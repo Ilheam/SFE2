@@ -1,0 +1,197 @@
+
+        <?import java.lang.String?>
+        <?import javafx.geometry.Insets?>
+        <?import javafx.scene.control.Button?>
+        <?import javafx.scene.control.Label?>
+        <?import javafx.scene.control.ScrollPane?>
+        <?import javafx.scene.control.TextField?>
+        <?import javafx.scene.image.Image?>
+        <?import javafx.scene.image.ImageView?>
+        <?import javafx.scene.layout.AnchorPane?>
+        <?import javafx.scene.layout.BorderPane?>
+        <?import javafx.scene.layout.GridPane?>
+        <?import javafx.scene.layout.HBox?>
+        <?import javafx.scene.layout.Pane?>
+        <?import javafx.scene.layout.RowConstraints?>
+        <?import javafx.scene.layout.VBox?>
+        <?import javafx.scene.text.Font?>
+        <?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ilham.testfinal.MarketController">
+<children>
+    <BorderPane layoutX="6.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <left>
+            <VBox prefHeight="200.0" prefWidth="435.0" style="-fx-background-color: #ffc900;" styleClass="right-bar" BorderPane.alignment="CENTER">
+                <children>
+                    <HBox alignment="CENTER" prefHeight="110.0" prefWidth="200.0" style="-fx-background-color: #ffc900;">
+                        <children>
+                            <Label prefHeight="49.0" prefWidth="149.0" text="Détails" textFill="WHITE">
+                                <font>
+                                    <Font name="Cambria Bold" size="40.0" />
+                                </font>
+                            </Label>
+                            <Label prefHeight="49.0" prefWidth="172.0" text="Catalogue" textFill="WHITE">
+                                <font>
+                                    <Font name="Cambria" size="40.0" />
+                                </font>
+                            </Label>
+                        </children>
+                    </HBox>
+                    <Pane prefHeight="57.0" prefWidth="435.0" VBox.vgrow="ALWAYS" />
+                    <VBox fx:id="chosenFruitCard" alignment="CENTER" prefHeight="535.0" prefWidth="100.0" >
+                        <VBox.margin>
+                            <Insets left="50.0" right="50.0" />
+                        </VBox.margin>
+                        <children>
+                            <HBox prefHeight="60.0" prefWidth="335.0">
+                                <children>
+                                    <Label fx:id="fruitNameLable" prefHeight="60.0" prefWidth="218.0" text="Peach">
+                                        <font>
+                                            <Font name="Cambria" size="36.0" />
+                                        </font>
+                                    </Label>
+                                    <Label fx:id="fruitPriceLabel" contentDisplay="RIGHT" prefHeight="60.0" prefWidth="149.0" text="        DH2.99     ">
+                                        <font>
+                                            <Font name="Cambria" size="30.0" />
+                                        </font>
+                                    </Label>
+                                </children>
+                                <VBox.margin>
+                                    <Insets left="20.0" top="30.0" />
+                                </VBox.margin>
+                            </HBox>
+                            <ImageView fx:id="fruitImg" fitHeight="170.0" fitWidth="285.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@1.jpg" />
+                                </image>
+                                <VBox.margin>
+                                    <Insets top="20.0" />
+                                </VBox.margin>
+                            </ImageView>
+                            <HBox alignment="CENTER" prefHeight="53.0" prefWidth="335.0">
+                                <children>
+                                    <Label contentDisplay="CENTER" prefHeight="42.0" prefWidth="161.0">
+                                        <font>
+                                            <Font name="Cambria" size="18.0" />
+                                        </font>
+                                    </Label>
+                                </children>
+                                <VBox.margin>
+                                    <Insets top="20.0" />
+                                </VBox.margin>
+                            </HBox>
+                            <HBox alignment="CENTER" prefHeight="53.0" prefWidth="335.0">
+                                <children>
+                                    <Label prefHeight="42.0" prefWidth="152.0" text="     Description">
+                                        <font>
+                                            <Font name="Calibri" size="18.0" />
+                                        </font>
+                                    </Label>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Produit de Qualitée ">
+                                        <font>
+                                            <Font size="16.0" />
+                                        </font>
+                                    </Text>
+                                </children>
+                            </HBox>
+                            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #ffc900;" styleClass="add-btn"  text="Produit de catalogue" textFill="WHITE">
+                                <VBox.margin>
+                                    <Insets bottom="20.0" top="30.0" />
+                                </VBox.margin>
+                                <font>
+                                    <Font name="System Bold" size="18.0" />
+                                </font>
+                            </Button>
+                        </children>
+                        <styleClass>
+                            <String fx:value="chosen-fruit-card" />
+                            <String fx:value="shadow" />
+                        </styleClass>
+                    </VBox>
+                    <Pane prefHeight="57.0" prefWidth="435.0" VBox.vgrow="ALWAYS" />
+                </children>
+            </VBox>
+        </left>
+        <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                <children>
+                    <HBox alignment="CENTER" prefHeight="65.0" prefWidth="200.0">
+                        <VBox.margin>
+                            <Insets left="20.0" right="20.0" />
+                        </VBox.margin>
+                        <children>
+                            <Label prefHeight="35.0" prefWidth="217.0" text="Catalogue">
+                                <font>
+                                    <Font name="Cambria Bold" size="28.0" />
+                                </font>
+                            </Label>
+                            <Pane prefHeight="65.0" prefWidth="393.0" HBox.hgrow="ALWAYS" />
+                            <Label prefHeight="62.0" prefWidth="100.0" text="My Account" textFill="#878787">
+                                <font>
+                                    <Font name="Cambria" size="18.0" />
+                                </font>
+                            </Label>
+                            <ImageView fitHeight="50.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@1.jpg" />
+                                </image>
+                            </ImageView>
+                        </children>
+                    </HBox>
+                    <HBox prefHeight="100.0" prefWidth="200.0">
+                        <children>
+                            <Pane prefHeight="84.0" prefWidth="96.0" />
+                            <Pane prefHeight="84.0" prefWidth="96.0" HBox.hgrow="ALWAYS">
+                                <children>
+                                    <Pane layoutX="221.0" layoutY="8.0" prefHeight="84.0" prefWidth="96.0" />
+                                    <Button layoutX="508.0" mnemonicParsing="false"  prefHeight="41.0" prefWidth="211.0" onAction="#handleAddCatalogueButton" style="-fx-background-color: #ffc900;" text="Ajouter un catalogue" textFill="WHITE">
+                                        <font>
+                                            <Font name="System Bold" size="17.0" />
+                                        </font>
+                                    </Button>
+
+                                    <HBox alignment="CENTER" layoutX="-105.0" layoutY="-6.0" prefHeight="65.0" prefWidth="310.0" >
+                                        <children>
+                                            <TextField prefHeight="40.0" prefWidth="235.0" promptText="Rechercher un catalogue" styleClass="transparent" >
+                                                <HBox.margin>
+                                                    <Insets left="20.0" />
+                                                </HBox.margin>
+                                                <font>
+                                                    <Font name="Cambria" size="18.0" />
+                                                </font>
+                                            </TextField>
+                                            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #ffc900;" styleClass="search-button"  text="Search" textFill="WHITE" />
+                                        </children>
+                                        <styleClass>
+                                            <String fx:value="search-box" />
+                                            <String fx:value="shadow" />
+                                        </styleClass>
+                                    </HBox>
+                                </children></Pane>
+                        </children>
+                        <VBox.margin>
+                            <Insets left="20.0" right="20.0" top="10.0" />
+                        </VBox.margin>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                        <children>
+                            <ScrollPane fx:id="scroll" prefHeight="570.0" prefWidth="785.0" styleClass="transparent" >
+                                <content>
+                                    <GridPane fx:id="grid" prefHeight="0.0" prefWidth="0.0">
+                                        <rowConstraints>
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                                        </rowConstraints>
+                                    </GridPane>
+                                </content>
+                                <HBox.margin>
+                                    <Insets top="10.0" />
+                                </HBox.margin>
+                            </ScrollPane>
+                        </children>
+                    </HBox>
+                </children>
+            </VBox>
+        </center>
+    </BorderPane>
+</children>
+</AnchorPane>

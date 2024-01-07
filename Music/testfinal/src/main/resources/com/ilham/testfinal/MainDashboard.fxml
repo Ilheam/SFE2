@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="900.0" styleClass="opasity"  xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ilham.testfinal.MainDashboardController">
+   <children>
+      <Label prefHeight="100.0" prefWidth="900.0" style="-fx-background-color: #39941e; -fx-background-radius: 0;" styleClass="title" text=" Stocks Portfolio Management System" textAlignment="CENTER">
+         <font>
+            <Font name="Courier New Bold" size="41.0" />
+         </font>
+      </Label>
+      <Button id="empbutton" fx:id="ManageEmployee" alignment="TOP_CENTER" layoutX="275.0" layoutY="115.0" mnemonicParsing="false" onMouseClicked="#SelectModuleButton" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-background-color: #73a580;" styleClass="title" text="Manage Employee">
+         <font>
+            <Font name="Courier New Bold" size="18.0" />
+         </font></Button>
+
+      <Button id="cusbutton" fx:id="ManageCustomer" alignment="TOP_CENTER" layoutX="485.0" layoutY="115.0" mnemonicParsing="false" onAction="#goto_SPM_Module" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-background-color: #73a580;" styleClass="title" text="Manage Customer">
+         <font>
+            <Font name="Courier New Bold" size="18.0" />
+         </font></Button>
+
+
+
+      <Button id="finanbutton" fx:id="ManageFinancial" alignment="TOP_CENTER" layoutX="485.0" layoutY="325.0" mnemonicParsing="false" onMouseClicked="#SelectModuleButton" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-background-color: #73a580;" styleClass="title" text="Manage Financial">
+         <font>
+            <Font name="Courier New Bold" size="18.0" />
+         </font></Button>
+      <Button id="stocbutton" fx:id="ManageStock" alignment="TOP_CENTER" layoutX="275.0" layoutY="325.0" mnemonicParsing="false" onMouseClicked="#SelectModuleButton" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-background-color: #73a580;" styleClass="title" text="Manage Stock">
+         <font>
+            <Font name="Courier New Bold" size="18.0" />
+         </font></Button>
+      <Button id="supbutton" fx:id="ManageSupplier" alignment="TOP_CENTER" layoutX="692.0" layoutY="115.0" mnemonicParsing="false" onAction="#goto_SPM_Module" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-background-color: #73a580;" styleClass="title" text="Manage Supplier">
+         <font>
+            <Font name="Courier New Bold" size="18.0" />
+         </font></Button>
+      <Button id="cutbutton" fx:id="catalogue" alignment="TOP_CENTER" layoutX="692.0" layoutY="115.0" mnemonicParsing="false" onAction="#goto_SPM_Module" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-background-color: #73a580;" styleClass="title" text="catalogue">
+         <font>
+            <Font name="Courier New Bold" size="18.0" />
+         </font></Button>
+
+      <Label layoutX="28.0" layoutY="115.0" prefHeight="220.0" prefWidth="220.0" />
+      <ImageView fitHeight="220.0" fitWidth="220.0" layoutX="28.0" layoutY="115.0">
+         <image>
+            <Image url="@free-user-icon-3297-thumb.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="138.0" layoutY="480.0" mnemonicParsing="false" onAction="#gotoEditProfile" prefHeight="45.0" prefWidth="125.0" style="-fx-background-radius: 15; -fx-background-color: #5eff00;" styleClass="title" text="Edit Profile">
+         <font>
+            <Font name="Courier New Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="7.0" layoutY="480.0" mnemonicParsing="false" onAction="#gotoLogin" prefHeight="45.0" prefWidth="125.0" style="-fx-background-color: #5eff00; -fx-background-radius: 15;" styleClass="title" text="Logout">
+         <font>
+            <Font name="Courier New Bold" size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="14.0" layoutY="335.0" prefHeight="51.0" prefWidth="111.0" text="Name    : ">
+         <font>
+            <Font name="Courier New Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="400.0" prefHeight="51.0" prefWidth="99.0" text="Position:">
+         <font>
+            <Font name="Courier New Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="name" layoutX="112.0" layoutY="338.0" prefHeight="45.0" prefWidth="157.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="Position" layoutX="112.0" layoutY="403.0" prefHeight="45.0" prefWidth="157.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
