@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
-// Import FormsModule or ReactiveFormsModule here if you need them
-// import { FormsModule } from '@angular/forms';
-
+import { HttpClientModule,HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { SuppliersComponent } from './suppliers/suppliers.component'; // Import your SuppliersComponent
+import { SuppliersComponent } from './Fournisseur/Fournisseur.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SuppliersComponent // Declare your SuppliersComponent
+    SuppliersComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
-    HttpClientModule, // Add HttpClientModule to your imports
-    // FormsModule // Uncomment if you've imported FormsModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -10,14 +10,7 @@ table {
     background-color: #f4f4f4;
   }
   
-  /* Border and spacing for table cells */
-  th, td {
-    border: 1px solid #ddd;
-    text-align: left;
-    padding: 8px;
-  }
-  
-  /* Add zebra-striping to table rows */
+ 
   tbody tr:nth-child(odd) {
     background-color: #f9f9f9;
   }
@@ -31,5 +24,57 @@ table {
   /* Highlight rows on hover for better readability */
   tbody tr:hover {
     background-color: #f1f1f1;
+  }
+  /* Global Resets */
+body, h1, nav, a {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Header Styles */
+  .app-header {
+    background-color: #3e66ea; /* Dark background */
+    color: #fff; /* White text */
+    padding: 10px 0; /* Some padding on top and bottom */
+  }
+  
+  .container {
+    width: 80%; /* Max width for content */
+    margin: 0 auto; /* Center the container */
+    display: flex; /* Flex container for alignment */
+    justify-content: space-between; /* Distribute space */
+    align-items: center; /* Align items vertically */
+  }
+  
+  h1 {
+    font-size: 1.8em; /* Large text for the logo */
+  }
+  
+  
+  
+  .nav-link {
+    color: #fff; /* White text for links */
+    text-decoration: none; /* No underline */
+    margin-left: 20px; /* Space out links */
+    transition: color 0.3s ease; /* Transition for hover effect */
+  }
+  
+  .nav-link:hover {
+    color: #4caf50; /* Green color on hover */
+  }
+  
+  @media (max-width: 768px) {
+    /* Responsive Design for smaller screens */
+    .container {
+      flex-direction: column; /* Stack items vertically on small screens */
+    }
+  
+    .navigation {
+      margin-top: 10px; /* Add some space between logo and navigation */
+    }
+  
+    .nav-link {
+      margin: 5px 0; /* Adjust margin for vertical layout */
+    }
   }
   
