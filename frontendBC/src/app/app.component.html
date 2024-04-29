@@ -1,4 +1,5 @@
 <div class="suppliers-table-container">
+  <h1>{{ title }}</h1>
   <table>
     <thead>
       <tr>
@@ -6,9 +7,11 @@
         <th>Name</th>
       </tr>
     </thead>
-
-    <tbody [innerHTML]="getRowsHtml()">
-
+    <tbody>
+      <tr *ngFor="let fournisseur of fournisseurs">
+        <td>{{fournisseur.fournisseurId}}</td>
+        <td>{{fournisseur.nom}}</td>
+      </tr>
     </tbody>
   </table>
 </div>
