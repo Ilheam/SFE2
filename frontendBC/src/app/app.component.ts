@@ -32,4 +32,9 @@ export class AppComponent implements OnInit {
       }
     });
   }
+  DeleteFournisseur(id: number): void {
+    // Logic to handle delete
+    console.log('Deleting fournisseur with ID:', id);
+    // Here you might want to call a service to delete the data and then remove it from `fournisseurs` array or refresh the list
+  }
 }

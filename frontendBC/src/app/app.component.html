@@ -18,12 +18,17 @@
       <tr>
         <th>ID</th>
         <th>nom</th>
+        <th>Actions</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody style="padding-left: 2rem;">
       <tr *ngFor="let fournisseur of fournisseurs">
         <td>{{fournisseur.fournisseurId}}</td>
         <td>{{fournisseur.nom}}</td>
+        <td>
+            
+            <button (click)="DeleteFournisseur(fournisseur.fournisseurId)">Delete</button>
+          </td>
       </tr>
     </tbody>
   </table>

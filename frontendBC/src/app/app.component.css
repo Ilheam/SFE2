@@ -1,8 +1,8 @@
 /* Style the table to fill the width of the container, with a bit of padding */
 table {
     width: 50%;
-    border-collapse: collapse;
-    margin-top: 20px;
+    
+    
   }
   
   /* Add a light grey background on table headers */
@@ -13,11 +13,16 @@ table {
  
   tbody tr:nth-child(odd) {
     background-color: #f9f9f9;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  td{
+    padding-left: 2rem;
   }
   
   /* Style for the table header cells */
   th {
-    background-color: #4CAF50;
+    background-color: #eb9e0f;
     color: white;
   }
   
@@ -56,7 +61,7 @@ table {
     font-weight: bold;
   }
   .navigation a:hover {
-    color: #017acd; /* Change hover color as needed */
+    color: #ffffff; /* Change hover color as needed */
   }
 
   
@@ -97,6 +102,20 @@ table {
     flex: 1;
     overflow-y: auto; /* Adds scroll to main content if overflow */
   }
+  button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    background-color: #dd1313; /* Green background for better visibility */
+    color: white; /* White text */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+  
   @media (max-width: 768px) {
     /* Responsive Design for smaller screens */
     .container {
