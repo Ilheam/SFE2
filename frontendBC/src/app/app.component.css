@@ -1,6 +1,6 @@
 /* Style the table to fill the width of the container, with a bit of padding */
 table {
-    width: 100%;
+    width: 50%;
     border-collapse: collapse;
     margin-top: 20px;
   }
@@ -26,17 +26,40 @@ table {
     background-color: #f1f1f1;
   }
   /* Global Resets */
-body, h1, nav, a {
-    margin: 0;
-    padding: 0;
+  body {
+    height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
   }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f3f3f3;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  .logo img {
+    width: 120px; /* Adjust as needed */
+  }
+  .navigation {
+    display: flex;
+  }
+  .navigation a {
+    text-decoration: none;
+    color: #F99908;
+    margin: 0 10px;
+    font-weight: bold;
+  }
+  .navigation a:hover {
+    color: #017acd; /* Change hover color as needed */
+  }
+
   
-  /* Header Styles */
-  .app-header {
-    background-color: #3e66ea; /* Dark background */
-    color: #fff; /* White text */
-    padding: 10px 0; /* Some padding on top and bottom */
-  }
   
   .container {
     width: 80%; /* Max width for content */
@@ -62,7 +85,18 @@ body, h1, nav, a {
   .nav-link:hover {
     color: #4caf50; /* Green color on hover */
   }
+  #app-root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Full viewport height */
+    position: relative; /* Needed for proper footer positioning */
+  }
   
+  
+  main {
+    flex: 1;
+    overflow-y: auto; /* Adds scroll to main content if overflow */
+  }
   @media (max-width: 768px) {
     /* Responsive Design for smaller screens */
     .container {

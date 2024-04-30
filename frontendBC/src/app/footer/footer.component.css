@@ -1,0 +1,39 @@
+.footer {
+    background-color: #f5f5f5; /* Footer background color */
+    color: #333; /* Contrast color for text for visibility */
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-column {
+    display: flex;
+    flex-direction: column;
+  }
+  .social-icons {
+    display: flex;
+    align-items: center;
+  }
+  .social-icons img {
+    width: 24px; /* Size of icons */
+    margin-right: 10px;
+  }
+  .social-icons a {
+    color: #333; /* Contrast color for icons for visibility */
+    text-decoration: none;
+  }
+  /* Footer fixed at the bottom */
+:host {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%; /* Full width ensures it spans the bottom */
+    background-color: #333; /* Keeping your background color */
+    color: white; /* Keeping your text color */
+    text-align: center; /* Center text horizontally */
+    padding: 10px 0; /* Vertical padding */
+    box-sizing: border-box; /* Include padding in the height */
+    z-index: 1000; /* Ensures footer is above other content */
+  }
+  
+  
