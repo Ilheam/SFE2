@@ -15,4 +15,7 @@ export class DataService {
   getFournisseurs(): Observable<Fournisseur[]> {
     return this.http.get<Fournisseur[]>(this.apiUrl);
   }
+  DeleteFournisseur(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
 }

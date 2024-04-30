@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common'; // Import CommonModule
+import { DataService } from './data.service';
 import { FooterComponent } from './footer/footer.component';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -13,15 +14,15 @@ export class AppComponent implements OnInit {
   title = 'My Angular Application';
   fournisseurs: any[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private dataService: DataService) {} // Single constructor with DataService
 
   ngOnInit(): void {
     this.fetchFournisseurs();
   }
 
   fetchFournisseurs(): void {
-    // Fetch data from the backend using the HttpClient
-    this.http.get<any[]>('https://localhost:7234/api/Fournisseurs').subscribe({
+    // Fetch data from the backend using DataService
+    this.dataService.getFournisseurs().subscribe({
       next: (data) => {
         // Assign the data received to the fournisseurs array
         this.fournisseurs = data;
@@ -32,9 +33,12 @@ export class AppComponent implements OnInit {
       }
     });
   }
+
   DeleteFournisseur(id: number): void {
-    // Logic to handle delete
-    console.log('Deleting fournisseur with ID:', id);
-    // Here you might want to call a service to delete the data and then remove it from `fournisseurs` array or refresh the list
+    // Use DataService to delete a fournisseur
+    this.dataService.DeleteFournisseur(id).subscribe({
+      next: () => this.fetchFournisseurs(), // Refresh the list after deletion
+      error: (error) => console.error('Error deleting fournisseur:', error)
+    });
   }
 }
