@@ -1,5 +1,5 @@
 export class Fournisseur {
-    Fournisseurid: number | undefined; // This can be undefined if not set
-    Nom: string | undefined; // This can be undefined if not set
+    fournisseurId!: number; // This can be undefined if not set
+    nom!: string; // This can be undefined if not set
   }
   

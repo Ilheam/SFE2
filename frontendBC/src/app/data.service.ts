@@ -18,4 +18,7 @@ export class DataService {
   DeleteFournisseur(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
+  updateFournisseur(id: number, fournisseurData: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, fournisseurData);
+  }
 }

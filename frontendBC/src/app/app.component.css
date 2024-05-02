@@ -1,6 +1,6 @@
 /* Style the table to fill the width of the container, with a bit of padding */
 table {
-    width: 50%;
+    width: 80%;
     
     
   }
@@ -22,7 +22,7 @@ table {
   
   /* Style for the table header cells */
   th {
-    background-color: #eb9e0f;
+    background-color: #F99908;
     color: white;
   }
   
@@ -42,14 +42,14 @@ table {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #f3f3f3;
+    background-color: #ffffff;
   }
   .logo {
     display: flex;
     align-items: center;
   }
   .logo img {
-    width: 120px; /* Adjust as needed */
+    width: 250px; /* Adjust as needed */
   }
   .navigation {
     display: flex;
@@ -61,7 +61,7 @@ table {
     font-weight: bold;
   }
   .navigation a:hover {
-    color: #ffffff; /* Change hover color as needed */
+    color: #0e0e0e; /* Change hover color as needed */
   }
 
   
@@ -77,7 +77,44 @@ table {
   h1 {
     font-size: 1.8em; /* Large text for the logo */
   }
-  
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 99; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+.show{
+  display:block;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
   
   
   .nav-link {
@@ -93,15 +130,15 @@ table {
   #app-root {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Full viewport height */
-    position: relative; /* Needed for proper footer positioning */
-  }
+    min-height: 100vh;
+    position: relative;
+}
   
   
   main {
-    flex: 1;
-    overflow-y: auto; /* Adds scroll to main content if overflow */
-  }
+  flex: 1; /* This will make the main content grow and occupy available space, pushing the footer down */
+  overflow-y: auto; /* Allows scrolling within the main content area if content overflows */
+}
   button {
     margin-right: 10px;
     padding: 5px 10px;
