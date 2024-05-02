@@ -1,14 +1,20 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-
 import { AppComponent } from './app.component';
+import { FooterComponent } from './footer/footer.component';
+import { AppRoutingModule } from './app-routing.module';
+import { FournisseursComponent } from './Fournisseur/Fournisseur.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    FooterComponent,
+    FournisseursComponent,
+  ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    AppRoutingModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

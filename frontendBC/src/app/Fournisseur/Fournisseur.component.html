@@ -1,1 +1,27 @@
-<p>suppliers works!</p>
+<main>
+
+    <div class="suppliers-table-container">
+      <h1>{{ title }}</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let fournisseur of fournisseurs">
+            <td>{{fournisseur.fournisseurId}}</td>
+            <td>{{fournisseur.nom}}</td>
+            <td>
+              <button (click)="deleteFournisseur(fournisseur.fournisseurId)">Delete</button>
+              <!-- Additional buttons for other actions like 'Update' can be added here -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+  
+  

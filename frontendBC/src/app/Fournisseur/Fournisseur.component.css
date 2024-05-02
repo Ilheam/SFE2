@@ -1,0 +1,45 @@
+table {
+    width: 50%;
+    
+    
+  }
+  
+  /* Add a light grey background on table headers */
+  thead {
+    background-color: #f4f4f4;
+  }
+  
+ 
+  tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  td{
+    padding-left: 2rem;
+  }
+  
+  /* Style for the table header cells */
+  th {
+    background-color: #eb9e0f;
+    color: white;
+  }
+  
+  /* Highlight rows on hover for better readability */
+  tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  /* Global Resets */
+  body {
+    height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f3f3f3;
+  }
