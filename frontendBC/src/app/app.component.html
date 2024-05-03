@@ -16,15 +16,24 @@
     <table>
       <thead>
         <tr>
-          <th>ID</th>
+         <!-- <th>ID</th> -->
           <th>nom</th>
+          <th>Email</th>
+          <th>Telephone</th>
+          <th>Adresse</th>
+          <th>Designation</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody style="padding-left: 2rem;">
         <tr *ngFor="let fournisseur of fournisseurs">
-          <td>{{fournisseur?.fournisseurId}}</td>
+         <!-- <td>{{fournisseur?.fournisseurId}}</td>-->
           <td>{{fournisseur?.nom}}</td>
+          <td>{{fournisseur?.email}}</td>
+          <td>{{fournisseur?.telephone}}</td>
+          <td>{{fournisseur?.adresse}}</td>
+          <td>{{fournisseur?.designation}}</td>
+
           <td>
 
             <button (click)="DeleteFournisseur(fournisseur.fournisseurId)">Delete</button>
@@ -35,7 +44,7 @@
     </table>
   </div>
 </main>
-  <app-footer ></app-footer>
+<app-footer></app-footer>
 
 <!-- Update Fournisseur Modal -->
 <div id="updateFournisseurModal" class="modal" [class.show]="showModal">
@@ -43,10 +52,15 @@
     <span class="close" (click)="closeModal()">&times;</span>
     <form #fournisseurForm="ngForm" (ngSubmit)="submitUpdate(fournisseurForm.value)">
       <h2>Update Fournisseur</h2>
-      <label for="fournisseurId">ID:</label>
-      <input type="text" id="fournisseurId" name="fournisseurId" [(ngModel)]="selectedFournisseur.fournisseurId" ngModel readonly>
+    <!--  <label for="fournisseurId">ID:</label> -->
+    <!--  <input type="text" id="fournisseurId" name="fournisseurId" [(ngModel)]="selectedFournisseur.fournisseurId" ngModel readonly> -->
       <label for="nom">Nom:</label>
       <input type="text" id="nom" name="nom" [(ngModel)]="selectedFournisseur.nom" ngModel required>
+      <input type="text" id="email" name="email" [(ngModel)]="selectedFournisseur.email" ngModel required>
+      <input type="text" id="telphone" name="telephone" [(ngModel)]="selectedFournisseur.telephone" ngModel required>
+      <input type="text" id="adresse" name="adresse" [(ngModel)]="selectedFournisseur.adresse" ngModel required>
+      <input type="text" id="designation" name="designation" [(ngModel)]="selectedFournisseur.designation" ngModel required>
+
       <button type="submit">Update</button>
     </form>
   </div>
