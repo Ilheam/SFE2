@@ -1,6 +1,6 @@
 /* Style the table to fill the width of the container, with a bit of padding */
 table {
-    width: 80%;
+    width: 100%;
     
     
   }
@@ -17,13 +17,15 @@ table {
     padding-right: 2rem;
   }
   td{
-    padding-left: 2rem;
-  }
+    padding: 8px; /* Ensure consistent padding */
+    text-align: center; /* Center align the content */  }
   
   /* Style for the table header cells */
   th {
-    background-color: #F99908;
+    background-color: #7d7c7a;
     color: white;
+    padding: 10px; /* Sufficient padding */
+    text-align: center; /* Center alignment for headers */
   }
   
   /* Highlight rows on hover for better readability */
@@ -116,14 +118,32 @@ table {
 }
 
 .rectangle {
-  position: absolute;
-  left: 114px;
-  top: 295px;
+  position: relative; /* Changed to relative for easier inner positioning */
+  margin: 20px auto; /* Center the form on the page */
   height: 604px;
   width: 587px;
   border-radius: 50px;
   background-color: #D9D9D9;
+  padding: 20px; /* Padding inside the rectangle */
 }
+
+label, input {
+  display: block; /* Elements will take full width */
+  width: 90%; /* Utilize most of the container width */
+  margin: 10px auto; /* Center elements and provide spacing */
+}
+
+input[type="text"] {
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 50px; /* Slight rounding of corners */
+}
+
+
+button:hover {
+  background-color: #45a049; /* Slightly darker on hover */
+}
+
   
 
 
@@ -152,10 +172,10 @@ table {
   button {
     margin-right: 10px;
     padding: 5px 10px;
-    background-color: #dd1313; /* Green background for better visibility */
-    color: white; /* White text */
+    background-color: #36FEF2; /* Green background for better visibility */
+    color: rgb(9, 9, 9); /* White text */
     border: none;
-    border-radius: 4px;
+    border-radius: 50px;
     cursor: pointer;
   }
   
