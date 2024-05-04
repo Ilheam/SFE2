@@ -115,8 +115,18 @@ table {
     cursor: pointer;
 }
 
+.rectangle {
+  position: absolute;
+  left: 114px;
+  top: 295px;
+  height: 604px;
+  width: 587px;
+  border-radius: 50px;
+  background-color: #D9D9D9;
+}
   
-  
+
+
   .nav-link {
     color: #fff; /* White text for links */
     text-decoration: none; /* No underline */

@@ -21,4 +21,7 @@ export class DataService {
   updateFournisseur(id: number, fournisseurData: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, fournisseurData);
   }
+  addFournisseur(fournisseur: any): Observable<any> {
+    return this.http.post(this.apiUrl, fournisseur);
+  }
 }

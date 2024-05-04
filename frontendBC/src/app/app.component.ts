@@ -16,7 +16,9 @@ export class AppComponent implements OnInit {
   title = 'My Angular Application';
   fournisseurs: any[] = [];
   selectedFournisseur: any={};
+  newFournisseur: any = {};
   showModal: boolean = false;
+  showAddModal: boolean = false;
   
   constructor(private dataService: DataService) {} // Single constructor with DataService
 
@@ -30,11 +32,9 @@ export class AppComponent implements OnInit {
     this.dataService.getFournisseurs().subscribe({
       next: (data) => {
         console.timeEnd('fetchFournisseurs')
-        // Assign the data received to the fournisseurs array
         this.fournisseurs = data;
       },
       error: (error) => {
-        // Log errors to the console if the request fails
         console.error('Error fetching fournisseurs:', error);
       }
     });
@@ -71,5 +71,25 @@ export class AppComponent implements OnInit {
   }
   closeModal(): void {
     this.showModal = false;
+  } 
+  toggleAddModal(): void {
+    this.showAddModal = true;
+  }
+
+  closeAddModal(): void {
+    this.showAddModal = false;
+  }
+  submitAddFournisseur(fournisseurData: any): void {
+    this.dataService.addFournisseur(fournisseurData).subscribe({
+      next: (result) => {
+        console.log('Fournisseur added successfully');
+        this.closeAddModal();
+        this.fetchFournisseurs(); // Assuming you have a method to refresh the list
+      },
+      error: (error) => {
+        console.error('Error adding fournisseur:', error);
+        this.closeAddModal();
+      }
+    });
   }
 }
