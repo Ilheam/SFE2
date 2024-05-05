@@ -1,44 +1,5 @@
 /* Style the table to fill the width of the container, with a bit of padding */
-table {
-    width: 100%;
-    
-    
-  }
-  
-  /* Add a light grey background on table headers */
-  thead {
-    background-color: #f4f4f4;
-  }
-  
- 
-  tbody tr:nth-child(odd) {
-    background-color: #f9f9f9;
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-  td{
-    padding: 8px; /* Ensure consistent padding */
-    text-align: center; /* Center align the content */  }
-  
-  /* Style for the table header cells */
-  th {
-    background-color: #7d7c7a;
-    color: white;
-    padding: 10px; /* Sufficient padding */
-    text-align: center; /* Center alignment for headers */
-  }
-  
-  /* Highlight rows on hover for better readability */
-  tbody tr:hover {
-    background-color: #f1f1f1;
-  }
-  /* Global Resets */
-  body {
-    height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  }
+
   .header {
     display: flex;
     justify-content: space-between;
@@ -68,82 +29,6 @@ table {
 
   
   
-  .container {
-    width: 80%; /* Max width for content */
-    margin: 0 auto; /* Center the container */
-    display: flex; /* Flex container for alignment */
-    justify-content: space-between; /* Distribute space */
-    align-items: center; /* Align items vertically */
-  }
-  
-  h1 {
-    font-size: 1.8em; /* Large text for the logo */
-  }
-  .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 99; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-}
-.show{
-  display:block;
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.rectangle {
-  position: relative; /* Changed to relative for easier inner positioning */
-  margin: 20px auto; /* Center the form on the page */
-  height: 604px;
-  width: 587px;
-  border-radius: 50px;
-  background-color: #D9D9D9;
-  padding: 20px; /* Padding inside the rectangle */
-}
-
-label, input {
-  display: block; /* Elements will take full width */
-  width: 90%; /* Utilize most of the container width */
-  margin: 10px auto; /* Center elements and provide spacing */
-}
-
-input[type="text"] {
-  padding: 8px;
-  font-size: 16px;
-  border-radius: 50px; /* Slight rounding of corners */
-}
-
-
-button:hover {
-  background-color: #45a049; /* Slightly darker on hover */
-}
-
   
 
 
@@ -156,45 +41,5 @@ button:hover {
   
   .nav-link:hover {
     color: #4caf50; /* Green color on hover */
-  }
-  #app-root {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    position: relative;
-}
-  
-  
-  main {
-  flex: 1; /* This will make the main content grow and occupy available space, pushing the footer down */
-  overflow-y: auto; /* Allows scrolling within the main content area if content overflows */
-}
-  button {
-    margin-right: 10px;
-    padding: 5px 10px;
-    background-color: #36FEF2; /* Green background for better visibility */
-    color: rgb(9, 9, 9); /* White text */
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049; /* Darker green on hover */
-  }
-  
-  @media (max-width: 768px) {
-    /* Responsive Design for smaller screens */
-    .container {
-      flex-direction: column; /* Stack items vertically on small screens */
-    }
-  
-    .navigation {
-      margin-top: 10px; /* Add some space between logo and navigation */
-    }
-  
-    .nav-link {
-      margin: 5px 0; /* Adjust margin for vertical layout */
-    }
   }
   

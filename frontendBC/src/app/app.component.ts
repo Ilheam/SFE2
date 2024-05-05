@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import { DataService } from './data.service';
 import { FormsModule } from '@angular/forms';  // Import FormsModule here
+import { SuppliersComponent } from './Fournisseur/Fournisseur.component';  // Adjust path as needed
 
 import { FooterComponent } from './footer/footer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FooterComponent, FormsModule], 
+  imports: [CommonModule, FooterComponent, FormsModule, SuppliersComponent], 
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

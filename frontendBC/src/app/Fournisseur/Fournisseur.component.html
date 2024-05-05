@@ -1,1 +1,77 @@
-<p>suppliers works!</p>
+<main>
+<button (click)="toggleAddModal()">Ajouter un Fournisseur</button>
+<br>
+  <div class="suppliers-table-container">
+    
+    <table>
+      <thead>
+        <tr>
+          <!-- <th>ID</th> -->
+          <th>nom</th>
+          <th>Email</th>
+          <th>Telephone</th>
+          <th>Adresse</th>
+          <th>Designation</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody style="padding-left: 2rem;">
+        <tr *ngFor="let fournisseur of fournisseurs">
+          <!-- <td>{{fournisseur?.fournisseurId}}</td>-->
+          <td>{{fournisseur?.nom}}</td>
+          <td>{{fournisseur?.email}}</td>
+          <td>{{fournisseur?.telephone}}</td>
+          <td>{{fournisseur?.adresse}}</td>
+          <td>{{fournisseur?.designation}}</td>
+
+          <td>
+
+            <button (click)="DeleteFournisseur(fournisseur.fournisseurId)">Supprimer</button>
+            <button (click)="toggleModal(); selectFournisseur(fournisseur)">Modifier</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<!-- Update Fournisseur Modal -->
+<div id="updateFournisseurModal" class="modal" [class.show]="showModal">
+  <div class="rectangle">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <form #fournisseurForm="ngForm" (ngSubmit)="submitUpdate(fournisseurForm.value)">
+      <h2 style="text-align: center;">Modifier le Fournisseur</h2>
+      <label for="nom">Nom:</label>
+      <input type="text" id="nom" name="nom" [(ngModel)]="selectedFournisseur.nom" ngModel required>
+      <label for="email">Email:</label>
+      <input type="text" id="email" name="email" [(ngModel)]="selectedFournisseur.email" ngModel required>
+      <label for="telephone">Telephone:</label>
+      <input type="text" id="telephone" name="telephone" [(ngModel)]="selectedFournisseur.telephone" ngModel required>
+      <label for="adresse">Adresse:</label>
+      <input type="text" id="adresse" name="adresse" [(ngModel)]="selectedFournisseur.adresse" ngModel required>
+      <label for="designation">Designation:</label>
+      <input type="text" id="designation" name="designation" [(ngModel)]="selectedFournisseur.designation" ngModel required>
+      <button type="submit">Modifier</button>
+    </form>
+  </div>
+</div>
+<div id="addFournisseurModal" class="modal" [class.show]="showAddModal">
+  <div class="rectangle">
+    <span class="close" (click)="closeAddModal()">&times;</span>
+    <form #addFournisseurForm="ngForm" (ngSubmit)="submitAddFournisseur(addFournisseurForm.value)">
+      <h2>Add New Fournisseur</h2>
+      <label for="nom">Nom:</label>
+      <input type="text" id="nom" name="nom" [(ngModel)]="newFournisseur.nom" ngModel required>
+      <label for="email">Email:</label>
+      <input type="text" id="email" name="email" [(ngModel)]="newFournisseur.email" ngModel required>
+      <label for="telephone">Telephone:</label>
+      <input type="text" id="telphone" name="telephone" [(ngModel)]="newFournisseur.telephone" ngModel required>
+      <label for="adresse">Adresse:</label>
+      <input type="text" id="adresse" name="adresse" [(ngModel)]="newFournisseur.adresse" ngModel required>
+      <label for="designation">Designation:</label>
+      <input type="text" id="designation" name="designation" [(ngModel)]="newFournisseur.designation" ngModel
+        required>    
+          <button type="submit">Ajouter</button>
+    </form>
+  </div>
+</div>
