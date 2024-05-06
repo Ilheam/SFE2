@@ -6,6 +6,6 @@ import { SuppliersComponent } from './Fournisseur.component';
 @NgModule({
   declarations: [SuppliersComponent],
   imports: [CommonModule, FormsModule],
-  exports: [SuppliersComponent] // Export if it needs to be used elsewhere
+  exports: [SuppliersComponent] 
 })
 export class SuppliersModule { }

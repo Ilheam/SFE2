@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { DataService } from './data.service';
 import { FormsModule } from '@angular/forms';  // Import FormsModule here
 import { SuppliersComponent } from './Fournisseur/Fournisseur.component';  // Adjust path as needed
+import { FamilleComponent } from './famille/famille.component'; // Adjust path based on your folder structure
 
 import { FooterComponent } from './footer/footer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FooterComponent, FormsModule, SuppliersComponent], 
+  imports: [CommonModule, FooterComponent, FormsModule, SuppliersComponent, FamilleComponent], 
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -20,7 +21,7 @@ export class AppComponent implements OnInit {
   newFournisseur: any = {};
   showModal: boolean = false;
   showAddModal: boolean = false;
-  
+  showSuppliers = true;
   constructor(private dataService: DataService) {} // Single constructor with DataService
 
   ngOnInit(): void {
@@ -79,6 +80,9 @@ export class AppComponent implements OnInit {
 
   closeAddModal(): void {
     this.showAddModal = false;
+  }
+  toggleComponent(): void {
+    this.showSuppliers = !this.showSuppliers;  // Toggle between true and false
   }
   submitAddFournisseur(fournisseurData: any): void {
     this.dataService.addFournisseur(fournisseurData).subscribe({

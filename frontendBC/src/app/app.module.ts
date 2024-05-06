@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';  // Import FormsModule here
+import { FormsModule } from '@angular/forms';  
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { SuppliersModule } from './Fournisseur/Fournisseur.module'; // Adjust path as needed
+import { SuppliersModule } from './Fournisseur/Fournisseur.module'; 
+import { FamilleModule } from './famille/famille.module'; 
 
 @NgModule({
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    SuppliersModule 
+    SuppliersModule,
+    FamilleModule 
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent]

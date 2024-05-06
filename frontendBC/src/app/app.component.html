@@ -5,10 +5,14 @@
       <img src="assets/omegalogo.jpeg" alt="OmegaSoft Logo">
     </div>
     <nav class="navigation">
+      <a href="#" (click)="toggleComponent()">Tables</a>
       <a href="#">Connexion</a>
       <a href="#">À propos</a>
       <a href="#">Accueil</a>
       <a href="#">Contactez nous</a>
     </nav>
   </header>
-  <app-suppliers></app-suppliers>
+  <br>
+  <br>
+  <app-suppliers *ngIf="showSuppliers"></app-suppliers>
+  <app-famille *ngIf="!showSuppliers"></app-famille>
