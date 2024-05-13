@@ -1,18 +1,18 @@
-
-  <header class="header">
-    <div class="logo">
-      <!-- Replace with your own image source -->
-      <img src="assets/omegalogo.jpeg" alt="OmegaSoft Logo">
-    </div>
-    <nav class="navigation">
-      <a href="#" (click)="toggleComponent()">Tables</a>
-      <a href="#">Connexion</a>
-      <a href="#">À propos</a>
-      <a href="#">Accueil</a>
-      <a href="#">Contactez nous</a>
-    </nav>
-  </header>
-  <br>
-  <br>
-  <app-suppliers *ngIf="showSuppliers"></app-suppliers>
-  <app-famille *ngIf="!showSuppliers"></app-famille>
+<header class="header">
+  <div class="logo">
+    <img src="assets/omegalogo.jpeg" alt="OmegaSoft Logo">
+  </div>
+  <nav class="navigation">
+    <a href="#" (click)="toggleSuppliers()">Fournisseurs</a>
+    <a href="#" (click)="toggleArticles()">Articles</a>
+    <a href="#" (click)="toggleFamilles()">Familles</a>
+    <a href="#">Connexion</a>
+    <a href="#">À propos</a>
+    <a href="#">Accueil</a>
+    <a href="#">Contactez nous</a>
+  </nav>
+</header>
+<br><br>
+<app-suppliers *ngIf="showSuppliers"></app-suppliers>
+<app-famille *ngIf="showFamilles"></app-famille>
+<app-articles *ngIf="showArticles"></app-articles>

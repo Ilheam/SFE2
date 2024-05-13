@@ -14,19 +14,18 @@ import { formatDate } from '@angular/common';
 })
 export class FamilleComponent implements OnInit {
   familles: FamilleArticle[] = [];
-  newFamille = new FamilleArticle();  // Initialize with defaults or an empty constructor
-  selectedFamille = new FamilleArticle();  // Initialize for selection
+  newFamille = new FamilleArticle();  
+  selectedFamille = new FamilleArticle();
   showModal = false;
   showAddModal = false;
+  selectedFile: File | null = null;
+
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
     this.fetchFamilles();
   }
-  formatDateForInput(dateString: string): string {
-    const date = new Date(dateString);
-    return formatDate(date, 'yyyy-MM-dd', 'en-US');  // Adjust the locale as needed
-  }
+
   fetchFamilles(): void {
     this.dataService.getFamilles().subscribe({
       next: (data) => this.familles = data,
@@ -45,18 +44,21 @@ export class FamilleComponent implements OnInit {
   }
 
   selectFamille(famille: FamilleArticle): void {
-    this.selectedFamille = famille;
+    this.selectedFamille = { ...famille };
     this.showModal = true;
   }
 
-  submitUpdate(famille: FamilleArticle): void {
-    console.log('Updating famille:', famille);
-    if (!famille || famille.familleArticleId === undefined) {
-      console.error('Invalid famille data:', famille);
-      return;
+  handleFileInput(event: any): void {
+    const files = event.target.files;
+    if (files.length > 0) {
+        this.selectedFile = files[0];
     }
-  
-    this.dataService.updateFamille(famille.familleArticleId, famille).subscribe({
+  }
+
+  submitUpdate(): void {
+    const formData = new FormData();
+    // Add form data
+    this.dataService.updateFamille(this.selectedFamille.familleArticleId, formData).subscribe({
       next: () => {
         console.log('Famille updated successfully');
         this.showModal = false;
@@ -64,7 +66,7 @@ export class FamilleComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error updating famille:', error);
-        this.showModal = false; // Ensure modal is closed even on error
+        this.showModal = false;
       }
     });
   }
@@ -85,8 +87,10 @@ export class FamilleComponent implements OnInit {
     this.showAddModal = false;
   }
 
-  submitAddFamille(famille: FamilleArticle): void {
-    this.dataService.addFamille(famille).subscribe({
+  submitAddFamille(familleFormValue: any): void {
+    let formData = new FormData();
+    // Add form data
+    this.dataService.addFamille(formData).subscribe({
       next: (result) => {
         console.log('Famille added successfully');
         this.closeAddModal();

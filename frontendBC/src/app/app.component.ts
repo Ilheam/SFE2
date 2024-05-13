@@ -4,13 +4,13 @@ import { DataService } from './data.service';
 import { FormsModule } from '@angular/forms';  // Import FormsModule here
 import { SuppliersComponent } from './Fournisseur/Fournisseur.component';  // Adjust path as needed
 import { FamilleComponent } from './famille/famille.component'; // Adjust path based on your folder structure
-
+import { ArticlesComponent } from './articles/articles.component';
 import { FooterComponent } from './footer/footer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FooterComponent, FormsModule, SuppliersComponent, FamilleComponent], 
+  imports: [CommonModule, FooterComponent, FormsModule, SuppliersComponent, FamilleComponent, ArticlesComponent], 
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -21,7 +21,10 @@ export class AppComponent implements OnInit {
   newFournisseur: any = {};
   showModal: boolean = false;
   showAddModal: boolean = false;
-  showSuppliers = true;
+  showSuppliers = false;
+  showArticles = false;
+  showFamilles = false;
+
   constructor(private dataService: DataService) {} // Single constructor with DataService
 
   ngOnInit(): void {
@@ -44,7 +47,7 @@ export class AppComponent implements OnInit {
 
   DeleteFournisseur(id: number): void {
     // Use DataService to delete a fournisseur
-    this.dataService.DeleteFournisseur(id).subscribe({
+    this.dataService.deleteFournisseur(id).subscribe({
       next: () => this.fetchFournisseurs(), // Refresh the list after deletion
       error: (error) => console.error('Error deleting fournisseur:', error)
     });
@@ -81,9 +84,24 @@ export class AppComponent implements OnInit {
   closeAddModal(): void {
     this.showAddModal = false;
   }
-  toggleComponent(): void {
-    this.showSuppliers = !this.showSuppliers;  // Toggle between true and false
+  toggleSuppliers(): void {
+    this.showSuppliers = true;
+    this.showArticles = false;
+    this.showFamilles = false;
   }
+
+  toggleArticles(): void {
+    this.showSuppliers = false;
+    this.showArticles = true;
+    this.showFamilles = false;
+  }
+
+  toggleFamilles(): void {
+    this.showSuppliers = false;
+    this.showArticles = false;
+    this.showFamilles = true;
+  }
+
   submitAddFournisseur(fournisseurData: any): void {
     this.dataService.addFournisseur(fournisseurData).subscribe({
       next: (result) => {

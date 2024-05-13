@@ -43,7 +43,7 @@ export class SuppliersComponent implements OnInit {
 
   DeleteFournisseur(id: number): void {
     // Use DataService to delete a fournisseur
-    this.dataService.DeleteFournisseur(id).subscribe({
+    this.dataService.deleteFournisseur(id).subscribe({
       next: () => this.fetchFournisseurs(), // Refresh the list after deletion
       error: (error) => console.error('Error deleting fournisseur:', error)
     });
@@ -54,19 +54,25 @@ export class SuppliersComponent implements OnInit {
   }
 
   submitUpdate(fournisseurData: any): void {
-    this.dataService.updateFournisseur(fournisseurData.fournisseurId, fournisseurData).subscribe({
+    // Get the current fournisseur data from the list
+    const existingFournisseur = this.fournisseurs.find(f => f.fournisseurId === fournisseurData.fournisseurId);
+    // Merge existing data with the updated data
+    const updatedFournisseur = { ...existingFournisseur, ...fournisseurData };
+  
+    this.dataService.updateFournisseur(updatedFournisseur.fournisseurId, updatedFournisseur).subscribe({
       next: () => {
         console.log('Fournisseur updated successfully');
-        this.showModal = false;  // Set to false to hide modal
+        this.showModal = false;
         this.fetchFournisseurs();
       },
       error: (error) => {
         console.error('Error updating fournisseur:', error);
-        this.showModal = false;  // Also ensure modal is closed on error
+        this.showModal = false;
       }
     });
-
   }
+  
+  
   toggleModal(): void {
     this.showModal = !this.showModal; // Toggle the visibility
   }
@@ -85,7 +91,7 @@ export class SuppliersComponent implements OnInit {
       next: (result) => {
         console.log('Fournisseur added successfully');
         this.closeAddModal();
-        this.fetchFournisseurs(); // Assuming you have a method to refresh the list
+        this.fetchFournisseurs(); // Fetches the latest list
       },
       error: (error) => {
         console.error('Error adding fournisseur:', error);

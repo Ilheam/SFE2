@@ -1,8 +1,6 @@
 <main>
     <button class="btn2" (click)="toggleAddModal()">Ajouter une Famille</button>
-    <br>
-    <br>
-    <br>
+    <br><br><br>
     <div class="familles-table-container">
         <table>
             <thead>
@@ -29,18 +27,17 @@
                         <button (click)="toggleModal(); selectFamille(famille)">Modifier</button>
                     </td>
                 </tr>
-
             </tbody>
         </table>
     </div>
 </main>
 
 <!-- Update Famille Modal -->
+<!-- Update Famille Modal -->
 <div id="updateFamilleModal" class="modal" [class.show]="showModal">
     <div class="rectangle">
         <span class="close" (click)="closeModal()">&times;</span>
-        <form #familleForm="ngForm" (ngSubmit)="submitUpdate(familleForm.value)">
-            <input type="hidden" name="familleArticleId" [(ngModel)]="selectedFamille.familleArticleId">
+        <form #familleForm="ngForm" (ngSubmit)="submitUpdate()" enctype="multipart/form-data"> 
             <h2 style="text-align: center;">Modifier la Famille</h2>
             <label for="nom">Nom:</label>
             <input type="text" id="nom" name="nom" [(ngModel)]="selectedFamille.nom" ngModel required>
@@ -48,8 +45,8 @@
             <input type="text" id="description" name="description" [(ngModel)]="selectedFamille.description" ngModel required>
             <label for="prix">Prix:</label>
             <input type="number" id="prix" name="prix" [(ngModel)]="selectedFamille.prix" ngModel required>
-            <label for="image">Image URL:</label>
-            <input type="text" id="image" name="image" [(ngModel)]="selectedFamille.image" ngModel required class="input-style">
+            <label for="image">Image File:</label>
+            <input type="file" id="image" name="image" (change)="handleFileInput($event)" class="input-style">
             <label for="dateCreation">Date de Création:</label>
             <input type="date" id="dateCreation" name="dateCreation" [(ngModel)]="selectedFamille.dateCreation" ngModel required class="input-style">
             <label for="categorie">Catégorie:</label>
@@ -59,10 +56,11 @@
     </div>
 </div>
 
+
 <div id="addFamilleModal" class="modal" [class.show]="showAddModal">
     <div class="rectangle">
         <span class="close" (click)="closeAddModal()">&times;</span>
-        <form #addFamilleForm="ngForm" (ngSubmit)="submitAddFamille(addFamilleForm.value)">
+        <form #addFamilleForm="ngForm" (ngSubmit)="submitAddFamille(addFamilleForm.value)" enctype="multipart/form-data">
             <h2>Ajouter une nouvelle Famille</h2>
             <label for="nom">Nom:</label>
             <input type="text" id="nom" name="nom" [(ngModel)]="newFamille.nom" ngModel required>
@@ -70,8 +68,8 @@
             <input type="text" id="description" name="description" [(ngModel)]="newFamille.description" ngModel required>
             <label for="prix">Prix:</label>
             <input type="number" id="prix" name="prix" [(ngModel)]="newFamille.prix" ngModel required>
-            <label for="image">Image URL:</label>
-            <input type="text" id="image" name="image" [(ngModel)]="newFamille.image" ngModel required class="input-style">
+            <label for="image">Image File:</label>
+            <input type="file" id="image" name="image" (change)="handleFileInput($event)" class="input-style">
             <label for="dateCreation">Date de Création:</label>
             <input type="date" id="dateCreation" name="dateCreation" [(ngModel)]="newFamille.dateCreation" ngModel required class="input-style">
             <label for="categorie">Catégorie:</label>
