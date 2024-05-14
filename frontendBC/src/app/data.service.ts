@@ -43,11 +43,15 @@ export class DataService {
   }
 
   addFamille(famille: FormData): Observable<any> {
-    return this.http.post(`${this.familleUrl}/Create`, famille);  // Verify if the '/Create' endpoint is required
+    return this.http.post(this.familleUrl, famille, {
+      observe: 'response'
+    });
   }
 
   updateFamille(id: number, familleData: FormData): Observable<any> {
-    return this.http.put(`${this.familleUrl}/${id}`, familleData);
+    return this.http.put(`${this.familleUrl}/${id}`, familleData, {
+      observe: 'response'
+    });
   }
 
   deleteFamille(id: number): Observable<any> {

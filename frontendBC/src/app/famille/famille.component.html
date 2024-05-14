@@ -46,7 +46,7 @@
             <label for="prix">Prix:</label>
             <input type="number" id="prix" name="prix" [(ngModel)]="selectedFamille.prix" ngModel required>
             <label for="image">Image File:</label>
-            <input type="file" id="image" name="image" (change)="handleFileInput($event)" class="input-style">
+            <input type="file" (change)="onFileSelected($event)">
             <label for="dateCreation">Date de Création:</label>
             <input type="date" id="dateCreation" name="dateCreation" [(ngModel)]="selectedFamille.dateCreation" ngModel required class="input-style">
             <label for="categorie">Catégorie:</label>
@@ -69,7 +69,7 @@
             <label for="prix">Prix:</label>
             <input type="number" id="prix" name="prix" [(ngModel)]="newFamille.prix" ngModel required>
             <label for="image">Image File:</label>
-            <input type="file" id="image" name="image" (change)="handleFileInput($event)" class="input-style">
+            <input type="file" (change)="handleFileInput($event.target.files)" placeholder="Upload image">
             <label for="dateCreation">Date de Création:</label>
             <input type="date" id="dateCreation" name="dateCreation" [(ngModel)]="newFamille.dateCreation" ngModel required class="input-style">
             <label for="categorie">Catégorie:</label>

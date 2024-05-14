@@ -48,13 +48,16 @@ export class FamilleComponent implements OnInit {
     this.showModal = true;
   }
 
-  handleFileInput(event: any): void {
-    const files = event.target.files;
-    if (files.length > 0) {
-        this.selectedFile = files[0];
+  handleFileInput(files: FileList): void {
+    if (files && files.length > 0) {
+      this.selectedFile = files[0];
     }
   }
-
+  
+  
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+  }
   submitUpdate(): void {
     const formData = new FormData();
     // Add form data
@@ -87,19 +90,29 @@ export class FamilleComponent implements OnInit {
     this.showAddModal = false;
   }
 
-  submitAddFamille(familleFormValue: any): void {
-    let formData = new FormData();
-    // Add form data
+  submitAddFamille(): void {
+    const formData = new FormData();
+    formData.append('nom', this.newFamille.nom);
+    formData.append('description', this.newFamille.description);
+    formData.append('prix', this.newFamille.prix.toString());
+    formData.append('dateCreation', this.newFamille.dateCreation.toISOString()); // Ensure date is in ISO format
+    formData.append('categorie', this.newFamille.categorie);
+    if (this.selectedFile) {
+      formData.append('image', this.selectedFile, this.selectedFile.name);
+    }
+  
     this.dataService.addFamille(formData).subscribe({
       next: (result) => {
         console.log('Famille added successfully');
-        this.closeAddModal();
-        this.fetchFamilles();
+        this.closeAddModal(); // Assuming there's a method to close the modal on success
       },
       error: (error) => {
         console.error('Error adding famille:', error);
-        this.closeAddModal();
       }
     });
   }
+  
+  
+  
+  
 }
