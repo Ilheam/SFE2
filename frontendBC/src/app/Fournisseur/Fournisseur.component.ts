@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; 
-
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { DataService } from '../data.service';
-import { FormsModule } from '@angular/forms';  // Import FormsModule here
-
 import { Fournisseur } from './Fournisseur.model';
 
 @Component({
@@ -24,15 +22,12 @@ export class SuppliersComponent implements OnInit {
   constructor(private dataService: DataService) {} // Single constructor with DataService
 
   ngOnInit(): void {
-    console.time('fetchFournisseurs')
     this.fetchFournisseurs();
   }
 
   fetchFournisseurs(): void {
-    // Fetch data from the backend using DataService
     this.dataService.getFournisseurs().subscribe({
       next: (data) => {
-        console.timeEnd('fetchFournisseurs')
         this.fournisseurs = data;
       },
       error: (error) => {
@@ -41,25 +36,20 @@ export class SuppliersComponent implements OnInit {
     });
   }
 
-  DeleteFournisseur(id: number): void {
-    // Use DataService to delete a fournisseur
+  deleteFournisseur(id: number): void {
     this.dataService.deleteFournisseur(id).subscribe({
       next: () => this.fetchFournisseurs(), // Refresh the list after deletion
       error: (error) => console.error('Error deleting fournisseur:', error)
     });
   }
+
   selectFournisseur(fournisseur: any): void {
-    this.selectedFournisseur = fournisseur;
-    this.showModal = true;  // Set to true to show modal
+    this.selectedFournisseur = { ...fournisseur };
+    this.showModal = true;
   }
 
-  submitUpdate(fournisseurData: any): void {
-    // Get the current fournisseur data from the list
-    const existingFournisseur = this.fournisseurs.find(f => f.fournisseurId === fournisseurData.fournisseurId);
-    // Merge existing data with the updated data
-    const updatedFournisseur = { ...existingFournisseur, ...fournisseurData };
-  
-    this.dataService.updateFournisseur(updatedFournisseur.fournisseurId, updatedFournisseur).subscribe({
+  submitUpdate(): void {
+    this.dataService.updateFournisseur(this.selectedFournisseur.fournisseurId, this.selectedFournisseur).subscribe({
       next: () => {
         console.log('Fournisseur updated successfully');
         this.showModal = false;
@@ -72,13 +62,14 @@ export class SuppliersComponent implements OnInit {
     });
   }
   
-  
   toggleModal(): void {
-    this.showModal = !this.showModal; // Toggle the visibility
+    this.showModal = !this.showModal;
   }
+
   closeModal(): void {
     this.showModal = false;
   } 
+
   toggleAddModal(): void {
     this.showAddModal = true;
   }
@@ -86,8 +77,9 @@ export class SuppliersComponent implements OnInit {
   closeAddModal(): void {
     this.showAddModal = false;
   }
-  submitAddFournisseur(fournisseurData: any): void {
-    this.dataService.addFournisseur(fournisseurData).subscribe({
+
+  submitAddFournisseur(): void {
+    this.dataService.addFournisseur(this.newFournisseur).subscribe({
       next: (result) => {
         console.log('Fournisseur added successfully');
         this.closeAddModal();

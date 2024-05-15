@@ -1,80 +1,79 @@
 <main>
-    <button class="btn2" (click)="toggleAddModal()">Ajouter une Famille</button>
-    <br><br><br>
-    <div class="familles-table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Description</th>
-                    <th>Prix</th>
-                    <th>Image</th>
-                    <th>Date de Création</th>
-                    <th>Catégorie</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody style="padding-left: 2rem;">
-                <tr *ngFor="let famille of familles">
-                    <td>{{ famille.nom }}</td>
-                    <td>{{ famille.description }}</td>
-                    <td>{{ famille.prix | number:'1.2-2' }}</td>
-                    <td><img [src]="famille.image" alt="Image de Famille" style="width: 50px;"></td>
-                    <td>{{ famille.dateCreation | date:'mediumDate' }}</td>
-                    <td>{{ famille.categorie }}</td>
-                    <td>
-                        <button (click)="deleteFamille(famille.familleArticleId)">Supprimer</button>
-                        <button (click)="toggleModal(); selectFamille(famille)">Modifier</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+  <button class="btn2" (click)="toggleAddModal()">Ajouter une Famille</button>
+  <br><br><br>
+  <div class="familles-table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Description</th>
+          <th>Prix</th>
+          <th>Image</th>
+          <th>Date de Création</th>
+          <th>Catégorie</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody style="padding-left: 2rem;">
+        <tr *ngFor="let famille of familles">
+          <td>{{ famille.nom }}</td>
+          <td>{{ famille.description }}</td>
+          <td>{{ famille.prix | number:'1.2-2' }}</td>
+          <td><img [src]="famille.image" alt="Image de Famille" style="width: 50px;"></td>
+          <td>{{ famille.dateCreation | date:'mediumDate' }}</td>
+          <td>{{ famille.categorie }}</td>
+          <td>
+            <button (click)="deleteFamille(famille.familleArticleId)">Supprimer</button>
+            <button (click)="toggleModal(); selectFamille(famille)">Modifier</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </main>
 
 <!-- Update Famille Modal -->
-<!-- Update Famille Modal -->
 <div id="updateFamilleModal" class="modal" [class.show]="showModal">
-    <div class="rectangle">
-        <span class="close" (click)="closeModal()">&times;</span>
-        <form #familleForm="ngForm" (ngSubmit)="submitUpdate()" enctype="multipart/form-data"> 
-            <h2 style="text-align: center;">Modifier la Famille</h2>
-            <label for="nom">Nom:</label>
-            <input type="text" id="nom" name="nom" [(ngModel)]="selectedFamille.nom" ngModel required>
-            <label for="description">Description:</label>
-            <input type="text" id="description" name="description" [(ngModel)]="selectedFamille.description" ngModel required>
-            <label for="prix">Prix:</label>
-            <input type="number" id="prix" name="prix" [(ngModel)]="selectedFamille.prix" ngModel required>
-            <label for="image">Image File:</label>
-            <input type="file" (change)="onFileSelected($event)">
-            <label for="dateCreation">Date de Création:</label>
-            <input type="date" id="dateCreation" name="dateCreation" [(ngModel)]="selectedFamille.dateCreation" ngModel required class="input-style">
-            <label for="categorie">Catégorie:</label>
-            <input type="text" id="categorie" name="categorie" [(ngModel)]="selectedFamille.categorie" ngModel required>
-            <button type="submit">Modifier</button>
-        </form>
-    </div>
+  <div class="rectangle">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <form #familleForm="ngForm" (ngSubmit)="submitUpdate()">
+      <h2 style="text-align: center;">Modifier la Famille</h2>
+      <label for="nom">Nom:</label>
+      <input type="text" id="nom" name="nom" [(ngModel)]="selectedFamille.nom" required>
+      <label for="description">Description:</label>
+      <input type="text" id="description" name="description" [(ngModel)]="selectedFamille.description" required>
+      <label for="prix">Prix:</label>
+      <input type="number" id="prix" name="prix" [(ngModel)]="selectedFamille.prix" required>
+      <label for="image">Image File:</label>
+      <input type="text" id="image" name="image" [(ngModel)]="selectedFamille.image" required>
+      <label for="dateCreation">Date de Création:</label>
+      <input type="date" id="dateCreation" name="dateCreation" [(ngModel)]="selectedFamille.dateCreation" required class="input-style">
+      <label for="categorie">Catégorie:</label>
+      <input type="text" id="categorie" name="categorie" [(ngModel)]="selectedFamille.categorie" required>
+      <button type="submit">Modifier</button>
+    </form>
+  </div>
 </div>
 
-
+<!-- Add Famille Modal -->
 <div id="addFamilleModal" class="modal" [class.show]="showAddModal">
-    <div class="rectangle">
-        <span class="close" (click)="closeAddModal()">&times;</span>
-        <form #addFamilleForm="ngForm" (ngSubmit)="submitAddFamille(addFamilleForm.value)" enctype="multipart/form-data">
-            <h2>Ajouter une nouvelle Famille</h2>
-            <label for="nom">Nom:</label>
-            <input type="text" id="nom" name="nom" [(ngModel)]="newFamille.nom" ngModel required>
-            <label for="description">Description:</label>
-            <input type="text" id="description" name="description" [(ngModel)]="newFamille.description" ngModel required>
-            <label for="prix">Prix:</label>
-            <input type="number" id="prix" name="prix" [(ngModel)]="newFamille.prix" ngModel required>
-            <label for="image">Image File:</label>
-            <input type="file" (change)="handleFileInput($event.target.files)" placeholder="Upload image">
-            <label for="dateCreation">Date de Création:</label>
-            <input type="date" id="dateCreation" name="dateCreation" [(ngModel)]="newFamille.dateCreation" ngModel required class="input-style">
-            <label for="categorie">Catégorie:</label>
-            <input type="text" id="categorie" name="categorie" [(ngModel)]="newFamille.categorie" ngModel required>
-            <button class="btn3" type="submit">Ajouter</button>
-        </form>
-    </div>
+  <div class="rectangle">
+    <span class="close" (click)="closeAddModal()">&times;</span>
+    <form #addFamilleForm="ngForm" (ngSubmit)="submitAddFamille()">
+      <h2>Ajouter une nouvelle Famille</h2>
+      <label for="nom">Nom:</label>
+      <input type="text" id="nom" name="nom" [(ngModel)]="newFamille.nom" required>
+      <label for="description">Description:</label>
+      <input type="text" id="description" name="description" [(ngModel)]="newFamille.description" required>
+      <label for="prix">Prix:</label>
+      <input type="number" id="prix" name="prix" [(ngModel)]="newFamille.prix" required>
+      <label for="image">Image URL:</label>
+      <input type="text" id="image" name="image" [(ngModel)]="newFamille.image" required>
+      <label for="dateCreation">Date de Création:</label>
+      <input type="date" id="dateCreation" name="dateCreation" [(ngModel)]="newFamille.dateCreation" required class="input-style">
+      <label for="categorie">Catégorie:</label>
+      <input type="text" id="categorie" name="categorie" [(ngModel)]="newFamille.categorie" required>
+      <button class="btn3" type="submit">Ajouter</button>
+    </form>
+  </div>
 </div>

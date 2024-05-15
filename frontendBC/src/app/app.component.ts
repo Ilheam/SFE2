@@ -5,25 +5,27 @@ import { FormsModule } from '@angular/forms';  // Import FormsModule here
 import { SuppliersComponent } from './Fournisseur/Fournisseur.component';  // Adjust path as needed
 import { FamilleComponent } from './famille/famille.component'; // Adjust path based on your folder structure
 import { ArticlesComponent } from './articles/articles.component';
+import { PurchaseOrderComponent } from './purchase-order/purchase-order.component';
 import { FooterComponent } from './footer/footer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FooterComponent, FormsModule, SuppliersComponent, FamilleComponent, ArticlesComponent], 
+  imports: [CommonModule, FooterComponent, FormsModule, SuppliersComponent, FamilleComponent, ArticlesComponent, PurchaseOrderComponent], 
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
   title = 'My Angular Application';
   fournisseurs: any[] = [];
-  selectedFournisseur: any={};
+  selectedFournisseur: any = {};
   newFournisseur: any = {};
   showModal: boolean = false;
   showAddModal: boolean = false;
   showSuppliers = false;
   showArticles = false;
   showFamilles = false;
+  showPurchaseOrders = false;
 
   constructor(private dataService: DataService) {} // Single constructor with DataService
 
@@ -52,6 +54,7 @@ export class AppComponent implements OnInit {
       error: (error) => console.error('Error deleting fournisseur:', error)
     });
   }
+
   selectFournisseur(fournisseur: any): void {
     this.selectedFournisseur = fournisseur;
     this.showModal = true;  // Set to true to show modal
@@ -69,14 +72,16 @@ export class AppComponent implements OnInit {
         this.showModal = false;  // Also ensure modal is closed on error
       }
     });
-
   }
+
   toggleModal(): void {
     this.showModal = !this.showModal; // Toggle the visibility
   }
+
   closeModal(): void {
     this.showModal = false;
   } 
+
   toggleAddModal(): void {
     this.showAddModal = true;
   }
@@ -84,22 +89,33 @@ export class AppComponent implements OnInit {
   closeAddModal(): void {
     this.showAddModal = false;
   }
+
   toggleSuppliers(): void {
     this.showSuppliers = true;
     this.showArticles = false;
     this.showFamilles = false;
+    this.showPurchaseOrders = false;
   }
 
   toggleArticles(): void {
     this.showSuppliers = false;
     this.showArticles = true;
     this.showFamilles = false;
+    this.showPurchaseOrders = false;
   }
 
   toggleFamilles(): void {
     this.showSuppliers = false;
     this.showArticles = false;
     this.showFamilles = true;
+    this.showPurchaseOrders = false;
+  }
+
+  togglePurchaseOrders(): void {
+    this.showSuppliers = false;
+    this.showArticles = false;
+    this.showFamilles = false;
+    this.showPurchaseOrders = true;
   }
 
   submitAddFournisseur(fournisseurData: any): void {

@@ -18,8 +18,6 @@ export class ArticlesComponent implements OnInit {
   selectedArticle: Article = new Article();
   showModal: boolean = false;
   showAddModal: boolean = false;
-  selectedFile: File | null = null;
-
 
   constructor(private dataService: DataService) {}
 
@@ -75,15 +73,17 @@ export class ArticlesComponent implements OnInit {
   closeAddModal(): void {
     this.showAddModal = false;
   }
-  handleFileInput(event: any): void {
-    const files = event.target.files;
-    if (files.length > 0) {
-        this.selectedFile = files[0];
-    }
-}
 
-  submitAddArticle(articleData: any): void {
-    this.dataService.addArticle(articleData).subscribe({
+  submitAddArticle(): void {
+    const newArticleData = {
+      nomArticle: this.newArticle.nomArticle,
+      description: this.newArticle.description,
+      prix: this.newArticle.prix,
+      imageArticle: this.newArticle.imageArticle,
+      dateCreation: this.newArticle.dateCreation
+    };
+
+    this.dataService.addArticle(newArticleData).subscribe({
       next: (result) => {
         console.log('Article added successfully');
         this.closeAddModal();

@@ -1,0 +1,50 @@
+<main>
+    <button class="btn2" (click)="toggleModal()">Create Purchase Order</button>
+    <br><br><br>
+    <div class="purchase-order-table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Fournisseur</th>
+            <th>Article</th>
+            <th>Quantity</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of purchaseOrders">
+            <td>{{ getFournisseurName(order.entete.idFournisseur) }}</td>
+            <td>{{ getArticleName(order.details[0].idArticle) }}</td>
+            <td>{{ order.details[0].quantite }}</td>
+            <td>{{ order.entete.date | date:'short' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Create Purchase Order Modal -->
+    <div id="createPurchaseOrderModal" class="modal" [class.show]="showModal">
+      <div class="rectangle">
+        <span class="close" (click)="closeModal()">&times;</span>
+        <form #purchaseOrderForm="ngForm" (ngSubmit)="submitPurchaseOrder()">
+          <h2 style="text-align: center;">Create Purchase Order</h2>
+          
+          <label for="fournisseur">Fournisseur:</label>
+          <select id="fournisseur" name="fournisseur" [(ngModel)]="newPurchaseOrder.entete.idFournisseur" required>
+            <option *ngFor="let fournisseur of fournisseurs" [value]="fournisseur.fournisseurId">{{ fournisseur.nom }}</option>
+          </select>
+          
+          <label for="article">Article:</label>
+          <select id="article" name="article" [(ngModel)]="newPurchaseOrder.details[0].idArticle" required>
+            <option *ngFor="let article of articles" [value]="article.articleId">{{ article.nomArticle }}</option>
+          </select>
+  
+          <label for="quantity">Quantity:</label>
+          <input type="number" id="quantity" name="quantity" [(ngModel)]="newPurchaseOrder.details[0].quantite" required>
+          
+          <button type="submit">Create</button>
+        </form>
+      </div>
+    </div>
+  </main>
+  

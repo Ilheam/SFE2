@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Fournisseur } from './Fournisseur/Fournisseur.model';  // Verify the correct path
-import { FamilleArticle } from './famille/famille.model';  // Verify the correct path
-import { Article } from './articles/articles.model';  // Verify the correct path
+import { Fournisseur } from './Fournisseur/Fournisseur.model';  
+import { FamilleArticle } from './famille/famille.model';  
+import { Article } from './articles/articles.model';  
+import { BonDeCommande } from './purchase-order/purchase-order.model';  
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class DataService {
   private fournisseurUrl = `${this.baseUrl}/Fournisseurs`;
   private familleUrl = `${this.baseUrl}/FArticlesController2`;
   private articleUrl = `${this.baseUrl}/Articles`;
+  private purchaseOrderUrl = `${this.baseUrl}/PurchaseOrder`;
 
   constructor(private http: HttpClient) { }
 
@@ -42,13 +44,13 @@ export class DataService {
     return this.http.get<FamilleArticle>(`${this.familleUrl}/${id}`);
   }
 
-  addFamille(famille: FormData): Observable<any> {
+  addFamille(famille: any): Observable<any> {
     return this.http.post(this.familleUrl, famille, {
       observe: 'response'
     });
   }
 
-  updateFamille(id: number, familleData: FormData): Observable<any> {
+  updateFamille(id: number, familleData: any): Observable<any> {
     return this.http.put(`${this.familleUrl}/${id}`, familleData, {
       observe: 'response'
     });
@@ -67,15 +69,29 @@ export class DataService {
     return this.http.get<Article>(`${this.articleUrl}/${id}`);
   }
 
-  addArticle(articleData: FormData): Observable<any> {
+  addArticle(articleData: any): Observable<any> {
     return this.http.post(this.articleUrl, articleData);
   }
 
-  updateArticle(id: number, articleData: FormData): Observable<any> {
+  updateArticle(id: number, articleData: any): Observable<any> {
     return this.http.put(`${this.articleUrl}/${id}`, articleData);
   }
 
   deleteArticle(id: number): Observable<any> {
     return this.http.delete(`${this.articleUrl}/${id}`);
   }
+
+  // Methods related to Purchase Orders
+  getBonDeCommandes(): Observable<BonDeCommande[]> {
+    return this.http.get<BonDeCommande[]>(`${this.purchaseOrderUrl}/GetAll`);
+  }
+
+  createPurchaseOrder(order: BonDeCommande): Observable<any> {
+    return this.http.post(`${this.baseUrl}/PurchaseOrder/Create`, order);
+  }
+
+  getPurchaseOrders(): Observable<BonDeCommande[]> {
+    return this.http.get<BonDeCommande[]>(`${this.baseUrl}/PurchaseOrder/GetAll`);
+  }
+  
 }

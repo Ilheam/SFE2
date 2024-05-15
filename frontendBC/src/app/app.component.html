@@ -6,6 +6,7 @@
     <a href="#" (click)="toggleSuppliers()">Fournisseurs</a>
     <a href="#" (click)="toggleArticles()">Articles</a>
     <a href="#" (click)="toggleFamilles()">Familles</a>
+    <a href="#" (click)="togglePurchaseOrders()">Bon de Commande</a>
     <a href="#">Connexion</a>
     <a href="#">À propos</a>
     <a href="#">Accueil</a>
@@ -16,3 +17,4 @@
 <app-suppliers *ngIf="showSuppliers"></app-suppliers>
 <app-famille *ngIf="showFamilles"></app-famille>
 <app-articles *ngIf="showArticles"></app-articles>
+<app-purchase-order *ngIf="showPurchaseOrders"></app-purchase-order>

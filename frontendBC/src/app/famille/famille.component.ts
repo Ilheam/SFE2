@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DataService } from '../data.service';
 import { FamilleArticle } from './famille.model';
-import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-famille',
@@ -18,7 +17,6 @@ export class FamilleComponent implements OnInit {
   selectedFamille = new FamilleArticle();
   showModal = false;
   showAddModal = false;
-  selectedFile: File | null = null;
 
   constructor(private dataService: DataService) {}
 
@@ -48,20 +46,17 @@ export class FamilleComponent implements OnInit {
     this.showModal = true;
   }
 
-  handleFileInput(files: FileList): void {
-    if (files && files.length > 0) {
-      this.selectedFile = files[0];
-    }
-  }
-  
-  
-  onFileSelected(event: any): void {
-    this.selectedFile = event.target.files[0];
-  }
   submitUpdate(): void {
-    const formData = new FormData();
-    // Add form data
-    this.dataService.updateFamille(this.selectedFamille.familleArticleId, formData).subscribe({
+    const updatedFamilleData = {
+      nom: this.selectedFamille.nom,
+      description: this.selectedFamille.description,
+      prix: this.selectedFamille.prix,
+      image: this.selectedFamille.image,
+      dateCreation: this.selectedFamille.dateCreation ? new Date(this.selectedFamille.dateCreation).toISOString() : '',
+      categorie: this.selectedFamille.categorie
+    };
+
+    this.dataService.updateFamille(this.selectedFamille.familleArticleId, updatedFamilleData).subscribe({
       next: () => {
         console.log('Famille updated successfully');
         this.showModal = false;
@@ -83,36 +78,33 @@ export class FamilleComponent implements OnInit {
   }
 
   toggleAddModal(): void {
-    this.showAddModal = true;
+    this.showAddModal = !this.showAddModal;
   }
-
+  
   closeAddModal(): void {
     this.showAddModal = false;
   }
 
   submitAddFamille(): void {
-    const formData = new FormData();
-    formData.append('nom', this.newFamille.nom);
-    formData.append('description', this.newFamille.description);
-    formData.append('prix', this.newFamille.prix.toString());
-    formData.append('dateCreation', this.newFamille.dateCreation.toISOString()); // Ensure date is in ISO format
-    formData.append('categorie', this.newFamille.categorie);
-    if (this.selectedFile) {
-      formData.append('image', this.selectedFile, this.selectedFile.name);
-    }
+    const dateCreation = new Date(this.newFamille.dateCreation);
+    const newFamilleData = {
+      nom: this.newFamille.nom,
+      description: this.newFamille.description,
+      prix: this.newFamille.prix,
+      image: this.newFamille.image, // Handle image as a simple text field
+      dateCreation: dateCreation.toISOString(),
+      categorie: this.newFamille.categorie
+    };
   
-    this.dataService.addFamille(formData).subscribe({
+    this.dataService.addFamille(newFamilleData).subscribe({
       next: (result) => {
         console.log('Famille added successfully');
-        this.closeAddModal(); // Assuming there's a method to close the modal on success
+        this.closeAddModal();
+        this.fetchFamilles(); // Refresh the list to show the newly added famille
       },
       error: (error) => {
         console.error('Error adding famille:', error);
       }
     });
   }
-  
-  
-  
-  
 }
