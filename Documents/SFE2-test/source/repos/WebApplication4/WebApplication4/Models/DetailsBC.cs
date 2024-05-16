@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace WebApplication4.Models
 {
@@ -19,8 +20,12 @@ namespace WebApplication4.Models
         public int IdArticle { get; set; }
         public int Quantite { get; set; }
         public decimal PrixUnitaire { get; set; }
+        [JsonIgnore]
+
         public decimal Montant { get { return Quantite * PrixUnitaire; } }
         public int BonDeCommandeId { get; set; }
+        [JsonIgnore]
+
 
         public BonDeCommande BonDeCommande { get; set; }
     }

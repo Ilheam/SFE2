@@ -35,6 +35,11 @@ namespace WebApplication4.Models
                 .HasForeignKey<BonDeCommande>(b => b.EnteteId);
 
             modelBuilder.Entity<BonDeCommande>()
+                .HasOne(b => b.Detail)
+                .WithMany()
+                .HasForeignKey(b => b.DetailId);
+
+            modelBuilder.Entity<BonDeCommande>()
                 .HasMany(b => b.Details)
                 .WithOne(d => d.BonDeCommande)
                 .HasForeignKey(d => d.BonDeCommandeId);

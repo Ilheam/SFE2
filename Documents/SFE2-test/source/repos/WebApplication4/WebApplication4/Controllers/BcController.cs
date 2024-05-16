@@ -32,11 +32,13 @@ namespace WebApplication4.Controllers
                 "INSERT INTO entete_bcs (IdFournisseur, NumeroBonCommande, Date, Devis) VALUES ({0}, {1}, {2}, {3})",
                 bonDeCommande.Entete.IdFournisseur, bonDeCommande.Entete.NumeroBonCommande, bonDeCommande.Entete.Date, bonDeCommande.Entete.Devis);
 
+            bonDeCommande.Entete.Id = _context.Entete_BCs.OrderByDescending(e => e.Id).FirstOrDefault()?.Id ?? 0;
+
             foreach (var detail in bonDeCommande.Details)
             {
                 await _context.Database.ExecuteSqlRawAsync(
-                    "INSERT INTO detailsbcs (IdArticle, Quantite, PrixUnitaire, BonDeCommandeId) VALUES ({0}, {1}, {2}, (SELECT Id FROM entete_bcs ORDER BY Id DESC LIMIT 1))",
-                    detail.IdArticle, detail.Quantite, detail.PrixUnitaire);
+                    "INSERT INTO detailsbcs (IdArticle, Quantite, PrixUnitaire, BonDeCommandeId) VALUES ({0}, {1}, {2}, {3})",
+                    detail.IdArticle, detail.Quantite, detail.PrixUnitaire, bonDeCommande.Entete.Id);
             }
 
             return Ok(bonDeCommande);
@@ -101,7 +103,7 @@ namespace WebApplication4.Controllers
             return Ok(existingBonDeCommande);
         }
 
-        // DELETE: api/PurchaseOrder/Delete/{id}
+        // DELETE: api/PurchaseOrder/Delete/{id}]
         [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
