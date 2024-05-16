@@ -1,20 +1,24 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';  
-import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { SuppliersModule } from './Fournisseur/Fournisseur.module'; 
-import { FamilleModule } from './famille/famille.module'; 
+import { SuppliersComponent } from './Fournisseur/Fournisseur.component';
+import { FamilleComponent } from './famille/famille.component';
+import { ArticlesComponent } from './articles/articles.component';
+import { FooterComponent } from './footer/footer.component';
+import { PurchaseOrderModule } from './purchase-order/purchase-order.module'; // Import the new module
 
 @NgModule({
+  declarations: [
+    AppComponent,
+   
+  ],
   imports: [
     BrowserModule,
-    HttpClientModule,
     FormsModule,
-    SuppliersModule,
-    FamilleModule 
+    PurchaseOrderModule // Add the new module here
   ],
-  declarations: [AppComponent],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
