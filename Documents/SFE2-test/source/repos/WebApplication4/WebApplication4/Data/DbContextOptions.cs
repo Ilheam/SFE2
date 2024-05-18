@@ -22,7 +22,7 @@ namespace WebApplication4.Models
             modelBuilder.Entity<BonDeCommande>()
                 .HasKey(b => b.Id);
 
-            modelBuilder.Entity<Entete_BC>()
+            modelBuilder.Entity<Entete_BC>()                
                 .HasKey(e => e.Id);
 
             modelBuilder.Entity<DetailsBc>()
@@ -32,6 +32,8 @@ namespace WebApplication4.Models
                 .HasOne(b => b.Entete)
                 .WithOne()
                 .HasForeignKey<BonDeCommande>(b => b.EnteteId);
+
+            //ef core is smart enouight to detect foreign key with navigation properties, just reference another class and it'll work
 
             modelBuilder.Entity<BonDeCommande>()
                 .HasOne(b => b.Detail)

@@ -4,9 +4,10 @@ using System.Text.Json.Serialization;
 
 namespace WebApplication4.Models
 {
-    [Table("detailsbcs")]
+    //[Table("detailsbcs")]
     public class DetailsBc
     {
+        [Key]
         public int Id { get; set; }
         [Required(ErrorMessage = "La validation 1 est requise")]
         public string Validation1 { get; set; }

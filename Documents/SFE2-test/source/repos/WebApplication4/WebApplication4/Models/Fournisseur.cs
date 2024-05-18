@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApplication4.Models
 
@@ -7,7 +8,7 @@ namespace WebApplication4.Models
 
     public class Fournisseur
     {
-
+        [Key]
         public int FournisseurId { get; set; }
         public string Nom { get; set; }
         public string Telephone { get; set; }

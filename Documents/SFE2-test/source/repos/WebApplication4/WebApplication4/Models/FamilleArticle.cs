@@ -1,7 +1,11 @@
-﻿namespace WebApplication4.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace WebApplication4.Models
 {
     public class FamilleArticle
     {
+        //you dont have to add the key attribute, just addidng to be explicit
+        [Key]
         public int FamilleArticleId { get; set; }
         public string Nom { get; set; }
         public string Description { get; set; }
