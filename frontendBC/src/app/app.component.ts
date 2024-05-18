@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
     // Fetch data from the backend using DataService
     this.dataService.getFournisseurs().subscribe({
       next: (data) => {
-        console.timeEnd('fetchFournisseurs')
+        console.timeEnd('fetchFournisseurs');
         this.fournisseurs = data;
       },
       error: (error) => {

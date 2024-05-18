@@ -32,6 +32,13 @@ export class FamilleComponent implements OnInit {
   }
 
   deleteFamille(id: number): void {
+    console.log('Received ID for deletion:', id); // Debugging statement
+
+    if (id === undefined || id === null) {
+      console.error('Error deleting famille: ID is undefined or null');
+      return;
+    }
+
     this.dataService.deleteFamille(id).subscribe({
       next: () => {
         this.fetchFamilles();
@@ -56,7 +63,7 @@ export class FamilleComponent implements OnInit {
       categorie: this.selectedFamille.categorie
     };
 
-    this.dataService.updateFamille(this.selectedFamille.familleArticleId, updatedFamilleData).subscribe({
+    this.dataService.updateFamille(this.selectedFamille.id, updatedFamilleData).subscribe({
       next: () => {
         console.log('Famille updated successfully');
         this.showModal = false;

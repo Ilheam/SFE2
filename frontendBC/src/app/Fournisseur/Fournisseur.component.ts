@@ -8,18 +8,18 @@ import { Fournisseur } from './Fournisseur.model';
   selector: 'app-suppliers',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './Fournisseur.component.html',
-  styleUrls: ['./Fournisseur.component.css']
+  templateUrl: './fournisseur.component.html',
+  styleUrls: ['./fournisseur.component.css']
 })
 export class SuppliersComponent implements OnInit {
   title = 'My Angular Application';
   fournisseurs: Fournisseur[] = [];
-  newFournisseur: Fournisseur = new Fournisseur(); // Assuming default values or constructors are manageable
+  newFournisseur: Fournisseur = new Fournisseur();
   selectedFournisseur: Fournisseur = new Fournisseur();
   showModal: boolean = false;
   showAddModal: boolean = false;
-  
-  constructor(private dataService: DataService) {} // Single constructor with DataService
+
+  constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
     this.fetchFournisseurs();
@@ -27,29 +27,35 @@ export class SuppliersComponent implements OnInit {
 
   fetchFournisseurs(): void {
     this.dataService.getFournisseurs().subscribe({
-      next: (data) => {
-        this.fournisseurs = data;
-      },
-      error: (error) => {
-        console.error('Error fetching fournisseurs:', error);
-      }
+      next: (data) => this.fournisseurs = data,
+      error: (error) => console.error('Error fetching fournisseurs:', error)
     });
   }
 
   deleteFournisseur(id: number): void {
+    if (id === undefined || id === null) {
+      console.error('Error deleting fournisseur: ID is undefined or null');
+      return;
+    }
+
     this.dataService.deleteFournisseur(id).subscribe({
       next: () => this.fetchFournisseurs(), // Refresh the list after deletion
       error: (error) => console.error('Error deleting fournisseur:', error)
     });
   }
 
-  selectFournisseur(fournisseur: any): void {
+  selectFournisseur(fournisseur: Fournisseur): void {
     this.selectedFournisseur = { ...fournisseur };
     this.showModal = true;
   }
 
   submitUpdate(): void {
-    this.dataService.updateFournisseur(this.selectedFournisseur.fournisseurId, this.selectedFournisseur).subscribe({
+    if (this.selectedFournisseur.id === undefined || this.selectedFournisseur.id === null) {
+      console.error('Error updating fournisseur: ID is undefined or null');
+      return;
+    }
+
+    this.dataService.updateFournisseur(this.selectedFournisseur.id, this.selectedFournisseur).subscribe({
       next: () => {
         console.log('Fournisseur updated successfully');
         this.showModal = false;
@@ -61,14 +67,14 @@ export class SuppliersComponent implements OnInit {
       }
     });
   }
-  
+
   toggleModal(): void {
     this.showModal = !this.showModal;
   }
 
   closeModal(): void {
     this.showModal = false;
-  } 
+  }
 
   toggleAddModal(): void {
     this.showAddModal = true;

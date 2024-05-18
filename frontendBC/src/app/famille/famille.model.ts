@@ -1,6 +1,6 @@
 export class FamilleArticle {
-    familleArticleId!: number; 
-    nom!: string; 
+  id!: number; // Updated to match backend
+  nom!: string; 
     description!: string; 
     prix!: number; 
     image!: string; 

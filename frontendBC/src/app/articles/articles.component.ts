@@ -45,7 +45,7 @@ export class ArticlesComponent implements OnInit {
   }
 
   submitUpdate(articleData: any): void {
-    this.dataService.updateArticle(this.selectedArticle.articleId, articleData).subscribe({
+    this.dataService.updateArticle(this.selectedArticle.id, articleData).subscribe({
       next: () => {
         console.log('Article updated successfully');
         this.showModal = false;

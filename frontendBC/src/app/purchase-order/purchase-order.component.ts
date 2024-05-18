@@ -1,74 +1,45 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { DataService } from '../data.service';
-import { PurchaseOrder, Entete, Detail } from './purchase-order.model';  // Ensure paths are correct
+import { BonDeCommande, OrderForClient, OrderForCreation } from './purchase-order.model';
 
 @Component({
   selector: 'app-purchase-order',
   standalone: true,
   imports: [CommonModule, FormsModule],
-
   templateUrl: './purchase-order.component.html',
   styleUrls: ['./purchase-order.component.css']
 })
 export class PurchaseOrderComponent implements OnInit {
-  purchaseOrders: PurchaseOrder[] = [];
-  newPurchaseOrder: PurchaseOrder = new PurchaseOrder();
-  fournisseurs: any[] = [];
-  articles: any[] = [];
+  purchaseOrders: OrderForClient[] = [];
+  newPurchaseOrder: OrderForCreation = new OrderForCreation();
   showModal: boolean = false;
 
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
     this.fetchPurchaseOrders();
-    this.fetchFournisseurs();
-    this.fetchArticles();
   }
 
   fetchPurchaseOrders(): void {
     this.dataService.getPurchaseOrders().subscribe({
-      next: (data: PurchaseOrder[]) => {
+      next: (data) => {
         this.purchaseOrders = data;
+        console.log(data);
       },
-      error: (error) => {
-        console.error('Error fetching purchase orders:', error);
-      }
+      error: (error) => console.error('Error fetching purchase orders:', error)
     });
   }
 
-  fetchFournisseurs(): void {
-    this.dataService.getFournisseurs().subscribe({
+  submitPurchaseOrder(): void {
+    console.log(this.newPurchaseOrder);
+    this.dataService.createPurchaseOrder(this.newPurchaseOrder).subscribe({
       next: (data) => {
-        this.fournisseurs = data;
+        this.closeModal();
       },
-      error: (error) => {
-        console.error('Error fetching fournisseurs:', error);
-      }
+      error: (error) => console.error('Error creating purchase order:', error)
     });
-  }
-
-  fetchArticles(): void {
-    this.dataService.getArticles().subscribe({
-      next: (data) => {
-        this.articles = data;
-      },
-      error: (error) => {
-        console.error('Error fetching articles:', error);
-      }
-    });
-  }
-
-  getFournisseurName(idFournisseur: number): string {
-    const fournisseur = this.fournisseurs.find(f => f.fournisseurId === idFournisseur);
-    return fournisseur ? fournisseur.nom : 'Unknown';
-  }
-
-  getArticleName(idArticle: number): string {
-    const article = this.articles.find(a => a.articleId === idArticle);
-    return article ? article.nomArticle : 'Unknown';
   }
 
   toggleModal(): void {
@@ -77,17 +48,18 @@ export class PurchaseOrderComponent implements OnInit {
 
   closeModal(): void {
     this.showModal = false;
+    this.newPurchaseOrder = new OrderForCreation(); // Reset form
   }
 
-  submitPurchaseOrder(): void {
-    this.dataService.createPurchaseOrder(this.newPurchaseOrder).subscribe({
-      next: () => {
-        this.fetchPurchaseOrders();
-        this.closeModal();
-      },
-      error: (error) => {
-        console.error('Error creating purchase order:', error);
-      }
-    });
-  }
+  //no need, server gives us what we need
+
+  // getFournisseurName(id: number): string {
+  //   const fournisseur = this.purchaseOrders.find(po => po.entete.fournisseurId === id)?.entete.fournisseur;
+  //   return fournisseur ? fournisseur.nom : 'Unknown';
+  // }
+
+  // getArticleName(id: number): string {
+  //   const article = this.purchaseOrders.find(po => po.detailsBc.articleId === id)?.detailsBc.article;
+  //   return article ? article.nomArticle : 'Unknown';
+  // }
 }

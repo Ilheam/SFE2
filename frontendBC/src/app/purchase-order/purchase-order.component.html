@@ -13,10 +13,10 @@
       </thead>
       <tbody>
         <tr *ngFor="let order of purchaseOrders">
-          <td>{{ getFournisseurName(order?.entete?.idFournisseur!) }}</td>
-          <td>{{ getArticleName(order?.detail?.idArticle!) || 'Unknown' }}</td>
-          <td>{{ order?.detail?.quantite || 'N/A' }}</td>
-          <td>{{ order?.entete?.date | date:'short' || 'N/A' }}</td>
+          <td>{{ order.fournisseurName}}</td>
+          <td>{{ order.articleNom}}</td>
+          <td>{{ order.quantite}}</td>
+          <td>{{ order.date }}</td>
         </tr>
       </tbody>
     </table>
@@ -29,18 +29,14 @@
       <form #purchaseOrderForm="ngForm" (ngSubmit)="submitPurchaseOrder()">
         <h2 style="text-align: center;">Create Purchase Order</h2>
         <label for="fournisseur">Fournisseur:</label>
-        <select id="fournisseur" name="fournisseur" [(ngModel)]="newPurchaseOrder.entete.idFournisseur" required>
-          <option *ngFor="let fournisseur of fournisseurs" [value]="fournisseur.fournisseurId">{{ fournisseur.nom }}</option>
-        </select>
-        
+        <input type="text" id="fournisseur" name="fournisseur" [(ngModel)]="newPurchaseOrder.fournisseurName" required>
+
         <label for="article">Article:</label>
-        <select id="article" name="article" [(ngModel)]="newPurchaseOrder.detail.idArticle" required>
-          <option *ngFor="let article of articles" [value]="article.articleId">{{ article.nomArticle }}</option>
-        </select>
+        <input type="text" id="article" name="article" [(ngModel)]="newPurchaseOrder.articleNom" required>
 
         <label for="quantity">Quantity:</label>
-        <input type="number" id="quantity" name="quantity" [(ngModel)]="newPurchaseOrder.detail.quantite" required>
-        
+        <input type="number" id="quantity" name="quantity" [(ngModel)]="newPurchaseOrder.quantite" required>
+
         <button type="submit">Create</button>
       </form>
     </div>

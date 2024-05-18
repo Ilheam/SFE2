@@ -1,8 +1,8 @@
 export class Fournisseur {
-  fournisseurId!: number;
-  nom: string = ''; // default to an empty string if not provided
+  id!: number;
+  nom: string = '';
   email: string = '';
   telephone: string = '';
-  adresse: string = ''; // Ensure this is always initialized
+  adresse: string = '';
   designation: string = '';
 }

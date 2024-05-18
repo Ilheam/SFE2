@@ -21,7 +21,7 @@
           <td><img [src]="article.imageArticle" alt="Article Image" style="width: 50px; height: auto;"></td>
           <td>{{ article.dateCreation | date:'mediumDate' }}</td>
           <td>
-            <button (click)="deleteArticle(article.articleId)">Supprimer</button>
+            <button (click)="deleteArticle(article.id)">Supprimer</button>
             <button (click)="toggleModal(); selectArticle(article)">Modifier</button>
           </td>
         </tr>

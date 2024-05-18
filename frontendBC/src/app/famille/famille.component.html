@@ -23,7 +23,7 @@
           <td>{{ famille.dateCreation | date:'mediumDate' }}</td>
           <td>{{ famille.categorie }}</td>
           <td>
-            <button (click)="deleteFamille(famille.familleArticleId)">Supprimer</button>
+            <button (click)="deleteFamille(famille.id)">Supprimer</button> <!-- Use 'id' if you chose Option 2 -->
             <button (click)="toggleModal(); selectFamille(famille)">Modifier</button>
           </td>
         </tr>

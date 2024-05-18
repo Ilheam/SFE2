@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Fournisseur } from './Fournisseur/Fournisseur.model';  
-import { FamilleArticle } from './famille/famille.model';  
-import { Article } from './articles/articles.model';  
-import { BonDeCommande } from './purchase-order/purchase-order.model'; 
+import { Fournisseur } from './Fournisseur/Fournisseur.model';
+import { FamilleArticle } from './famille/famille.model';
+import { Article } from './articles/articles.model';
+import { BonDeCommande, OrderForClient, OrderForCreation } from './purchase-order/purchase-order.model';
 import { PurchaseOrder } from './purchase-order/purchase-order.model';
-import { Detail } from './purchase-order/purchase-order.model'; 
+import { Detail } from './purchase-order/purchase-order.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  private baseUrl = 'https://localhost:7234/api';
+  private baseUrl = 'https://localhost:7130/api';
   private fournisseurUrl = `${this.baseUrl}/Fournisseurs`;
   private familleUrl = `${this.baseUrl}/FArticlesController2`;
   private articleUrl = `${this.baseUrl}/Articles`;
@@ -85,15 +85,15 @@ export class DataService {
 
   // Methods related to Purchase Orders
   getBonDeCommandes(): Observable<BonDeCommande[]> {
-    return this.http.get<BonDeCommande[]>(`${this.purchaseOrderUrl}/GetAll`);
+    return this.http.get<BonDeCommande[]>(this.purchaseOrderUrl);
   }
 
-  getPurchaseOrders(): Observable<BonDeCommande[]> {
-    return this.http.get<BonDeCommande[]>(`${this.baseUrl}/PurchaseOrder/GetAll`);
+  getPurchaseOrders(): Observable<OrderForClient[]> {
+    return this.http.get<OrderForClient[]>(this.purchaseOrderUrl);
   }
 
-  createPurchaseOrder(order: BonDeCommande): Observable<BonDeCommande> {
-    return this.http.post<BonDeCommande>(`${this.baseUrl}/PurchaseOrder/Create`, order);
+  createPurchaseOrder(order: OrderForCreation): Observable<OrderForCreation> {
+    return this.http.post<OrderForCreation>(this.purchaseOrderUrl, order);
   }
-  
+
 }
