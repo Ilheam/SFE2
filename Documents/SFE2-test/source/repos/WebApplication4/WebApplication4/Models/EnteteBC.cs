@@ -3,8 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApplication4.Models
 {
-    [Table("entete_bc")] // Ensure this matches the actual table name
-
+    [Table("entete_bcs")]
     public class Entete_BC
     {
         public int Id { get; set; }

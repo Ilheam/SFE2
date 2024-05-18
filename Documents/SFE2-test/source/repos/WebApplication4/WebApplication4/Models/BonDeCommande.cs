@@ -4,20 +4,19 @@ using System.Text.Json.Serialization;
 
 namespace WebApplication4.Models
 {
-    [Table("bondecommandes")] // Ensure this matches the actual table name
-
+    [Table("bondecommandes")]
     public class BonDeCommande
     {
-        public int Id { get; set; } // This will be the primary key
-
+        public int Id { get; set; }
         public int EnteteId { get; set; }
         public Entete_BC Entete { get; set; }
         public int DetailId { get; set; }
         public DetailsBc Detail { get; set; }
-
         [JsonIgnore]
-
-        public List<DetailsBc> Details { get; set; }
-
+        public List<DetailsBc> Details { get; set; } = new List<DetailsBc>();
+        [NotMapped]
+        public string FournisseurNom { get; set; }
+        [NotMapped]
+        public string ArticleNom { get; set; }
     }
 }

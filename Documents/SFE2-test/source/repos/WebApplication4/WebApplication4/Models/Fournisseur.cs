@@ -1,7 +1,13 @@
-﻿namespace WebApplication4.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace WebApplication4.Models
+
 {
+    [Table("fournisseurs")]
+
     public class Fournisseur
     {
+
         public int FournisseurId { get; set; }
         public string Nom { get; set; }
         public string Telephone { get; set; }

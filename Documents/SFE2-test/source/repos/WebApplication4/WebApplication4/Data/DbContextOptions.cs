@@ -19,7 +19,6 @@ namespace WebApplication4.Models
         {
             base.OnModelCreating(modelBuilder);
 
-            // Configure entity relationships and keys
             modelBuilder.Entity<BonDeCommande>()
                 .HasKey(b => b.Id);
 

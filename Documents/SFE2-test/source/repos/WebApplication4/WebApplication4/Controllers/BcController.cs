@@ -29,7 +29,7 @@ namespace WebApplication4.Controllers
 
             // Add Entete and Details using SQL queries
             await _context.Database.ExecuteSqlRawAsync(
-                "INSERT INTO entete_bcs (IdFournisseur, NumeroBonCommande, Date, Devis) VALUES ({0}, {1}, {2}, {3})",
+                "INSERT INTO entete_bc (IdFournisseur, NumeroBonCommande, Date, Devis) VALUES ({0}, {1}, {2}, {3})",
                 bonDeCommande.Entete.IdFournisseur, bonDeCommande.Entete.NumeroBonCommande, bonDeCommande.Entete.Date, bonDeCommande.Entete.Devis);
 
             bonDeCommande.Entete.Id = _context.Entete_BCs.OrderByDescending(e => e.Id).FirstOrDefault()?.Id ?? 0;
@@ -37,7 +37,7 @@ namespace WebApplication4.Controllers
             foreach (var detail in bonDeCommande.Details)
             {
                 await _context.Database.ExecuteSqlRawAsync(
-                    "INSERT INTO detailsbcs (IdArticle, Quantite, PrixUnitaire, BonDeCommandeId) VALUES ({0}, {1}, {2}, {3})",
+                    "INSERT INTO detailsbc (IdArticle, Quantite, PrixUnitaire, BonDeCommandeId) VALUES ({0}, {1}, {2}, {3})",
                     detail.IdArticle, detail.Quantite, detail.PrixUnitaire, bonDeCommande.Entete.Id);
             }
 
@@ -89,21 +89,21 @@ namespace WebApplication4.Controllers
 
             // Update Entete
             await _context.Database.ExecuteSqlRawAsync(
-                "UPDATE entete_bcs SET IdFournisseur = {0}, NumeroBonCommande = {1}, Date = {2}, Devis = {3} WHERE Id = {4}",
+                "UPDATE entete_bc SET IdFournisseur = {0}, NumeroBonCommande = {1}, Date = {2}, Devis = {3} WHERE Id = {4}",
                 updatedBonDeCommande.Entete.IdFournisseur, updatedBonDeCommande.Entete.NumeroBonCommande, updatedBonDeCommande.Entete.Date, updatedBonDeCommande.Entete.Devis, updatedBonDeCommande.Entete.Id);
 
             // Update Details
             foreach (var detail in updatedBonDeCommande.Details)
             {
                 await _context.Database.ExecuteSqlRawAsync(
-                    "UPDATE detailsbcs SET IdArticle = {0}, Quantite = {1}, PrixUnitaire = {2} WHERE Id = {3}",
+                    "UPDATE detailsbc SET IdArticle = {0}, Quantite = {1}, PrixUnitaire = {2} WHERE Id = {3}",
                     detail.IdArticle, detail.Quantite, detail.PrixUnitaire, detail.Id);
             }
 
             return Ok(existingBonDeCommande);
         }
 
-        // DELETE: api/PurchaseOrder/Delete/{id}]
+        // DELETE: api/PurchaseOrder/Delete/{id}
         [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -117,7 +117,8 @@ namespace WebApplication4.Controllers
                 return NotFound("Bon de commande non trouvé");
             }
 
-            await _context.Database.ExecuteSqlRawAsync("DELETE FROM bondecommandes WHERE Id = {0}", id);
+            _context.BonDeCommandes.Remove(bonDeCommandeToRemove);
+            await _context.SaveChangesAsync();
 
             return Ok("Bon de commande supprimé");
         }

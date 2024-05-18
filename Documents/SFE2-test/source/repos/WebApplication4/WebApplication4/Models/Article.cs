@@ -1,5 +1,9 @@
-﻿namespace WebApplication4.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace WebApplication4.Models
 {
+    [Table("articles")] // Ensure this matches the actual table name
+
     public class Article
     {
         public int ArticleId { get; set; }
