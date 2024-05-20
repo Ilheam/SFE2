@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DataService } from '../data.service';
-import { BonDeCommande, OrderForClient, OrderForCreation } from './purchase-order.model';
+import { GeneratedPurchaseOrder, OrderForClient, OrderForCreation } from './purchase-order.model';
+import { BonDeCommandeComponent } from '../bon-de-commande/bon-de-commande.component';
 
 @Component({
   selector: 'app-purchase-order',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, BonDeCommandeComponent],
   templateUrl: './purchase-order.component.html',
   styleUrls: ['./purchase-order.component.css']
 })
@@ -15,6 +16,7 @@ export class PurchaseOrderComponent implements OnInit {
   purchaseOrders: OrderForClient[] = [];
   newPurchaseOrder: OrderForCreation = new OrderForCreation();
   showModal: boolean = false;
+  selectedOrder: GeneratedPurchaseOrder | undefined;
 
   constructor(private dataService: DataService) { }
 
@@ -33,10 +35,10 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   submitPurchaseOrder(): void {
-    console.log(this.newPurchaseOrder);
     this.dataService.createPurchaseOrder(this.newPurchaseOrder).subscribe({
-      next: (data) => {
+      next: () => {
         this.closeModal();
+        this.fetchPurchaseOrders();
       },
       error: (error) => console.error('Error creating purchase order:', error)
     });
@@ -48,18 +50,20 @@ export class PurchaseOrderComponent implements OnInit {
 
   closeModal(): void {
     this.showModal = false;
-    this.newPurchaseOrder = new OrderForCreation(); // Reset form
+    this.newPurchaseOrder = new OrderForCreation();
   }
 
-  //no need, server gives us what we need
+  generateBonDeCommande(order: OrderForClient): void {
+    this.dataService.generatePurchaseOrder(order.fournisseurName)
+      .subscribe(
+        (order) => {
+          this.selectedOrder = order;
+        }, (error) => {
 
-  // getFournisseurName(id: number): string {
-  //   const fournisseur = this.purchaseOrders.find(po => po.entete.fournisseurId === id)?.entete.fournisseur;
-  //   return fournisseur ? fournisseur.nom : 'Unknown';
-  // }
+        });
+  }
 
-  // getArticleName(id: number): string {
-  //   const article = this.purchaseOrders.find(po => po.detailsBc.articleId === id)?.detailsBc.article;
-  //   return article ? article.nomArticle : 'Unknown';
-  // }
+  closeBonDeCommande(): void {
+    this.selectedOrder = undefined;
+  }
 }

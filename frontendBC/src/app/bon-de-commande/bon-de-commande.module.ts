@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { PurchaseOrderComponent } from './purchase-order.component';
-import { BonDeCommandeComponent } from '../bon-de-commande/bon-de-commande.component';
+import { BonDeCommandeComponent } from './bon-de-commande.component';
 
 @NgModule({
   declarations: [
-    PurchaseOrderComponent,
     BonDeCommandeComponent
   ],
   imports: [
@@ -14,7 +12,7 @@ import { BonDeCommandeComponent } from '../bon-de-commande/bon-de-commande.compo
     FormsModule
   ],
   exports: [
-    PurchaseOrderComponent
+    BonDeCommandeComponent
   ]
 })
-export class PurchaseOrderModule { }
+export class BonDeCommandeModule { } 

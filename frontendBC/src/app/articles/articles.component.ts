@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DataService } from '../data.service';
-import { Article } from './articles.model';
+import { Article, ArticleForCreation } from './articles.model';
 
 @Component({
   selector: 'app-articles',
@@ -14,7 +14,7 @@ import { Article } from './articles.model';
 export class ArticlesComponent implements OnInit {
   title = 'My Angular Application';
   articles: Article[] = [];
-  newArticle: Article = new Article();
+  newArticle: ArticleForCreation = new ArticleForCreation();
   selectedArticle: Article = new Article();
   showModal: boolean = false;
   showAddModal: boolean = false;
@@ -79,8 +79,7 @@ export class ArticlesComponent implements OnInit {
       nomArticle: this.newArticle.nomArticle,
       description: this.newArticle.description,
       prix: this.newArticle.prix,
-      imageArticle: this.newArticle.imageArticle,
-      dateCreation: this.newArticle.dateCreation
+      imageArticle: this.newArticle.imageArticle
     };
 
     this.dataService.addArticle(newArticleData).subscribe({

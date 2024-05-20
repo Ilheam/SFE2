@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Fournisseur } from './Fournisseur/Fournisseur.model';
 import { FamilleArticle } from './famille/famille.model';
 import { Article } from './articles/articles.model';
-import { BonDeCommande, OrderForClient, OrderForCreation } from './purchase-order/purchase-order.model';
+import { BonDeCommande, GeneratedPurchaseOrder, OrderForClient, OrderForCreation } from './purchase-order/purchase-order.model';
 import { PurchaseOrder } from './purchase-order/purchase-order.model';
 import { Detail } from './purchase-order/purchase-order.model';
 
@@ -13,10 +13,11 @@ import { Detail } from './purchase-order/purchase-order.model';
 })
 export class DataService {
   private baseUrl = 'https://localhost:7130/api';
-  private fournisseurUrl = `${this.baseUrl}/Fournisseurs`;
-  private familleUrl = `${this.baseUrl}/FArticlesController2`;
-  private articleUrl = `${this.baseUrl}/Articles`;
+  private fournisseurUrl = `${this.baseUrl}/Fournisseur`;
+  private familleUrl = `${this.baseUrl}/FamilleArticle`;
+  private articleUrl = `${this.baseUrl}/Article`;
   private purchaseOrderUrl = `${this.baseUrl}/PurchaseOrder`;
+  
 
   constructor(private http: HttpClient) { }
 
@@ -91,9 +92,16 @@ export class DataService {
   getPurchaseOrders(): Observable<OrderForClient[]> {
     return this.http.get<OrderForClient[]>(this.purchaseOrderUrl);
   }
+  getPurchaseOrderById(id: number): Observable<OrderForClient> {
+    return this.http.get<OrderForClient>(`${this.purchaseOrderUrl}/${id}`);
+  }
 
   createPurchaseOrder(order: OrderForCreation): Observable<OrderForCreation> {
     return this.http.post<OrderForCreation>(this.purchaseOrderUrl, order);
   }
 
+  generatePurchaseOrder(supplierName: string): Observable<GeneratedPurchaseOrder>{
+    let generatedPurchaseOrderUrl = `${this.baseUrl}/PurchaseOrder/generate/${supplierName}`;
+    return this.http.get<GeneratedPurchaseOrder>(generatedPurchaseOrderUrl);
+  }
 }

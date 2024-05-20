@@ -9,14 +9,18 @@
           <th>Article</th>
           <th>Quantity</th>
           <th>Date</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let order of purchaseOrders">
-          <td>{{ order.fournisseurName}}</td>
-          <td>{{ order.articleNom}}</td>
-          <td>{{ order.quantite}}</td>
-          <td>{{ order.date }}</td>
+          <td>{{ order.fournisseurName }}</td>
+          <td>{{ order.articleNom }}</td>
+          <td>{{ order.quantite }}</td>
+          <td>{{ order.date | date: 'mediumDate' }}</td>
+          <td>
+            <button (click)="generateBonDeCommande(order)">Generate Bon de Commande</button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -41,4 +45,8 @@
       </form>
     </div>
   </div>
+
+  <!-- Bon de Commande Details -->
+  <app-bon-de-commande *ngIf="selectedOrder" [order]="selectedOrder"></app-bon-de-commande>
+  <button *ngIf="selectedOrder" (click)="closeBonDeCommande()">Close Bon de Commande</button>
 </main>

@@ -26,7 +26,7 @@ export class Detail {
   quantite: number = 0;
   prixUnitaire: number = 0;
   bonDeCommandeId: number = 0;
-  article: Article = new Article(); // Add this property
+  article: Article = new Article(); 
 }
 
 export class OrderForCreation {
@@ -36,6 +36,8 @@ export class OrderForCreation {
 }
 
 export class OrderForClient {
+  orderId: number = 0; 
+
   fournisseurName: string = '';
   articleNom: string = '';
   quantite: number = 0;
@@ -60,4 +62,21 @@ export class Fournisseur {
 export class Article {
   articleId: number = 0;
   nomArticle: string = '';
+}
+
+export class GeneratedPurchaseOrder {
+  nom : string = '';
+  email : string = '';
+  phone : string = ''; 
+  adresse : string = ''; 
+  articles: GeneratedPurchaseOrderArticle[] = [];
+  total :number = 0;
+  date: Date = new Date();
+}
+
+export class GeneratedPurchaseOrderArticle{
+  nom: string = '';
+  quantite: number = 0;
+  prix: number = 0;
+  total: number = 0;
 }

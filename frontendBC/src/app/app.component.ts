@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import { DataService } from './data.service';
-import { FormsModule } from '@angular/forms';  // Import FormsModule here
+import { FormsModule } from '@angular/forms';
 import { SuppliersComponent } from './Fournisseur/Fournisseur.component';  // Adjust path as needed
 import { FamilleComponent } from './famille/famille.component'; // Adjust path based on your folder structure
 import { ArticlesComponent } from './articles/articles.component';
@@ -30,15 +30,12 @@ export class AppComponent implements OnInit {
   constructor(private dataService: DataService) {} // Single constructor with DataService
 
   ngOnInit(): void {
-    console.time('fetchFournisseurs')
     this.fetchFournisseurs();
   }
 
   fetchFournisseurs(): void {
-    // Fetch data from the backend using DataService
     this.dataService.getFournisseurs().subscribe({
       next: (data) => {
-        console.timeEnd('fetchFournisseurs');
         this.fournisseurs = data;
       },
       error: (error) => {
@@ -47,8 +44,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  DeleteFournisseur(id: number): void {
-    // Use DataService to delete a fournisseur
+  deleteFournisseur(id: number): void {
     this.dataService.deleteFournisseur(id).subscribe({
       next: () => this.fetchFournisseurs(), // Refresh the list after deletion
       error: (error) => console.error('Error deleting fournisseur:', error)

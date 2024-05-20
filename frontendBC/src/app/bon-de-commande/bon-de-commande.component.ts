@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { GeneratedPurchaseOrder, GeneratedPurchaseOrderArticle } from '../purchase-order/purchase-order.model';
 
 @Component({
   selector: 'app-bon-de-commande',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './bon-de-commande.component.html',
-  styleUrl: './bon-de-commande.component.css'
+  styleUrls: ['./bon-de-commande.component.css']
 })
 export class BonDeCommandeComponent {
-
+  @Input() order: GeneratedPurchaseOrder | undefined;
 }

@@ -14,7 +14,74 @@
   </nav>
 </header>
 <br><br>
+
 <app-suppliers *ngIf="showSuppliers"></app-suppliers>
 <app-famille *ngIf="showFamilles"></app-famille>
 <app-articles *ngIf="showArticles"></app-articles>
 <app-purchase-order *ngIf="showPurchaseOrders"></app-purchase-order>
+
+<div *ngIf="!showSuppliers && !showFamilles && !showArticles && !showPurchaseOrders">
+
+<div class="circle"></div>
+<div class="rectangle"></div>
+<div class="group">
+    <div class="mini-group">
+        <div class="text">Electronic</div>
+        <div class="text">Items</div>
+    </div>
+    <div class="mini-group">
+        <div class="text">Hours</div>
+        <div class="text"><strong>24H/24</strong></div>
+    </div>
+    <div class="mini-group">
+        <div class="text">Electronic</div>
+        <div class="text">Items</div>
+    </div>
+</div>
+<div class="vector"></div>
+<div class="text-decouvrez">
+    Découvrez<br>notre<br>univers
+</div>
+<div class="text-services">
+    Nous sommes ravis de vous présenter nos services.<br>Soyez les bienvenues.
+</div>
+<button class="btn">Next</button>
+<div class="rectangle-noir"></div>
+
+<div class="rectangle-noir">
+    <div class="ellipse-blanc"></div>
+    <div class="ellipse-blanc-droite"></div>
+    <a href="gestionDroit.html" class="btn-rectangle-noir">Paramétrage</a>
+    <a href="gestionDroit.html" class="btn-rectangle-noir-droite">Traitement</a>
+</div>
+
+<div class="cercle-noir"></div>
+<div class="cercle-noir-droite"></div>
+<div class="animated-rectangle"></div>
+<div class="animated-rectangle1"></div>
+<a href="gestionDroit.html" target="_blank">
+    <div class="animated-rectangle-behind" data-content="Pc Portable"></div>
+</a>
+<div class="animated-rectangle-behind2" data-content="Ultrabooks"></div>
+<div class="animated-rectangle-behind3" data-content="Pc burreau"></div>
+<div class="animated-rectangle-behind4" data-content="Ordinateur de jeu"></div>
+
+<div class="rectangle-en-bas">
+  <a href="gestionDroit.html"><button class="btn-ajouter">Ajouter</button></a>
+</div>
+
+<div class="cercle"></div>
+<h1 style="position: relative; top: 1800px; left: 755px;">Explorez</h1>
+<h1 style="position: relative; top: 1880px; left: 750px;">Notre gamme</h1>
+<h1 style="position: relative; top: 1940px; left: 790px;">D'articles informatiques</h1>
+<h3 style="position: relative; top: 2080px; left: 350px; font-weight: normal; text-align: justify;">
+    <span style="margin-left: 40px;"></span>"Bienvenue sur notre plateforme, dédiée à l'univers informatique. Découvrez une sélection soigneusement choisie d'articles informatiques provenant de fournisseurs de confiance. Nous sommes fiers de vous offrir des produits de qualité et un service exceptionnel, pour répondre à vos besoins technologiques."
+</h3>
+
+<svg class="wave" viewBox="0 0 400 50" xmlns="http://www.w3.org/2000/svg">
+    <path d="M 0 25 Q 25 0, 50 25 T 100 25 T 150 25 T 200 25 T 250 25 T 300 25 T 350 25 T 400 25" stroke="black" fill="transparent" stroke-width="2"/>
+</svg>
+<svg class="wave-below" viewBox="0 0 400 50" xmlns="http://www.w3.org/2000/svg">
+    <path d="M 0 25 Q 25 50, 50 25 T 100 25 T 150 25 T 200 25 T 250 25 T 300 25 T 350 25 T 400 25" stroke="black" fill="transparent" stroke-width="2"/>
+</svg>
+</div>
