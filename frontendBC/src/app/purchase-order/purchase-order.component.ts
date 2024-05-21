@@ -54,13 +54,14 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   generateBonDeCommande(order: OrderForClient): void {
-    this.dataService.generatePurchaseOrder(order.fournisseurName)
-      .subscribe(
-        (order) => {
-          this.selectedOrder = order;
-        }, (error) => {
-
-        });
+    this.dataService.generatePurchaseOrder(order.fournisseurName).subscribe(
+      (generatedOrder) => {
+        this.selectedOrder = generatedOrder;
+      }, 
+      (error) => {
+        console.error('Error generating Bon de Commande:', error);
+      }
+    );
   }
 
   closeBonDeCommande(): void {

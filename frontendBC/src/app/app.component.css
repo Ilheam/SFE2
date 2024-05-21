@@ -22,6 +22,7 @@
     color: #F99908;
     margin: 0 10px;
     font-weight: bold;
+    cursor: pointer;
   }
   .navigation a:hover {
     color: #0e0e0e; /* Change hover color as needed */
@@ -41,7 +42,6 @@
   }
 
 /*style page acceuil*/
-
 body {
   margin: 0;
   height: 100vh;
@@ -66,7 +66,7 @@ body {
   width: 489px;
   height: 654px;
   border-radius: 500px 0px 500px 500px;
-  background-image: url('assets/imgBckacc.jpeg');
+  background-image: url('/assets/imgBckacc.jpeg');
   background-size: cover;
   position: absolute;
   top: 162px;
@@ -202,7 +202,7 @@ body {
   position: absolute;
   top: 1131px;
   left: 228px;
-  background-image: url('assets/parametragePic.jpeg');
+  background-image: url('/assets/parametragePic.jpeg');
   background-size: cover;
   animation: moveUpDown 3s ease-in-out infinite;
 }
@@ -215,17 +215,17 @@ body {
   position: absolute;
   top: 1131px;
   left: 899px;
-  background-image: url('assets/tratementPic.jpeg');
+  background-image: url('/assets/tratementPic.jpeg');
   background-size: cover;
   animation: moveUpDown 3s ease-in-out infinite;
 }
 
 @keyframes moveUpDown {
   0%, 100% {
-      transform: translateY(0);
+    transform: translateY(0);
   }
   50% {
-      transform: translateY(-20px);
+    transform: translateY(-20px);
   }
 }
 
@@ -286,13 +286,12 @@ body {
   top: 1650px;
   border-radius: 30px;
   border: 1px solid gray;
-  background-image: url('assets/hp.jpeg');
+  background-image: url('/assets/hp.jpeg');
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   background-position: center top;
   background-size: 100% 100%;
   background-position: center top -20px;
 }
-
 .animated-rectangle-behind::after {
   content: "Pc Portable";
   position: absolute;
@@ -319,7 +318,7 @@ body {
   top: 1550px;
   border-radius: 30px;
   border: 1px solid gray;
-  background-image: url('assets/ultrabook.jpeg');
+  background-image: url('/assets/ultrabook.jpeg');
   background-size: cover;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   background-position: center top;
@@ -353,7 +352,7 @@ body {
   top: 1650px;
   border-radius: 30px;
   border: 1px solid gray;
-  background-image: url('assets/pcBureau.jpeg');
+  background-image: url('/assets/pcBureau.jpeg');
   background-size: cover;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   background-position: center top;
@@ -388,7 +387,7 @@ body {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   border-radius: 30px;
   border: 1px solid gray;
-  background-image: url('assets/gaming.jpeg');
+  background-image: url('/assets/gaming.jpeg');
   background-size: cover;
   background-position: center top;
   background-size: 100% 100%;
@@ -410,10 +409,10 @@ body {
 
 @keyframes scroll {
   0% {
-      transform: translateX(-25vw);
+    transform: translateX(-25vw);
   }
   100% {
-      transform: translateX(100vw);
+    transform: translateX(100vw);
   }
 }
 
@@ -425,7 +424,7 @@ body {
   top: 2000px;
   left: 120px;
   border-radius: 30px;
-  background-image: url('assets/imgBckacc.jpeg');
+  background-image: url('/assets/imgBckacc.jpeg');
   background-size: 50% 100%;
   background-repeat: no-repeat;
   opacity: 0.7;
@@ -453,16 +452,28 @@ body {
   top: 2050px;
   left: 200px;
   animation: rotateSelf 3s linear infinite;
-  background-image: url('assets/imgBckacc.jpeg');
+  background-image: url('/assets/imgBckacc.jpeg');
   background-size: cover;
 }
+div.wave {
+  width: 80%;
+  height: 30px; /* Adjust this value to change the wave height */
+  transform: translate(-720px, -50px); /* Move left by 720px and up by 50px */
+}
+
+div.wave-below {
+  width: 90%;
+  height: 30px; /* Adjust this value to change the wave height */
+  transform: translate(-720px, 280px); /* Move left by 720px and down by 280px */
+}
+
 
 @keyframes rotateSelf {
   0% {
-      transform: rotate(0deg);
+    transform: rotate(0deg);
   }
   100% {
-      transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
@@ -472,6 +483,3 @@ h1 {
   font-variation-settings: "wdth" 100;
   font-style: italic;
 }
-
-
-  

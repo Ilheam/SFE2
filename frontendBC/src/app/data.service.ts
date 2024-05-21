@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Fournisseur } from './Fournisseur/Fournisseur.model';
 import { FamilleArticle } from './famille/famille.model';
@@ -17,9 +17,18 @@ export class DataService {
   private familleUrl = `${this.baseUrl}/FamilleArticle`;
   private articleUrl = `${this.baseUrl}/Article`;
   private purchaseOrderUrl = `${this.baseUrl}/PurchaseOrder`;
-  
+  private authUrl = `${this.baseUrl}/auth`;
+
 
   constructor(private http: HttpClient) { }
+  private getAuthHeaders(): HttpHeaders {
+    const username = 'your-username';
+    const password = 'your-password';
+    const auth = btoa(`${username}:${password}`);
+    return new HttpHeaders({
+      'Authorization': `Basic ${auth}`
+    });
+  }
 
   // Methods related to Fournisseurs
   getFournisseurs(): Observable<Fournisseur[]> {
@@ -103,5 +112,12 @@ export class DataService {
   generatePurchaseOrder(supplierName: string): Observable<GeneratedPurchaseOrder>{
     let generatedPurchaseOrderUrl = `${this.baseUrl}/PurchaseOrder/generate/${supplierName}`;
     return this.http.get<GeneratedPurchaseOrder>(generatedPurchaseOrderUrl);
+  }
+  login(credentials: { email: string, password: string }): Observable<any> {
+    return this.http.post(`${this.authUrl}/login`, credentials, { headers: this.getAuthHeaders() });
+  }
+
+  signup(data: { email: string, password: string }): Observable<any> {
+    return this.http.post(`${this.authUrl}/signup`, data, { headers: this.getAuthHeaders() });
   }
 }

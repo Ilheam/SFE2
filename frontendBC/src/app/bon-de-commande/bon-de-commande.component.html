@@ -1,6 +1,10 @@
 <main *ngIf="order">
-    <h1>BON DE COMMANDE</h1>
-    <div>
+    <div class="header">
+        <img src="assets/omegalogo.jpeg" alt="Logo">
+        <h1>BON DE COMMANDE</h1>
+    </div>
+
+    <div class="contact-info">
         <div>
             <label>Nom - Prénom :</label>
             <span>{{ order.nom }}</span>
@@ -19,7 +23,7 @@
         </div>
     </div>
 
-    <table>
+    <table class="order-table">
         <thead>
             <tr>
                 <th>N° page</th>
@@ -30,24 +34,22 @@
             </tr>
         </thead>
         <tbody>
-            @for(item of order.articles; track $index){
-            <tr>
-                <td>{{$index + 1}}</td>
+            <tr *ngFor="let item of order.articles; let i = index">
+                <td>{{ i + 1 }}</td>
                 <td>{{ item.nom }}</td>
                 <td>{{ item.prix }}</td>
                 <td>{{ item.quantite }}</td>
                 <td>{{ item.total }}</td>
             </tr>
-            }
         </tbody>
     </table>
 
-    <div>
+    <div class="total">
         <label>TOTAL :</label>
         <span>{{ order.total }}</span>
     </div>
 
-    <div>
+    <div class="signature">
         <label>Date et Signature :</label>
         <span>{{ order.date | date: 'mediumDate' }}</span>
     </div>
