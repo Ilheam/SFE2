@@ -32,7 +32,7 @@ export class FamilleComponent implements OnInit {
   }
 
   deleteFamille(id: number): void {
-    const confirmed = confirm('Voullez vous vraiement supprimer cet famille?');
+    const confirmed = confirm('Voulez-vous vraiment supprimer cette famille?');
     if (confirmed) {
       this.dataService.deleteFamille(id).subscribe({
         next: () => {
@@ -51,12 +51,7 @@ export class FamilleComponent implements OnInit {
 
   submitUpdate(): void {
     const updatedFamilleData = {
-      nom: this.selectedFamille.nom,
-      description: this.selectedFamille.description,
-      prix: this.selectedFamille.prix,
-      image: this.selectedFamille.image,
-      dateCreation: this.selectedFamille.dateCreation ? new Date(this.selectedFamille.dateCreation).toISOString() : '',
-      categorie: this.selectedFamille.categorie
+      nom: this.selectedFamille.nom
     };
 
     this.dataService.updateFamille(this.selectedFamille.id, updatedFamilleData).subscribe({
@@ -89,14 +84,8 @@ export class FamilleComponent implements OnInit {
   }
 
   submitAddFamille(): void {
-    const dateCreation = new Date(this.newFamille.dateCreation);
     const newFamilleData = {
-      nom: this.newFamille.nom,
-      description: this.newFamille.description,
-      prix: this.newFamille.prix,
-      image: this.newFamille.image, // Handle image as a simple text field
-      dateCreation: dateCreation.toISOString(),
-      categorie: this.newFamille.categorie
+      nom: this.newFamille.nom
     };
   
     this.dataService.addFamille(newFamilleData).subscribe({
