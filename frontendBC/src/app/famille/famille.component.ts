@@ -32,20 +32,16 @@ export class FamilleComponent implements OnInit {
   }
 
   deleteFamille(id: number): void {
-    console.log('Received ID for deletion:', id); // Debugging statement
-
-    if (id === undefined || id === null) {
-      console.error('Error deleting famille: ID is undefined or null');
-      return;
+    const confirmed = confirm('Voullez vous vraiement supprimer cet famille?');
+    if (confirmed) {
+      this.dataService.deleteFamille(id).subscribe({
+        next: () => {
+          this.fetchFamilles();
+          console.log('Famille deleted successfully');
+        },
+        error: (error) => console.error('Error deleting famille:', error)
+      });
     }
-
-    this.dataService.deleteFamille(id).subscribe({
-      next: () => {
-        this.fetchFamilles();
-        console.log('Famille deleted successfully');
-      },
-      error: (error) => console.error('Error deleting famille:', error)
-    });
   }
 
   selectFamille(famille: FamilleArticle): void {

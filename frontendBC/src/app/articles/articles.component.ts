@@ -33,12 +33,14 @@ export class ArticlesComponent implements OnInit {
   }
 
   deleteArticle(id: number): void {
-    this.dataService.deleteArticle(id).subscribe({
-      next: () => this.fetchArticles(),
-      error: (error) => console.error('Error deleting article:', error)
-    });
+    const confirmed = confirm('Voullez vous vraiement supprimer cet article ?');
+    if (confirmed) {
+      this.dataService.deleteArticle(id).subscribe({
+        next: () => this.fetchArticles(),
+        error: (error) => console.error('Error deleting article:', error)
+      });
+    }
   }
-
   selectArticle(article: Article): void {
     this.selectedArticle = article;
     this.showModal = true;

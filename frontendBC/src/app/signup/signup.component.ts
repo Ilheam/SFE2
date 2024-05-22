@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { DataService } from '../data.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
+  imports: [FormsModule],
+  standalone: true,
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {

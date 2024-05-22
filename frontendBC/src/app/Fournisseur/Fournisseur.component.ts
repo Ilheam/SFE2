@@ -33,15 +33,13 @@ export class SuppliersComponent implements OnInit {
   }
 
   deleteFournisseur(id: number): void {
-    if (id === undefined || id === null) {
-      console.error('Error deleting fournisseur: ID is undefined or null');
-      return;
+    const confirmed = confirm('Voullez vous vraiement supprimer ce fournisseur ?');
+    if (confirmed) {
+      this.dataService.deleteFournisseur(id).subscribe({
+        next: () => this.fetchFournisseurs(), // Refresh the list after deletion
+        error: (error) => console.error('Error deleting fournisseur:', error)
+      });
     }
-
-    this.dataService.deleteFournisseur(id).subscribe({
-      next: () => this.fetchFournisseurs(), // Refresh the list after deletion
-      error: (error) => console.error('Error deleting fournisseur:', error)
-    });
   }
 
   selectFournisseur(fournisseur: Fournisseur): void {

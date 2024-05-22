@@ -68,7 +68,7 @@ export class GeneratedPurchaseOrder {
   nom : string = '';
   email : string = '';
   phone : string = ''; 
-  adresse : string = ''; 
+  adress : string = ''; 
   articles: GeneratedPurchaseOrderArticle[] = [];
   total :number = 0;
   date: Date = new Date();

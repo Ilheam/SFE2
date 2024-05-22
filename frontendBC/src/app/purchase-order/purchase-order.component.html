@@ -30,12 +30,10 @@
   </div>
 
   <div *ngIf="selectedOrder">
-    <!-- Bon de Commande Details -->
     <app-bon-de-commande [order]="selectedOrder"></app-bon-de-commande>
     <button (click)="closeBonDeCommande()">Close Bon de Commande</button>
   </div>
 
-  <!-- Create Purchase Order Modal -->
   <div id="createPurchaseOrderModal" class="modal" [class.show]="showModal">
     <div class="rectangle">
       <span class="close" (click)="closeModal()">&times;</span>
