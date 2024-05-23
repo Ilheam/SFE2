@@ -21,6 +21,8 @@ export class ArticlesComponent implements OnInit {
   showModal: boolean = false;
   showAddModal: boolean = false;
   familleId: number | null = null;
+  selectedFile: File | null = null; // For file upload
+
 
   constructor(private dataService: DataService) { }
 
@@ -57,8 +59,30 @@ export class ArticlesComponent implements OnInit {
     this.selectedArticle = article;
     this.showModal = true;
   }
-
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+  }
   submitUpdate(articleData: any): void {
+    if (this.selectedFile) {
+      this.dataService.uploadImage(this.selectedFile).subscribe({
+        next: (response) => {
+          // Update articleData with the new image URL
+          articleData.imageArticle = response.url;
+  
+          // Proceed with updating the article
+          this.updateArticleData(articleData);
+        },
+        error: (error) => {
+          console.error('Error uploading image:', error);
+          this.showModal = false;
+        }
+      });
+    } else {
+      // If no new image is selected, proceed with updating the article directly
+      this.updateArticleData(articleData);
+    }
+  }
+  updateArticleData(articleData: any): void {
     this.dataService.updateArticle(this.selectedArticle.id, articleData).subscribe({
       next: () => {
         console.log('Article updated successfully');
@@ -89,25 +113,32 @@ export class ArticlesComponent implements OnInit {
   }
 
   submitAddArticle(): void {
-    const newArticleData = {
-      nomArticle: this.newArticle.nomArticle,
-      description: this.newArticle.description,
-      prix: this.newArticle.prix,
-      imageArticle: this.newArticle.imageArticle,
-      familleArticleId: this.newArticle.familleArticleId // Link the article to the selected famille
-    };
+    if (this.selectedFile) {
+      this.dataService.uploadImage(this.selectedFile).subscribe({
+        next: (response) => {
+          const newArticleData = {
+            nomArticle: this.newArticle.nomArticle,
+            description: this.newArticle.description,
+            prix: this.newArticle.prix,
+            imageArticle: response.url, // Use the uploaded image URL
+            familleArticleId: this.newArticle.familleArticleId
+          };
 
-    this.dataService.addArticle(newArticleData).subscribe({
-      next: (result) => {
-        console.log('Article added successfully');
-        this.closeAddModal();
-        this.fetchArticles();
-      },
-      error: (error) => {
-        console.error('Error adding article:', error);
-        this.closeAddModal();
-      }
-    });
+          this.dataService.addArticle(newArticleData).subscribe({
+            next: (result) => {
+              console.log('Article added successfully');
+              this.closeAddModal();
+              this.fetchArticles();
+            },
+            error: (error) => {
+              console.error('Error adding article:', error);
+              this.closeAddModal();
+            }
+          });
+        },
+        error: (error) => console.error('Error uploading image:', error)
+      });
+    }
   }
 
   findFamile(id: number): string {

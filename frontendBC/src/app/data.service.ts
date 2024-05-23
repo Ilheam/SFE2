@@ -123,5 +123,9 @@ export class DataService {
   getArticlesByFamille(familleId: number): Observable<Article[]> {
     return this.http.get<Article[]>(`${this.articleUrl}/byFamille/${familleId}`);
   }
-  
+  uploadImage(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post(`${this.baseUrl}/upload/upload`, formData);
+  }
 }
