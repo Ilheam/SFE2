@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { DataService } from '../data.service';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -13,12 +14,13 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
 
-  constructor(private dataService: DataService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   login(): void {
-    this.dataService.login({ email: this.email, password: this.password }).subscribe({
+    this.authService.login({ email: this.email, password: this.password }).subscribe({
       next: (response) => {
         console.log('Login successful');
+        this.router.navigate(['/home']); // Redirect to home or any other route after successful login
       },
       error: (error) => {
         console.error('Login failed:', error);
