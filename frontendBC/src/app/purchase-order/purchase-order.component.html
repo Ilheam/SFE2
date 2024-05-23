@@ -8,8 +8,7 @@
         <thead>
           <tr>
             <th>Fournisseur</th>
-            <th>Article</th>
-            <th>Quantity</th>
+            <th>Articles</th>
             <th>Date</th>
             <th>Actions</th>
           </tr>
@@ -17,8 +16,11 @@
         <tbody>
           <tr *ngFor="let order of purchaseOrders">
             <td>{{ order.fournisseurName }}</td>
-            <td>{{ order.articleNom }}</td>
-            <td>{{ order.quantite }}</td>
+            <td>
+              <ul>
+                <li *ngFor="let article of order.articles">{{ article.nom }} ({{ article.quantite }})</li>
+              </ul>
+            </td>
             <td>{{ order.date | date: 'mediumDate' }}</td>
             <td>
               <button (click)="generateBonDeCommande(order)">Generate Bon de Commande</button>

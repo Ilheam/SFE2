@@ -4,7 +4,13 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators } fr
 import { DataService } from '../data.service';
 import { GeneratedPurchaseOrder, OrderForClient, OrderForCreation, OrderForCreationArticle } from './purchase-order.model';
 import { BonDeCommandeComponent } from '../bon-de-commande/bon-de-commande.component';
-import { Article } from '../articles/articles.model'; // Use the existing Article type
+import { Article } from '../articles/articles.model';
+
+interface GroupedOrder {
+  fournisseurName: string;
+  articles: OrderForCreationArticle[];
+  date: Date;
+}
 
 @Component({
   selector: 'app-purchase-order',
@@ -14,17 +20,17 @@ import { Article } from '../articles/articles.model'; // Use the existing Articl
   styleUrls: ['./purchase-order.component.css']
 })
 export class PurchaseOrderComponent implements OnInit {
-  purchaseOrders: OrderForClient[] = [];
+  purchaseOrders: GroupedOrder[] = [];
   newPurchaseOrderForm: FormGroup;
   showModal: boolean = false;
   selectedOrder: GeneratedPurchaseOrder | undefined;
-  articles: Article[] = [];  // Use the imported Article type
-  selectedArticles: Set<string> = new Set();  // Set to keep track of selected articles
+  articles: Article[] = [];
+  selectedArticles: Set<string> = new Set();
 
   constructor(private fb: FormBuilder, private dataService: DataService) {
     this.newPurchaseOrderForm = this.fb.group({
       fournisseur: ['', Validators.required],
-      articles: this.fb.array([])  // Initialize the articles as a form array
+      articles: this.fb.array([])
     });
   }
 
@@ -47,22 +53,41 @@ export class PurchaseOrderComponent implements OnInit {
 
   removeArticle(index: number): void {
     const articleName = this.articlesFormArray.at(index).get('nom')?.value;
-    this.selectedArticles.delete(articleName);  // Remove from selected articles set
+    this.selectedArticles.delete(articleName);
     this.articlesFormArray.removeAt(index);
   }
 
   fetchPurchaseOrders(): void {
     this.dataService.getPurchaseOrders().subscribe({
-      next: (data) => this.purchaseOrders = data,
+      next: (data) => {
+        this.purchaseOrders = this.groupOrdersByFournisseur(data);
+      },
       error: (error) => console.error('Error fetching purchase orders:', error)
     });
   }
 
   fetchArticles(): void {
     this.dataService.getArticles().subscribe({
-      next: (data) => this.articles = data, // Ensure data matches the Article type
+      next: (data) => this.articles = data,
       error: (error) => console.error('Error fetching articles:', error)
     });
+  }
+
+  groupOrdersByFournisseur(orders: OrderForClient[]): GroupedOrder[] {
+    const grouped: { [key: string]: GroupedOrder } = {};
+
+    orders.forEach(order => {
+      if (!grouped[order.fournisseurName]) {
+        grouped[order.fournisseurName] = {
+          fournisseurName: order.fournisseurName,
+          articles: [],
+          date: order.date
+        };
+      }
+      grouped[order.fournisseurName].articles.push({ nom: order.articleNom, quantite: order.quantite });
+    });
+
+    return Object.values(grouped);
   }
 
   submitPurchaseOrder(): void {
@@ -93,7 +118,7 @@ export class PurchaseOrderComponent implements OnInit {
     this.selectedArticles.clear();
   }
 
-  generateBonDeCommande(order: OrderForClient): void {
+  generateBonDeCommande(order: GroupedOrder): void {
     this.dataService.generatePurchaseOrder(order.fournisseurName).subscribe(
       (generatedOrder) => this.selectedOrder = generatedOrder,
       (error) => console.error('Error generating Bon de Commande:', error)
