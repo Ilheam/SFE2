@@ -7,6 +7,7 @@ import { BonDeCommandeComponent } from './bon-de-commande/bon-de-commande.compon
 import { FamilleComponent } from './famille/famille.component';
 import { HomeComponent } from './home/home.component';
 import { PurchaseOrderComponent } from './purchase-order/purchase-order.component';
+import { ArticlesByFamilleComponent } from './articles-by-famille/articles-by-famille.component'; // Import this
 
 export const routes: Routes = [
     { path: "home", component: HomeComponent },
@@ -16,5 +17,6 @@ export const routes: Routes = [
     { path: "fournisseur", component: SuppliersComponent },
     { path: "bondecommande", component: PurchaseOrderComponent },
     { path: "famille", component: FamilleComponent },
+    { path: "articles/:familleId", component: ArticlesByFamilleComponent }, // Add this line
     { path: "**", redirectTo: "/home" }
 ];

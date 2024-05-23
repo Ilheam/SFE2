@@ -121,6 +121,7 @@ export class DataService {
     return this.http.post(`${this.authUrl}/signup`, data, { headers: this.getAuthHeaders() });
   }
   getArticlesByFamille(familleId: number): Observable<Article[]> {
-    return this.http.get<Article[]>(`${this.articleUrl}?familleArticleId=${familleId}`);
+    return this.http.get<Article[]>(`${this.articleUrl}/byFamille/${familleId}`);
   }
+  
 }

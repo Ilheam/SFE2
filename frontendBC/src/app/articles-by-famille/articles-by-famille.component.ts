@@ -7,11 +7,9 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   standalone: true,
-
   selector: 'app-articles-by-famille',
   templateUrl: './articles-by-famille.component.html',
   imports: [CommonModule, FormsModule],
-
   styleUrls: ['./articles-by-famille.component.css']
 })
 export class ArticlesByFamilleComponent implements OnInit {
@@ -24,8 +22,10 @@ export class ArticlesByFamilleComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.familleId = +this.route.snapshot.paramMap.get('id')!;
-    this.fetchArticlesByFamille();
+    this.route.paramMap.subscribe(params => {
+      this.familleId = +params.get('familleId')!;
+      this.fetchArticlesByFamille();
+    });
   }
 
   fetchArticlesByFamille(): void {

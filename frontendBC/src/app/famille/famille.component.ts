@@ -51,8 +51,10 @@ export class FamilleComponent implements OnInit {
   }
 
   navigateToArticles(familleId: number): void {
-    this.router.navigate(['/articles', { familleId }]);
+    this.router.navigate(['/articles', familleId]);
   }
+  
+
 
   submitUpdate(): void {
     const updatedFamilleData = {
