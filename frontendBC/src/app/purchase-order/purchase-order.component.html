@@ -1,0 +1,82 @@
+<main>
+  <button class="btn2" (click)="toggleModal()">Create Purchase Order</button>
+  <br><br><br>
+
+  <div *ngIf="!selectedOrder">
+    <div class="purchase-order-table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Fournisseur</th>
+            <th>Articles</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of purchaseOrders">
+            <td>{{ order.fournisseurName }}</td>
+            <td>
+              <ul>
+                <li *ngFor="let article of order.articles">{{ article.nom }} ({{ article.quantite }})</li>
+              </ul>
+            </td>
+            <td>{{ order.date | date: 'mediumDate' }}</td>
+            <td>
+              <button (click)="generateBonDeCommande(order)">Generate Bon de Commande</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div *ngIf="selectedOrder">
+    <app-bon-de-commande [order]="selectedOrder"></app-bon-de-commande>
+    <button (click)="closeBonDeCommande()">Close Bon de Commande</button>
+  </div>
+
+  <div id="createPurchaseOrderModal" class="modal" [class.show]="showModal">
+    <div class="rectangle">
+      <span class="close" (click)="closeModal()">&times;</span>
+      <form [formGroup]="newPurchaseOrderForm" (ngSubmit)="submitPurchaseOrder()">
+        <h2 style="text-align: center;">Create Purchase Order</h2>
+        <label for="fournisseur">Fournisseur:</label>
+        <input type="text" id="fournisseur" formControlName="fournisseur" required>
+
+        <div class="articles-selection">
+          <h3>Select Articles:</h3>
+          <div *ngFor="let article of articles" (click)="toggleArticleSelection(article.nomArticle)" 
+               [class.selected]="isSelected(article.nomArticle)">
+            <span>{{ article.nomArticle }}</span>
+          </div>
+        </div>
+
+        <div formArrayName="articles">
+          <div *ngFor="let article of articlesFormArray.controls; let i = index" [formGroupName]="i">
+            <label for="article{{i}}">Article:</label>
+            <input type="text" id="article{{i}}" formControlName="nom" readonly>
+            <label for="quantite{{i}}">Quantity:</label>
+            <input id="quantite{{i}}" type="number" formControlName="quantite" required>
+            <button type="button" (click)="removeArticle(i)">Remove</button>
+          </div>
+        </div>
+
+        <button type="submit">Create</button>
+      </form>
+    </div>
+  </div>
+</main>
+
+<style>
+  .articles-selection div {
+    cursor: pointer;
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid #ccc;
+  }
+  .articles-selection div.selected {
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+  }
+</style>

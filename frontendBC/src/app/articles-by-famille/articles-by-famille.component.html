@@ -1,0 +1,26 @@
+<main>
+    <h2>Articles for Famille ID: {{ familleId }}</h2>
+    <div class="articles-table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Prix</th>
+            <th>Image</th>
+            <th>Date de Création</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let article of articles">
+            <td>{{ article.nomArticle }}</td>
+            <td>{{ article.description }}</td>
+            <td>{{ article.prix | number:'1.2-2' }}</td>
+            <td><img [src]="article.imageArticle" alt="Article Image" style="width: 50px; height: auto;"></td>
+            <td>{{ article.created | date:'mediumDate' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+  

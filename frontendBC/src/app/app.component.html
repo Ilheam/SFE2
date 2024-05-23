@@ -1,29 +1,3 @@
-<!-- Suppliers Table -->
-<div class="suppliers-table-container">
-  <table>
-    <!-- Table Header -->
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <!-- Add more table headers if needed, like address, contact info, etc. -->
-      </tr>
-    </thead>
-    <!-- Table Body -->
-    <tbody>
-      <!-- Use *ngFor directive to loop over the suppliers array and display data -->
-      <tr *ngFor="let supplier of suppliers">
-        <td>{{ supplier.id }}</td>
-        <td>{{ supplier.name }}</td>
-        <!-- Add more data cells if needed -->
-      </tr>
-    </tbody>
-  </table>
-</div>
+<app-navbar></app-navbar>
 
-<!-- A message for when the suppliers list is empty -->
-<!-- Assuming you want to display a message when there's no data to show -->
-<div *ngIf="suppliers.length === 0" class="no-suppliers-message">
-  No suppliers to display.
-</div>
-
+<router-outlet></router-outlet>
