@@ -23,8 +23,7 @@ export class ArticlesComponent implements OnInit {
   familleId: number | null = null;
   selectedFile: File | null = null; // For file upload
 
-
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
     this.fetchFamilles();
@@ -46,22 +45,33 @@ export class ArticlesComponent implements OnInit {
   }
 
   deleteArticle(id: number): void {
-    const confirmed = confirm('Voulez-vous vraiment supprimer cet article ?');
-    if (confirmed) {
-      this.dataService.deleteArticle(id).subscribe({
-        next: () => this.fetchArticles(),
-        error: (error) => console.error('Error deleting article:', error)
-      });
-    }
+    this.dataService.isArticleInPurchaseOrder(id).subscribe({
+      next: (isInOrder) => {
+        if (isInOrder) {
+          alert('Cannot delete this article because it is part of a purchase order.');
+        } else {
+          const confirmed = confirm('Voulez-vous vraiment supprimer cet article ?');
+          if (confirmed) {
+            this.dataService.deleteArticle(id).subscribe({
+              next: () => this.fetchArticles(),
+              error: (error) => console.error('Error deleting article:', error)
+            });
+          }
+        }
+      },
+      error: (error) => console.error('Error checking article in purchase order:', error)
+    });
   }
 
   selectArticle(article: Article): void {
     this.selectedArticle = article;
     this.showModal = true;
   }
+
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
   }
+
   submitUpdate(articleData: any): void {
     if (this.selectedFile) {
       this.dataService.uploadImage(this.selectedFile).subscribe({
@@ -82,6 +92,7 @@ export class ArticlesComponent implements OnInit {
       this.updateArticleData(articleData);
     }
   }
+
   updateArticleData(articleData: any): void {
     this.dataService.updateArticle(this.selectedArticle.id, articleData).subscribe({
       next: () => {

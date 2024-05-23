@@ -128,4 +128,7 @@ export class DataService {
     formData.append('file', file);
     return this.http.post(`${this.baseUrl}/upload/upload`, formData);
   }
+  isArticleInPurchaseOrder(articleId: number): Observable<boolean> {
+    return this.http.get<boolean>(`${this.purchaseOrderUrl}/isArticleInOrder/${articleId}`);
+  }
 }
