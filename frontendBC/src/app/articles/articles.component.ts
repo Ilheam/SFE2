@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DataService } from '../data.service';
 import { Article, ArticleForCreation } from './articles.model';
+import { FamilleArticle } from '../famille/famille.model';
 
 @Component({
   selector: 'app-articles',
@@ -14,15 +15,25 @@ import { Article, ArticleForCreation } from './articles.model';
 export class ArticlesComponent implements OnInit {
   title = 'My Angular Application';
   articles: Article[] = [];
+  familles: FamilleArticle[] = [];
   newArticle: ArticleForCreation = new ArticleForCreation();
   selectedArticle: Article = new Article();
   showModal: boolean = false;
   showAddModal: boolean = false;
+  familleId: number | null = null;
 
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
+    this.fetchFamilles();
     this.fetchArticles();
+  }
+
+  fetchFamilles(): void {
+    this.dataService.getFamilles().subscribe({
+      next: (data) => this.familles = data,
+      error: (error) => console.error('Error fetching familles:', error)
+    });
   }
 
   fetchArticles(): void {
@@ -33,7 +44,7 @@ export class ArticlesComponent implements OnInit {
   }
 
   deleteArticle(id: number): void {
-    const confirmed = confirm('Voullez vous vraiement supprimer cet article ?');
+    const confirmed = confirm('Voulez-vous vraiment supprimer cet article ?');
     if (confirmed) {
       this.dataService.deleteArticle(id).subscribe({
         next: () => this.fetchArticles(),
@@ -41,6 +52,7 @@ export class ArticlesComponent implements OnInit {
       });
     }
   }
+
   selectArticle(article: Article): void {
     this.selectedArticle = article;
     this.showModal = true;
@@ -81,7 +93,8 @@ export class ArticlesComponent implements OnInit {
       nomArticle: this.newArticle.nomArticle,
       description: this.newArticle.description,
       prix: this.newArticle.prix,
-      imageArticle: this.newArticle.imageArticle
+      imageArticle: this.newArticle.imageArticle,
+      familleArticleId: this.newArticle.familleArticleId // Link the article to the selected famille
     };
 
     this.dataService.addArticle(newArticleData).subscribe({
@@ -95,5 +108,9 @@ export class ArticlesComponent implements OnInit {
         this.closeAddModal();
       }
     });
+  }
+
+  findFamile(id: number): string {
+    return this.familles.find(f => f.id === id)?.nom || 'N/A';
   }
 }

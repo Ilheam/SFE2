@@ -1,15 +1,18 @@
 export class Article {
   id!: number;
-  nomArticle: string = ''; // Default empty string if not provided
+  nomArticle: string = '';
   description: string = '';
-  prix!: number; // Using ! to denote that this field is expected to be provided
-  imageArticle: string = ''; // Path or identifier for the image
-  dateCreation!: Date; // Using Date type for date fields
+  prix!: number;
+  imageArticle: string = '';
+  created!: Date;
+  familleArticleId!: number;
+  familleNom?: string; // Added this property to hold the family name
 }
 
 export class ArticleForCreation {
-  nomArticle: string = ''; // Default empty string if not provided
+  nomArticle: string = '';
   description: string = '';
-  prix!: number; // Using ! to denote that this field is expected to be provided
-  imageArticle: string = ''; // Path or identifier for the image
+  prix!: number;
+  imageArticle: string = '';
+  familleArticleId!: number; // Include this property
 }

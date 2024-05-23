@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DataService } from '../data.service';
 import { FamilleArticle } from './famille.model';
 
@@ -18,7 +19,7 @@ export class FamilleComponent implements OnInit {
   showModal = false;
   showAddModal = false;
 
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService, private router: Router) {}
 
   ngOnInit(): void {
     this.fetchFamilles();
@@ -47,6 +48,10 @@ export class FamilleComponent implements OnInit {
   selectFamille(famille: FamilleArticle): void {
     this.selectedFamille = { ...famille };
     this.showModal = true;
+  }
+
+  navigateToArticles(familleId: number): void {
+    this.router.navigate(['/articles', { familleId }]);
   }
 
   submitUpdate(): void {

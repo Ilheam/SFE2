@@ -6,8 +6,6 @@
       <thead>
         <tr>
           <th>Nom</th>
-     
-      
           <th>Actions</th>
         </tr>
       </thead>
@@ -15,8 +13,9 @@
         <tr *ngFor="let famille of familles">
           <td>{{ famille.nom }}</td>
           <td>
-            <button style="background-color: red;" (click)="deleteFamille(famille.id)">Supprimer</button> <!-- Use 'id' if you chose Option 2 -->
+            <button style="background-color: red;" (click)="deleteFamille(famille.id)">Supprimer</button>
             <button (click)="toggleModal(); selectFamille(famille)">Modifier</button>
+            <button (click)="navigateToArticles(famille.id)">Voir Articles</button> <!-- Button to navigate to articles -->
           </td>
         </tr>
       </tbody>
@@ -46,7 +45,6 @@
       <h2>Ajouter une nouvelle Famille</h2>
       <label for="nom">Nom:</label>
       <input type="text" id="nom" name="nom" [(ngModel)]="newFamille.nom" required>
-
       
       <button class="btn3" type="submit">Ajouter</button>
     </form>

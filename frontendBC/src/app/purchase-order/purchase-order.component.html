@@ -37,19 +37,44 @@
   <div id="createPurchaseOrderModal" class="modal" [class.show]="showModal">
     <div class="rectangle">
       <span class="close" (click)="closeModal()">&times;</span>
-      <form #purchaseOrderForm="ngForm" (ngSubmit)="submitPurchaseOrder()">
+      <form [formGroup]="newPurchaseOrderForm" (ngSubmit)="submitPurchaseOrder()">
         <h2 style="text-align: center;">Create Purchase Order</h2>
         <label for="fournisseur">Fournisseur:</label>
-        <input type="text" id="fournisseur" name="fournisseur" [(ngModel)]="newPurchaseOrder.fournisseurName" required>
+        <input type="text" id="fournisseur" formControlName="fournisseur" required>
 
-        <label for="article">Article:</label>
-        <input type="text" id="article" name="article" [(ngModel)]="newPurchaseOrder.articleNom" required>
+        <div class="articles-selection">
+          <h3>Select Articles:</h3>
+          <div *ngFor="let article of articles" (click)="toggleArticleSelection(article.nomArticle)" 
+               [class.selected]="isSelected(article.nomArticle)">
+            <span>{{ article.nomArticle }}</span>
+          </div>
+        </div>
 
-        <label for="quantity">Quantity:</label>
-        <input type="number" id="quantity" name="quantity" [(ngModel)]="newPurchaseOrder.quantite" required>
+        <div formArrayName="articles">
+          <div *ngFor="let article of articlesFormArray.controls; let i = index" [formGroupName]="i">
+            <label for="article{{i}}">Article:</label>
+            <input type="text" id="article{{i}}" formControlName="nom" readonly>
+            <label for="quantite{{i}}">Quantity:</label>
+            <input id="quantite{{i}}" type="number" formControlName="quantite" required>
+            <button type="button" (click)="removeArticle(i)">Remove</button>
+          </div>
+        </div>
 
         <button type="submit">Create</button>
       </form>
     </div>
   </div>
 </main>
+
+<style>
+  .articles-selection div {
+    cursor: pointer;
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid #ccc;
+  }
+  .articles-selection div.selected {
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+  }
+</style>

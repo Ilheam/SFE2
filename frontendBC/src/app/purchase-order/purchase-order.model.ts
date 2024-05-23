@@ -31,7 +31,11 @@ export class Detail {
 
 export class OrderForCreation {
   fournisseurName: string = '';
-  articleNom: string = '';
+  articles: OrderForCreationArticle[] = [];
+}
+
+export class OrderForCreationArticle {
+  nom: string = '';
   quantite: number = 0;
 }
 

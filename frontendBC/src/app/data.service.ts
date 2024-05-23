@@ -120,4 +120,7 @@ export class DataService {
   signup(data: { email: string, password: string }): Observable<any> {
     return this.http.post(`${this.authUrl}/signup`, data, { headers: this.getAuthHeaders() });
   }
+  getArticlesByFamille(familleId: number): Observable<Article[]> {
+    return this.http.get<Article[]>(`${this.articleUrl}?familleArticleId=${familleId}`);
+  }
 }
