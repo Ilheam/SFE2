@@ -7,6 +7,8 @@ import { Article } from './articles/articles.model';
 import { BonDeCommande, GeneratedPurchaseOrder, OrderForClient, OrderForCreation } from './purchase-order/purchase-order.model';
 import { PurchaseOrder } from './purchase-order/purchase-order.model';
 import { Detail } from './purchase-order/purchase-order.model';
+import { Comment } from './comments/comments.model';  // Ensure this path is correct
+
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +20,7 @@ export class DataService {
   private articleUrl = `${this.baseUrl}/Article`;
   private purchaseOrderUrl = `${this.baseUrl}/PurchaseOrder`;
   private authUrl = `${this.baseUrl}/auth`;
+  private commentUrl =`${this.baseUrl}/Comments`;
 
 
   constructor(private http: HttpClient) { }
@@ -109,8 +112,8 @@ export class DataService {
     return this.http.post<OrderForCreation>(this.purchaseOrderUrl, order);
   }
 
-  generatePurchaseOrder(supplierName: string): Observable<GeneratedPurchaseOrder>{
-    let generatedPurchaseOrderUrl = `${this.baseUrl}/PurchaseOrder/generate/${supplierName}`;
+  generatePurchaseOrder(orderId: number): Observable<GeneratedPurchaseOrder>{
+    let generatedPurchaseOrderUrl = `${this.baseUrl}/PurchaseOrder/generate/${orderId}`;
     return this.http.get<GeneratedPurchaseOrder>(generatedPurchaseOrderUrl);
   }
   login(credentials: { email: string, password: string }): Observable<any> {
@@ -130,5 +133,22 @@ export class DataService {
   }
   isArticleInPurchaseOrder(articleId: number): Observable<boolean> {
     return this.http.get<boolean>(`${this.purchaseOrderUrl}/isArticleInOrder/${articleId}`);
+  }
+  getSupplierPurchaseCounts(): Observable<{ [key: number]: number }> {
+    return this.http.get<{ [key: number]: number }>(`${this.baseUrl}/Fournisseur/supplier-purchase-count`);
+  }
+  getComments(): Observable<Comment[]> {
+    return this.http.get<Comment[]>(this.commentUrl);
+  }
+
+  addComment(comment: Comment): Observable<Comment> {
+    return this.http.post<Comment>(this.commentUrl, comment);
+  }
+  updateComment(id: number, comment: Comment): Observable<void> {
+    return this.http.put<void>(`${this.baseUrl}/comments/${id}`, comment);
+  }
+
+  deleteComment(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/comments/${id}`);
   }
 }

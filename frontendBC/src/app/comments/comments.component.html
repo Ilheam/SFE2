@@ -1,0 +1,25 @@
+<div class="comments-container">
+  <form [formGroup]="commentForm" (ngSubmit)="submitComment()">
+    <div class="form-group">
+      <label for="text">Add a Comment:</label>
+      <textarea id="text" formControlName="text" rows="3" placeholder="Write your comment here..."></textarea>
+    </div>
+    <button type="submit" [disabled]="commentForm.invalid">{{ editMode ? 'Update' : 'Submit' }}</button>
+  </form>
+
+  <div class="comments-list">
+    <div *ngFor="let comment of comments" class="comment">
+      <div class="comment-body">
+        <div class="comment-text">{{ comment.text }}</div>
+        <div class="comment-meta">
+          <span class="comment-date">{{ comment.created | date:'short' }}</span>
+          <span class="comment-user">User ID: {{ comment.userId }}</span>
+        </div>
+      </div>
+      <div class="comment-actions">
+        <button (click)="editComment(comment)" class="icon-button"><i class="fas fa-edit"></i></button>
+        <button (click)="deleteComment(comment.id)" class="icon-button"><i class="fas fa-trash"></i></button>
+      </div>
+    </div>
+  </div>
+</div>

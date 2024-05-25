@@ -43,8 +43,7 @@ export class OrderForClient {
   orderId: number = 0; 
 
   fournisseurName: string = '';
-  articleNom: string = '';
-  quantite: number = 0;
+  articles: string = '';
   date: Date = new Date();
 }
 

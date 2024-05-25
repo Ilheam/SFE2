@@ -6,7 +6,9 @@ export class Article {
   imageArticle: string = '';
   created!: Date;
   familleArticleId!: number;
-  familleNom?: string; // Added this property to hold the family name
+  familleNom?: string; 
+  quantite: number = 0;
+
 }
 
 export class ArticleForCreation {
@@ -14,5 +16,6 @@ export class ArticleForCreation {
   description: string = '';
   prix!: number;
   imageArticle: string = '';
-  familleArticleId!: number; // Include this property
+  familleArticleId!: number; 
+  quantite: number = 0;  // Add this line
 }

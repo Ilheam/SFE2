@@ -171,6 +171,11 @@ button:hover {
   button:hover {
     background-color: #36FEF2; /* Darker green on hover */
   }
+  .star-icon {
+    color: gold;
+    margin-left: 5px;
+  }
+  
   
   @media (max-width: 768px) {
     /* Responsive Design for smaller screens */

@@ -76,10 +76,7 @@ export class ArticlesComponent implements OnInit {
     if (this.selectedFile) {
       this.dataService.uploadImage(this.selectedFile).subscribe({
         next: (response) => {
-          // Update articleData with the new image URL
           articleData.imageArticle = response.url;
-  
-          // Proceed with updating the article
           this.updateArticleData(articleData);
         },
         error: (error) => {
@@ -88,12 +85,12 @@ export class ArticlesComponent implements OnInit {
         }
       });
     } else {
-      // If no new image is selected, proceed with updating the article directly
       this.updateArticleData(articleData);
     }
   }
 
   updateArticleData(articleData: any): void {
+    articleData.quantite = this.selectedArticle.quantite; // Ensure quantity is included
     this.dataService.updateArticle(this.selectedArticle.id, articleData).subscribe({
       next: () => {
         console.log('Article updated successfully');
@@ -131,10 +128,13 @@ export class ArticlesComponent implements OnInit {
             nomArticle: this.newArticle.nomArticle,
             description: this.newArticle.description,
             prix: this.newArticle.prix,
+            quantite: this.newArticle.quantite, // Add quantity
             imageArticle: response.url, // Use the uploaded image URL
             familleArticleId: this.newArticle.familleArticleId
           };
 
+          console.log(newArticleData);
+  
           this.dataService.addArticle(newArticleData).subscribe({
             next: (result) => {
               console.log('Article added successfully');

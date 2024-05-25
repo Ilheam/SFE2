@@ -1,17 +1,31 @@
-<div class="login-container">
-  <h2>Login</h2>
-  <form (submit)="login()">
-    <div>
-      <label for="email">Email:</label>
-      <input type="email" id="email" [(ngModel)]="email" name="email" required>
+<div class="login-wrapper">
+  <div class="background-rectangle">
+    <img src="assets/ImgCnx.png" alt="">
+  </div>
+  <div class="login-container">
+    <h2>Login</h2>
+    <form (submit)="login()">
+      <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" [(ngModel)]="email" name="email" required>
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" [(ngModel)]="password" name="password" required>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+    <div class="signup-message">
+      <p>Don't have an account? <a routerLink="/signup">Sign up here</a></p>
     </div>
-    <div>
-      <label for="password">Password:</label>
-      <input type="password" id="password" [(ngModel)]="password" name="password" required>
-    </div>
-    <button type="submit">Login</button>
-  </form>
-  <div class="signup-message">
-    <p>Don't have an account? <a routerLink="/signup">Sign up here</a></p>
   </div>
 </div>
+<div class="trait4"></div>
+    <div class="trait5"></div>
+    <div class="trait6"></div>
+    <div class="trait7"></div>
+
+    <div class="text5" >Votre </div>
+    <div class="text6" >Sécurité </div>
+    <div class="text7" >Nous </div>
+    <div class="text8" >intéresse </div>

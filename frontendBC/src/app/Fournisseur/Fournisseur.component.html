@@ -15,13 +15,16 @@
       </thead>
       <tbody>
         <tr *ngFor="let fournisseur of fournisseurs">
-          <td>{{ fournisseur.nom }}</td>
+          <td>
+            {{ fournisseur.nom }}
+            <i *ngIf="isTopSupplier(fournisseur)" class="material-icons star-icon">star</i>
+          </td>
           <td>{{ fournisseur.email }}</td>
           <td>{{ fournisseur.telephone }}</td>
           <td>{{ fournisseur.adresse }}</td>
           <td>{{ fournisseur.designation }}</td>
           <td>
-            <button (click)="deleteFournisseur(fournisseur.id)">Supprimer</button>
+            <button style="background-color: red;" (click)="deleteFournisseur(fournisseur.id)">Supprimer</button>
             <button (click)="selectFournisseur(fournisseur)">Modifier</button>
           </td>
         </tr>

@@ -18,11 +18,13 @@ export class SuppliersComponent implements OnInit {
   selectedFournisseur: Fournisseur = new Fournisseur();
   showModal: boolean = false;
   showAddModal: boolean = false;
+  supplierPurchaseCounts: { [key: number]: number } = {};
 
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
     this.fetchFournisseurs();
+    this.fetchSupplierPurchaseCounts();
   }
 
   fetchFournisseurs(): void {
@@ -32,11 +34,18 @@ export class SuppliersComponent implements OnInit {
     });
   }
 
+  fetchSupplierPurchaseCounts(): void {
+    this.dataService.getSupplierPurchaseCounts().subscribe({
+      next: (data) => this.supplierPurchaseCounts = data,
+      error: (error) => console.error('Error fetching supplier purchase counts:', error)
+    });
+  }
+
   deleteFournisseur(id: number): void {
-    const confirmed = confirm('Voullez vous vraiement supprimer ce fournisseur ?');
+    const confirmed = confirm('Voulez-vous vraiment supprimer ce fournisseur ?');
     if (confirmed) {
       this.dataService.deleteFournisseur(id).subscribe({
-        next: () => this.fetchFournisseurs(), // Refresh the list after deletion
+        next: () => this.fetchFournisseurs(),
         error: (error) => console.error('Error deleting fournisseur:', error)
       });
     }
@@ -87,12 +96,16 @@ export class SuppliersComponent implements OnInit {
       next: (result) => {
         console.log('Fournisseur added successfully');
         this.closeAddModal();
-        this.fetchFournisseurs(); // Fetches the latest list
+        this.fetchFournisseurs();
       },
       error: (error) => {
         console.error('Error adding fournisseur:', error);
         this.closeAddModal();
       }
     });
+  }
+
+  isTopSupplier(fournisseur: Fournisseur): boolean {
+    return this.supplierPurchaseCounts[fournisseur.id] >= 2;
   }
 }

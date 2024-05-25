@@ -1,41 +1,294 @@
+.signup-wrapper {
+  position: relative;
+  max-width: 400px;
+  margin: 50px auto;
+}
+
+.background-rectangle {
+  position: absolute;
+  top: 0;
+  left: -210px; /* Ajustez cette valeur selon la largeur et la position souhaitée */
+  background-color: #f0f0f0; /* Couleur de fond du rectangle */
+  z-index: -1; /* Place le rectangle derrière le formulaire */
+  width: 900px; /* Augmentez la largeur du rectangle gris */
+  height: 95%; /* Augmentez la hauteur pour plus d'espace vertical */
+  border-radius: 50px; /* Pour correspondre au rayon du coin du rectangle gris */
+
+  padding: 20px;
+}
+
 .signup-container {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  position: relative;
+  width: 400px;
+  height: 800px;
+
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 50px; /* Pour correspondre au rayon du coin du rectangle gris */
+  background-color: white;
+  z-index: 1; /* Assurez-vous que le formulaire est au-dessus du rectangle */
+  transform: translate(288px, 0px); /* Déplace le formulaire vers la droite et vers le bas */
+}
+
+h2 {
+  text-align: center;
+  margin-top: 20px; /* Déplacer h2 de 10 pixels vers le bas */
+}
+
+form div {
+  margin-bottom: 15px;
+  margin-top: 10px; /* Déplacer chaque div de 10 pixels vers le bas */
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  margin-top: 60px; /* Déplacer chaque input de 10 pixels vers le bas */
+}
+
+input {
+  width: 100%;
+  height: 50px;
+
+  padding: 8px;
+  box-sizing: border-box;
+  border-radius: 50px;
+  border: 1.02px solid #36FEF2;
+  background-color: #EBEBEB;
+  margin-top: 30px; /* Déplacer chaque input de 10 pixels vers le bas */
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: transparent;
+  color: rgb(26, 25, 25);
+  height: 40px;
+  width: 80px;
+  border-radius: 16px;
+  border: 1.02px solid #1b1919;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 50px; /* Déplacer le bouton de 10 pixels vers le bas */
+
+}
+
+button:hover {
+  background-color: #36FEF2;
+}
+
+
+
+* {
+  font-family: "Playfair", serif;
+  font-optical-sizing: auto;
+  font-variation-settings:"wdth" 100;
+  font-style: italic;
+}
+.cercle {
+  position: absolute;
+  left: 998px; /* Positionne le cercle horizontalement au centre */
+  top: 670px; /* Positionne le cercle verticalement au centre */
+  transform: translate(-50%, -50%); /* Centre le cercle par rapport à son propre centre */
+  height: 160px; /* Ajustez la taille du cercle */
+  width: 160px; /* Ajustez la taille du cercle */
+  border-radius: 50%; /* Pour rendre le div un cercle */
+  border: 1.02px solid black; /* Ajoute une bordure noire de 5px */
+  background-color: #EBEBEB; /* Couleur du cercle */
+  z-index: 1; /* Place le cercle devant le formulaire */
+
+}
+.cercle2 {
+  position: absolute;
+  left: 1017px; /* Positionne le cercle horizontalement au centre */
+  top: 670px; /* Positionne le cercle verticalement au centre */
+  transform: translate(-50%, -50%); /* Centre le cercle par rapport à son propre centre */
+  height: 200px; /* Ajustez la taille du cercle */
+  width: 200px; /* Ajustez la taille du cercle */
+  border-radius: 50%; /* Pour rendre le div un cercle */
+  background-color: transparent; /* Rend le cercle transparent */
+  border: 1.02px solid #36FEF2; /* Ajoute une bordure noire de 5px */
+  z-index: 1; /* Place le cercle devant le formulaire */
+
+}
+.cercle3 {
+  position: absolute;
+  left: 838px; /* Positionne le cercle horizontalement au centre */
+  top: 800px; /* Positionne le cercle verticalement au centre */
+  transform: translate(-50%, -50%); /* Centre le cercle par rapport à son propre centre */
+  height: 160px; /* Ajustez la taille du cercle */
+  width: 160px; /* Ajustez la taille du cercle */
+  border-radius: 50%; /* Pour rendre le div un cercle */
+  border: 1.02px solid black; /* Ajoute une bordure noire de 5px */
+  background-color: #EBEBEB; /* Couleur du cercle */
+  z-index: 1; /* Place le cercle devant le formulaire */
+
+}
+.cercle4 {
+  position: absolute;
+  left: 820px; /* Positionne le cercle horizontalement au centre */
+  top: 800px; /* Positionne le cercle verticalement au centre */
+  transform: translate(-50%, -50%); /* Centre le cercle par rapport à son propre centre */
+  height: 200px; /* Ajustez la taille du cercle */
+  width: 200px; /* Ajustez la taille du cercle */
+  border-radius: 50%; /* Pour rendre le div un cercle */
+  background-color: transparent; /* Rend le cercle transparent */
+  border: 1.02px solid #36FEF2; /* Ajoute une bordure noire de 5px */
+  z-index: 1; /* Place le cercle devant le formulaire */
+
+}
+.cercle5 {
+  position: absolute;
+  left: 988px; /* Positionne le cercle horizontalement au centre */
+  top: 860px; /* Positionne le cercle verticalement au centre */
+  transform: translate(-50%, -50%); /* Centre le cercle par rapport à son propre centre */
+  height: 80px; /* Ajustez la taille du cercle */
+  width: 80px; /* Ajustez la taille du cercle */
+  border-radius: 50%; /* Pour rendre le div un cercle */
+  border: 1.02px solid black; /* Ajoute une bordure noire de 5px */
+  background-color: #EBEBEB; /* Couleur du cercle */
+  z-index: 1; /* Place le cercle devant le formulaire */
+
+}
+.cercle6 {
+  position: absolute;
+  left: 998px; /* Positionne le cercle horizontalement au centre */
+  top: 860px; /* Positionne le cercle verticalement au centre */
+  transform: translate(-50%, -50%); /* Centre le cercle par rapport à son propre centre */
+  height: 100px; /* Ajustez la taille du cercle */
+  width: 100px; /* Ajustez la taille du cercle */
+  border-radius: 50%; /* Pour rendre le div un cercle */
+  background-color: transparent; /* Rend le cercle transparent */
+  border: 1.02px solid #36FEF2; /* Ajoute une bordure noire de 5px */
+  z-index: 1; /* Place le cercle devant le formulaire */
+
+}
+.cercle9 {
+  position: absolute;
+  left: 838px; /* Positionne le cercle horizontalement au centre */
+  top: 660px; /* Positionne le cercle verticalement au centre */
+  transform: translate(-50%, -50%); /* Centre le cercle par rapport à son propre centre */
+  height: 200px; /* Ajustez la taille du cercle */
+  width: 200px; /* Ajustez la taille du cercle */
+  border-radius: 50%; /* Pour rendre le div un cercle */
+  border: 1.02px solid black; /* Ajoute une bordure noire de 5px */
+  background-color: #EBEBEB; /* Couleur du cercle */
+  z-index: 1; /* Place le cercle devant le formulaire */
+  animation: rotateClockwise 5s linear infinite; /* Animation pour faire tourner le cercle */
+  overflow: hidden; /* Masque le contenu débordant */
+
+}
+.cercle9::before {
+  content: "";
+  position: absolute;
+  left: 100%; /* Positionne le petit cercle juste à l'extérieur du cercle principal */
+  top: 50%; /* Centre le petit cercle verticalement */
+  transform: translate(-50%, -50%);
+  height: 40px; /* Taille du petit cercle */
+  width: 40px; /* Moitié de la taille du petit cercle */
+  border-radius: 50%; /* Forme circulaire */
+  background-color: gray; /* Couleur du petit cercle */
+  z-index: 1; /* Place le cercle devant le formulaire */
+}
+
+@keyframes rotateClockwise {
+  0% {
+      transform: rotate(0deg); /* Rotation de 0 degrés (position de départ) */
   }
-  
-  h2 {
-    text-align: center;
+  100% {
+      transform: rotate(360deg); /* Rotation de 360 degrés (une rotation complète dans le sens horaire) */
   }
-  
-  form div {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  input {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-  }
-  
-  button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
+}
+.trait4{
+  position: absolute;
+  left: 150px;
+  top: 340px; /* Ajustez cette valeur pour positionner le trait entre les rectangles 3 et 4 */
+  height: 1px;
+  width: 260px;
+  background-color: #36FEF2;
+  transform: rotate(90deg); /* Applique une rotation de 90 degrés */
+  z-index: 1; /* Place le cercle devant le formulaire */
+
+}
+.trait5{
+  position: absolute;
+  left: 510px;
+  top: 290px; /* Ajustez cette valeur pour positionner le trait entre les rectangles 3 et 4 */
+  height: 1px;
+  width: 210px;
+  background-color: #36FEF2;
+  transform: rotate(90deg); /* Applique une rotation de 90 degrés */
+  z-index: 1; /* Place le cercle devant le formulaire */
+
+}
+.trait6{
+  position: absolute;
+  left: 420px;
+  top: 399px; /* Ajustez cette valeur pour positionner le trait entre les rectangles 3 et 4 */
+  height: 1px;
+  width: 200px;
+  background-color: #36FEF2;
+  transform: rotate(180deg); /* Applique une rotation de 90 degrés */
+  z-index: 1; /* Place le cercle devant le formulaire */
+
+}
+.trait7{
+  position: absolute;
+  left: 550px;
+  top: 499px; /* Ajustez cette valeur pour positionner le trait entre les rectangles 3 et 4 */
+  height: 1px;
+  width: 200px;
+  background-color: #36FEF2;
+  transform: rotate(90deg); /* Applique une rotation de 90 degrés */
+  z-index: 1; /* Place le cercle devant le formulaire */
+
+}
+.text5 {
+  position: absolute;
+  left: 290px;
+  top: 200px;
+  color: black;
+  font-size: 50px;
+  text-transform: uppercase; /* Met le texte en majuscules */
+  z-index: 1; /* Place le cercle devant le formulaire */
+
+}
+.text6{
+  position: absolute;
+  left: 390px;
+  top: 285px;
+  color: black;
+  font-size: 40px;
+  font-weight: bold;
+  text-transform: uppercase; /* Met le texte en majuscules */
+  z-index: 1; /* Place le cercle devant le formulaire */
+
+}
+.text7 {
+  position: absolute;
+  left: 290px;
+  top: 360px;
+  color: black;
+  font-size: 50px;
+  text-transform: uppercase; /* Met le texte en majuscules */
+  z-index: 1; /* Place le cercle devant le formulaire */
+
+}
+.text8 {
+  position: absolute;
+  left: 390px;
+  top: 460px;
+  color: black;
+  font-size: 40px;
+  font-weight: bold;
+  text-transform: uppercase; /* Met le texte en majuscules */
+  z-index: 1; /* Place le cercle devant le formulaire */
+
+}
+.background-rectangle img {
+  width: 46%; /* Ajustez la largeur de l'image selon vos besoins */
+  margin-top: 350px; /* Déplace l'image de 20 pixels vers le bas */
+  margin-left: 20px; /* Déplace l'image de 20 pixels vers la droite */
+  height: auto; /* Laissez la hauteur se calculer automatiquement pour maintenir les proportions de l'image */
+}

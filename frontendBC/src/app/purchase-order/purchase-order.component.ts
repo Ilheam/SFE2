@@ -6,7 +6,8 @@ import { GeneratedPurchaseOrder, OrderForClient, OrderForCreation, OrderForCreat
 import { BonDeCommandeComponent } from '../bon-de-commande/bon-de-commande.component';
 import { Article } from '../articles/articles.model';
 
-interface GroupedOrder {
+interface PurchaseOrder {
+  orderId: number;
   fournisseurName: string;
   articles: OrderForCreationArticle[];
   date: Date;
@@ -20,7 +21,7 @@ interface GroupedOrder {
   styleUrls: ['./purchase-order.component.css']
 })
 export class PurchaseOrderComponent implements OnInit {
-  purchaseOrders: GroupedOrder[] = [];
+  purchaseOrders: OrderForClient[] = [];
   newPurchaseOrderForm: FormGroup;
   showModal: boolean = false;
   selectedOrder: GeneratedPurchaseOrder | undefined;
@@ -60,7 +61,7 @@ export class PurchaseOrderComponent implements OnInit {
   fetchPurchaseOrders(): void {
     this.dataService.getPurchaseOrders().subscribe({
       next: (data) => {
-        this.purchaseOrders = this.groupOrdersByFournisseur(data);
+        this.purchaseOrders = this.groupOrdersByOrderId(data);
       },
       error: (error) => console.error('Error fetching purchase orders:', error)
     });
@@ -73,21 +74,22 @@ export class PurchaseOrderComponent implements OnInit {
     });
   }
 
-  groupOrdersByFournisseur(orders: OrderForClient[]): GroupedOrder[] {
-    const grouped: { [key: string]: GroupedOrder } = {};
+  groupOrdersByOrderId(orders: OrderForClient[]): OrderForClient[] {
+    const groupedOrders: { [key: number]: OrderForClient } = {};
 
     orders.forEach(order => {
-      if (!grouped[order.fournisseurName]) {
-        grouped[order.fournisseurName] = {
+      if (!groupedOrders[order.orderId]) {
+        groupedOrders[order.orderId] = {
+          orderId: order.orderId,
           fournisseurName: order.fournisseurName,
-          articles: [],
+          articles: order.articles,
           date: order.date
         };
       }
-      grouped[order.fournisseurName].articles.push({ nom: order.articleNom, quantite: order.quantite });
+      // groupedOrders[order.orderId].articles.push({ nom: order.articleNom, quantite: order.quantite });
     });
 
-    return Object.values(grouped);
+    return Object.values(groupedOrders);
   }
 
   submitPurchaseOrder(): void {
@@ -118,8 +120,8 @@ export class PurchaseOrderComponent implements OnInit {
     this.selectedArticles.clear();
   }
 
-  generateBonDeCommande(order: GroupedOrder): void {
-    this.dataService.generatePurchaseOrder(order.fournisseurName).subscribe(
+  generateBonDeCommande(order: OrderForClient): void {
+    this.dataService.generatePurchaseOrder(order.orderId).subscribe(
       (generatedOrder) => this.selectedOrder = generatedOrder,
       (error) => console.error('Error generating Bon de Commande:', error)
     );

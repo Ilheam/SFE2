@@ -7,6 +7,7 @@
       <table>
         <thead>
           <tr>
+            <th>Order ID</th>
             <th>Fournisseur</th>
             <th>Articles</th>
             <th>Date</th>
@@ -15,11 +16,12 @@
         </thead>
         <tbody>
           <tr *ngFor="let order of purchaseOrders">
+            <td>{{ order.orderId }}</td>
             <td>{{ order.fournisseurName }}</td>
-            <td>
-              <ul>
+            <td> {{order.articles}}
+              <!-- <ul>
                 <li *ngFor="let article of order.articles">{{ article.nom }} ({{ article.quantite }})</li>
-              </ul>
+              </ul> -->
             </td>
             <td>{{ order.date | date: 'mediumDate' }}</td>
             <td>
@@ -46,8 +48,8 @@
 
         <div class="articles-selection">
           <h3>Select Articles:</h3>
-          <div *ngFor="let article of articles" (click)="toggleArticleSelection(article.nomArticle)" 
-               [class.selected]="isSelected(article.nomArticle)">
+          <div *ngFor="let article of articles" (click)="toggleArticleSelection(article.nomArticle)"
+            [class.selected]="isSelected(article.nomArticle)">
             <span>{{ article.nomArticle }}</span>
           </div>
         </div>
@@ -75,6 +77,7 @@
     margin: 5px;
     border: 1px solid #ccc;
   }
+
   .articles-selection div.selected {
     background-color: #d1ecf1;
     border-color: #bee5eb;
