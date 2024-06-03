@@ -8,18 +8,22 @@ import { FamilleComponent } from './famille/famille.component';
 import { HomeComponent } from './home/home.component';
 import { PurchaseOrderComponent } from './purchase-order/purchase-order.component';
 import { ArticlesByFamilleComponent } from './articles-by-famille/articles-by-famille.component';
-import { AuthGuard } from './auth.guard';
 import { CommentsComponent } from './comments/comments.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { authGuard } from './auth.guard';
+import { authGuardAdmin } from './auth.guard.admin';
 
 export const routes: Routes = [
-  { path: "home", component: HomeComponent, canActivate: [AuthGuard] },
+  { path: "home", component: HomeComponent },
   { path: "login", component: LoginComponent },
   { path: "signup", component: SignupComponent },
-  { path: "article", component: ArticlesComponent, canActivate: [AuthGuard] },
-  { path: "fournisseur", component: SuppliersComponent, canActivate: [AuthGuard] },
-  { path: "bondecommande", component: PurchaseOrderComponent, canActivate: [AuthGuard] },
-  { path: "famille", component: FamilleComponent, canActivate: [AuthGuard] },
-  { path: "articles/:familleId", component: ArticlesByFamilleComponent, canActivate: [AuthGuard] },
-  { path: "comments", component: CommentsComponent, canActivate:[AuthGuard] },  // Add this route
+  { path: "article", component: ArticlesComponent, canActivate: [authGuardAdmin] },
+  { path: "fournisseur", component: SuppliersComponent, canActivate: [authGuardAdmin] },
+  { path: "bondecommande", component: PurchaseOrderComponent, canActivate: [authGuard] },
+  { path: "famille", component: FamilleComponent, canActivate: [authGuardAdmin] },
+  { path: "articles/:familleId", component: ArticlesByFamilleComponent, canActivate: [authGuard] },
+  { path: "comments", component: CommentsComponent, canActivate:[authGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate:[authGuardAdmin] },
   { path: "**", redirectTo: "/home" }
+
 ];

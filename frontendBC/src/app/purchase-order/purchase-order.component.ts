@@ -5,32 +5,29 @@ import { DataService } from '../data.service';
 import { GeneratedPurchaseOrder, OrderForClient, OrderForCreation, OrderForCreationArticle } from './purchase-order.model';
 import { BonDeCommandeComponent } from '../bon-de-commande/bon-de-commande.component';
 import { Article } from '../articles/articles.model';
-
-interface PurchaseOrder {
-  orderId: number;
-  fournisseurName: string;
-  articles: OrderForCreationArticle[];
-  date: Date;
-}
+import { Fournisseur } from '../Fournisseur/Fournisseur.model';
+import { ArticleListStringPipePipe } from '../article-list-string-pipe.pipe';
 
 @Component({
   selector: 'app-purchase-order',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, BonDeCommandeComponent],
+  imports: [CommonModule, ReactiveFormsModule, BonDeCommandeComponent, ArticleListStringPipePipe],
   templateUrl: './purchase-order.component.html',
   styleUrls: ['./purchase-order.component.css']
 })
 export class PurchaseOrderComponent implements OnInit {
   purchaseOrders: OrderForClient[] = [];
   newPurchaseOrderForm: FormGroup;
-  showModal: boolean = false;
+  showCreateModal: boolean = false;
+  showUpdateModal: boolean = false;
   selectedOrder: GeneratedPurchaseOrder | undefined;
   articles: Article[] = [];
+  fournisseurs: Fournisseur[] = [];
   selectedArticles: Set<string> = new Set();
 
   constructor(private fb: FormBuilder, private dataService: DataService) {
     this.newPurchaseOrderForm = this.fb.group({
-      fournisseur: ['', Validators.required],
+      fournisseurId: ['', Validators.required],
       articles: this.fb.array([])
     });
   }
@@ -38,6 +35,7 @@ export class PurchaseOrderComponent implements OnInit {
   ngOnInit(): void {
     this.fetchPurchaseOrders();
     this.fetchArticles();
+    this.fetchFournisseurs();
   }
 
   get articlesFormArray() {
@@ -74,6 +72,13 @@ export class PurchaseOrderComponent implements OnInit {
     });
   }
 
+  fetchFournisseurs(): void {
+    this.dataService.getFournisseurs().subscribe({
+      next: (data) => this.fournisseurs = data,
+      error: (error) => console.error('Error fetching fournisseurs:', error)
+    });
+  }
+
   groupOrdersByOrderId(orders: OrderForClient[]): OrderForClient[] {
     const groupedOrders: { [key: number]: OrderForClient } = {};
 
@@ -86,7 +91,6 @@ export class PurchaseOrderComponent implements OnInit {
           date: order.date
         };
       }
-      // groupedOrders[order.orderId].articles.push({ nom: order.articleNom, quantite: order.quantite });
     });
 
     return Object.values(groupedOrders);
@@ -95,10 +99,10 @@ export class PurchaseOrderComponent implements OnInit {
   submitPurchaseOrder(): void {
     if (this.newPurchaseOrderForm.valid) {
       const purchaseOrderData: OrderForCreation = {
-        fournisseurName: this.newPurchaseOrderForm.get('fournisseur')?.value,
+        fournisseurName: this.newPurchaseOrderForm.get('fournisseurId')?.value,
         articles: this.newPurchaseOrderForm.get('articles')?.value
       };
-
+      // Create new order
       this.dataService.createPurchaseOrder(purchaseOrderData).subscribe({
         next: () => {
           this.closeModal();
@@ -109,12 +113,22 @@ export class PurchaseOrderComponent implements OnInit {
     }
   }
 
-  toggleModal(): void {
-    this.showModal = !this.showModal;
+  toggleCreateModal(): void {
+    this.showCreateModal = !this.showCreateModal;
+    this.showUpdateModal = false;
+    this.newPurchaseOrderForm.reset();
+    this.articlesFormArray.clear();
+    this.selectedArticles.clear();
+  }
+
+  toggleUpdateModal(): void {
+    this.showUpdateModal = !this.showUpdateModal;
+    this.showCreateModal = false;
   }
 
   closeModal(): void {
-    this.showModal = false;
+    this.showCreateModal = false;
+    this.showUpdateModal = false;
     this.newPurchaseOrderForm.reset();
     this.articlesFormArray.clear();
     this.selectedArticles.clear();
@@ -146,5 +160,14 @@ export class PurchaseOrderComponent implements OnInit {
 
   isSelected(articleName: string): boolean {
     return this.selectedArticles.has(articleName);
+  }
+
+  deleteOrder(orderId: number): void {
+    if (confirm('Are you sure you want to delete this order?')) {
+      this.dataService.deletePurchaseOrder(orderId).subscribe({
+        next: () => this.fetchPurchaseOrders(),
+        error: (error) => console.error('Error deleting order:', error)
+      });
+    }
   }
 }

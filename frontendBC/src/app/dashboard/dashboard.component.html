@@ -1,0 +1,31 @@
+<div class="dashboard">
+    <div class="counts">
+      <div class="count-item">
+        <div class="count-icon"><i class="fas fa-truck"></i></div>
+        <div class="count-details">
+          <h3>Fournisseurs</h3>
+          <p>{{ counts.fournisseursCount }}</p>
+        </div>
+      </div>
+      <div class="count-item">
+        <div class="count-icon"><i class="fas fa-boxes"></i></div>
+        <div class="count-details">
+          <h3>Articles</h3>
+          <p>{{ counts.articlesCount }}</p>
+        </div>
+      </div>
+      <div class="count-item">
+        <div class="count-icon"><i class="fas fa-dollar-sign"></i></div>
+        <div class="count-details">
+          <h3>Chiffres d'Affaires</h3>
+          <p>{{ counts.totalRevenue }}</p>
+          <p>MAD</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="chart">
+      <canvas id="purchaseOrderGrowthChart"></canvas>
+    </div>
+  </div>
+  

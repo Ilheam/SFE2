@@ -1,3 +1,4 @@
+
 .btn-rectangle-noir,
 .btn-rectangle-noir-droite {
     text-decoration: none;
@@ -459,4 +460,50 @@ h1 {
   font-optical-sizing: auto;
   font-variation-settings: "wdth" 100;
   font-style: italic;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  z-index: 5000;
+}
+
+.dropbtn {
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.dropbtn i {
+  margin-left: 5px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #a19b9b;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #575757;
 }

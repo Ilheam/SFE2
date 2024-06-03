@@ -41,10 +41,15 @@ export class OrderForCreationArticle {
 
 export class OrderForClient {
   orderId: number = 0; 
-
   fournisseurName: string = '';
-  articles: string = '';
+  articles: OrderArticleForClient[] = [];
   date: Date = new Date();
+}
+
+export class OrderArticleForClient{
+  id: number = 0;
+  name: string = '';
+  quantity: number = 0;
 }
 
 export class BonDeCommande {

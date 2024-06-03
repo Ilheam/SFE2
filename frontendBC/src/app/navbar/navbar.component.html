@@ -6,34 +6,41 @@
     <a routerLink="home">
       <i class="fas fa-home"></i> Accueil
     </a>
-    <a routerLink="fournisseur">
-      <i class="fas fa-truck"></i> Fournisseurs
+    <a *ngIf="isAuthenticated && isAdmin" routerLink="/dashboard">
+      <i class="fas fa-tachometer-alt"></i> Dashboard
     </a>
-    <a routerLink="article">
-      <i class="fas fa-box"></i> Articles
-    </a>
-    <a routerLink="famille">
-      <i class="fas fa-tags"></i> Familles
-    </a>
-    <a routerLink="bondecommande">
+    <div *ngIf="isAuthenticated && isAdmin" class="dropdown">
+      <a class="dropbtn">
+        <i class="fas fa-cogs"></i> Paramétrages
+        <i class="fas fa-caret-down"></i>
+      </a>
+      <div class="dropdown-content">
+        <a routerLink="fournisseur">
+          <i class="fas fa-truck"></i> Fournisseurs
+        </a>
+        <a routerLink="article">
+          <i class="fas fa-box"></i> Articles
+        </a>
+        <a routerLink="famille">
+          <i class="fas fa-tags"></i> Familles
+        </a>
+      </div>
+    </div>
+    <a *ngIf="isAuthenticated" routerLink="/bondecommande">
       <i class="fas fa-file-alt"></i> Bon de Commande
     </a>
-    <a routerLink="/comments">
+    <a *ngIf="isAuthenticated" routerLink="/comments" (click)="clearNotification()">
       <i class="fas fa-comment"></i> Commentaires
+      <span *ngIf="newCommentNotification" class="notification-dot"></span>
     </a>
-    <a routerLink="/login" *ngIf="!authService.isAuthenticated()">
+    <a routerLink="/login" *ngIf="!isAuthenticated">
       <i class="fas fa-sign-in-alt"></i> Login
     </a>
-    <a routerLink="/signup" *ngIf="!authService.isAuthenticated()">
+    <a routerLink="/signup" *ngIf="!isAuthenticated">
       <i class="fas fa-user-plus"></i> Signup
     </a>
-
- 
-
-
-    <a (click)="logout()" *ngIf="authService.isAuthenticated()">
+    <a (click)="logout()" *ngIf="isAuthenticated">
       <i class="fas fa-sign-out-alt"></i> Logout
     </a>
   </nav>
-  </header>
-  
+</header>

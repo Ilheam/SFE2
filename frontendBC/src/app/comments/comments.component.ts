@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { DataService } from '../data.service';
 import { CommonModule } from '@angular/common';
@@ -13,10 +13,12 @@ import { AuthService } from '../auth.service';
   imports: [CommonModule, ReactiveFormsModule]
 })
 export class CommentsComponent implements OnInit {
+  @Output() newCommentEvent = new EventEmitter<void>();
   comments: Comment[] = [];
   commentForm: FormGroup;
   editMode: boolean = false;
   editCommentId: number | null = null;
+  userId: number | undefined;
 
   constructor(private fb: FormBuilder, private dataService: DataService, private authService: AuthService) {
     this.commentForm = this.fb.group({
@@ -25,6 +27,11 @@ export class CommentsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authService.authSubject.subscribe({
+      next: (user) => {
+        this.userId = user?.id
+      }
+    });
     this.fetchComments();
   }
 
@@ -44,9 +51,9 @@ export class CommentsComponent implements OnInit {
         id: this.editCommentId ?? 0,
         text: this.commentForm.value.text,
         created: new Date(),
-        userId: this.authService.getCurrentUserId()!,
+        userId: this.userId!,
         user: {
-          id: this.authService.getCurrentUserId()!,
+          id: this.userId!,
           email: '' // You may need to fetch and set the current user's email if required
         }
       };
@@ -58,6 +65,7 @@ export class CommentsComponent implements OnInit {
             this.commentForm.reset();
             this.editMode = false;
             this.editCommentId = null;
+            this.newCommentEvent.emit();
           },
           error: (error: any) => {
             console.error('Error updating comment:', error);
@@ -69,6 +77,7 @@ export class CommentsComponent implements OnInit {
           next: () => {
             this.fetchComments();
             this.commentForm.reset();
+            this.newCommentEvent.emit();
           },
           error: (error: any) => console.error('Error adding comment:', error)
         });

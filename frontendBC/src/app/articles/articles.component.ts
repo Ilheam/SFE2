@@ -48,7 +48,7 @@ export class ArticlesComponent implements OnInit {
     this.dataService.isArticleInPurchaseOrder(id).subscribe({
       next: (isInOrder) => {
         if (isInOrder) {
-          alert('Cannot delete this article because it is part of a purchase order.');
+          alert('Vous ne pouvez pas supprimer cet article car il est en commande.');
         } else {
           const confirmed = confirm('Voulez-vous vraiment supprimer cet article ?');
           if (confirmed) {

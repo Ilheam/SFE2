@@ -17,15 +17,19 @@
         <tr *ngFor="let fournisseur of fournisseurs">
           <td>
             {{ fournisseur.nom }}
-            <i *ngIf="isTopSupplier(fournisseur)" class="material-icons star-icon">star</i>
+            <i *ngIf="isTopSupplier(fournisseur)" class="fas fa-star star-icon"></i> <!-- Star icon for top suppliers -->
           </td>
           <td>{{ fournisseur.email }}</td>
           <td>{{ fournisseur.telephone }}</td>
           <td>{{ fournisseur.adresse }}</td>
           <td>{{ fournisseur.designation }}</td>
           <td>
-            <button style="background-color: red;" (click)="deleteFournisseur(fournisseur.id)">Supprimer</button>
-            <button (click)="selectFournisseur(fournisseur)">Modifier</button>
+            <button class="icon-button" (click)="deleteFournisseur(fournisseur.id)">
+              <i class="fas fa-trash"></i>
+            </button>
+            <button class="icon-button" (click)="selectFournisseur(fournisseur)">
+              <i class="fas fa-edit"></i>
+            </button>
           </td>
         </tr>
       </tbody>
@@ -74,3 +78,10 @@
     </div>
   </div>
 </main>
+
+<style>
+  .star-icon {
+    color: orange;
+    margin-left: 5px;
+  }
+</style>

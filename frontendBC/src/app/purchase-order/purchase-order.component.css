@@ -171,6 +171,14 @@ button:hover {
   button:hover {
     background-color: #36FEF2; /* Darker green on hover */
   }
+  button.icon-button {
+    margin-right: 5px;
+    padding: 5px;
+    background-color: transparent; /* Transparent background */
+    border: none;
+    cursor: pointer;
+    color: orange; /* Orange color for icons */
+  }
   
   @media (max-width: 768px) {
     /* Responsive Design for smaller screens */
@@ -186,6 +194,4 @@ button:hover {
       margin: 5px 0; /* Adjust margin for vertical layout */
     }
   }
-  
-
   

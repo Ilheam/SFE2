@@ -10,31 +10,42 @@
         <input type="email" id="email" [(ngModel)]="email" name="email" required>
       </div>
       <div>
-        <label for="password">Password:</label>
+        <label for="password">Mot de passe:</label>
         <input type="password" id="password" [(ngModel)]="password" name="password" required>
       </div>
-      <button type="submit">Signup</button>
+      <div>
+        <label for="confirmPassword">Confirmer le mot de passe:</label>
+        <input type="confirmPassword" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword"
+          required>
+      </div>
+      <div style="height: 24px; margin-top: 60px; display: flex; align-items: center; align-content: center;">
+        <p for="asAdmin">Vous etes un administrateur:</p>
+        <input type="checkbox" id="asAdmin" [(ngModel)]="asAdmin" name="asAdmin" required
+          style="margin: 0;">
+      </div>
+      <button type="submit">Créer</button>
 
     </form>
   </div>
 </div>
+<!--
 <div class="cercle"></div>
 <div class="cercle2"></div>
 
 <div class="cercle3"></div>
-    <div class="cercle4"></div>
+<div class="cercle4"></div>
 
-    <div class="cercle5"></div>
-    <div class="cercle6"></div>
+<div class="cercle5"></div>
+<div class="cercle6"></div>
 
-    <div class="cercle9"></div>
+<div class="cercle9"></div> -->
 
-    <div class="trait4"></div>
-    <div class="trait5"></div>
-    <div class="trait6"></div>
-    <div class="trait7"></div>
+<div class="trait4"></div>
+<div class="trait5"></div>
+<div class="trait6"></div>
+<div class="trait7"></div>
 
-    <div class="text5" >Votre </div>
-    <div class="text6" >Sécurité </div>
-    <div class="text7" >Nous </div>
-    <div class="text8" >intéresse </div>
+<div class="text5">Votre </div>
+<div class="text6">Sécurité </div>
+<div class="text7">Nous </div>
+<div class="text8">intéresse </div>

@@ -106,6 +106,6 @@ export class SuppliersComponent implements OnInit {
   }
 
   isTopSupplier(fournisseur: Fournisseur): boolean {
-    return this.supplierPurchaseCounts[fournisseur.id] >= 2;
+    return this.supplierPurchaseCounts[fournisseur.id] >= 5; // Check for more than 5 purchase orders
   }
 }

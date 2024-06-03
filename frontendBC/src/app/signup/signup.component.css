@@ -89,7 +89,7 @@ button:hover {
 .cercle {
   position: absolute;
   left: 998px; /* Positionne le cercle horizontalement au centre */
-  top: 670px; /* Positionne le cercle verticalement au centre */
+  top: 1000px; /* Positionne le cercle verticalement au centre */
   transform: translate(-50%, -50%); /* Centre le cercle par rapport à son propre centre */
   height: 160px; /* Ajustez la taille du cercle */
   width: 160px; /* Ajustez la taille du cercle */
@@ -97,12 +97,12 @@ button:hover {
   border: 1.02px solid black; /* Ajoute une bordure noire de 5px */
   background-color: #EBEBEB; /* Couleur du cercle */
   z-index: 1; /* Place le cercle devant le formulaire */
-
+  
 }
 .cercle2 {
   position: absolute;
   left: 1017px; /* Positionne le cercle horizontalement au centre */
-  top: 670px; /* Positionne le cercle verticalement au centre */
+  top: 770px; /* Positionne le cercle verticalement au centre */
   transform: translate(-50%, -50%); /* Centre le cercle par rapport à son propre centre */
   height: 200px; /* Ajustez la taille du cercle */
   width: 200px; /* Ajustez la taille du cercle */
@@ -115,7 +115,7 @@ button:hover {
 .cercle3 {
   position: absolute;
   left: 838px; /* Positionne le cercle horizontalement au centre */
-  top: 800px; /* Positionne le cercle verticalement au centre */
+  top: 900px; /* Positionne le cercle verticalement au centre */
   transform: translate(-50%, -50%); /* Centre le cercle par rapport à son propre centre */
   height: 160px; /* Ajustez la taille du cercle */
   width: 160px; /* Ajustez la taille du cercle */
@@ -128,7 +128,7 @@ button:hover {
 .cercle4 {
   position: absolute;
   left: 820px; /* Positionne le cercle horizontalement au centre */
-  top: 800px; /* Positionne le cercle verticalement au centre */
+  top: 900px; /* Positionne le cercle verticalement au centre */
   transform: translate(-50%, -50%); /* Centre le cercle par rapport à son propre centre */
   height: 200px; /* Ajustez la taille du cercle */
   width: 200px; /* Ajustez la taille du cercle */

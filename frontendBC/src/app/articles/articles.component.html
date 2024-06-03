@@ -5,6 +5,8 @@
     <table>
       <thead>
         <tr>
+          <th>Stock Status</th> <!-- Add Stock Status column -->
+
           <th>Nom</th>
           <th>Description</th>
           <th>Prix</th>
@@ -12,12 +14,16 @@
           <th>Date de Création</th>
           <th>Famille</th>
           <th>Quantité</th> <!-- Add Quantity column -->
-          <th>Stock Status</th> <!-- Add Stock Status column -->
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let article of articles">
+          <td>
+            <i class="material-icons" [ngClass]="{'text-success': article.quantite > 10, 'text-danger': article.quantite <= 10}">
+              {{ article.quantite > 10 ? 'check_circle' : 'error' }}
+            </i>
+          </td>
           <td>{{ article.nomArticle }}</td>
           <td>{{ article.description }}</td>
           <td>{{ article.prix | number:'1.2-2' }}</td>
@@ -25,14 +31,10 @@
           <td>{{ article.created | date:'mediumDate' }}</td>
           <td>{{ findFamile(article.familleArticleId) }}</td>
           <td>{{ article.quantite }}</td> <!-- Display Quantity -->
+
           <td>
-            <i class="material-icons" [ngClass]="{'text-success': article.quantite > 10, 'text-danger': article.quantite <= 10}">
-              {{ article.quantite > 10 ? 'check_circle' : 'error' }}
-            </i>
-          </td> <!-- Stock status icon -->
-          <td>
-            <button (click)="deleteArticle(article.id)">Supprimer</button>
-            <button (click)="toggleModal(); selectArticle(article)">Modifier</button>
+            <button class="icon-button" (click)="deleteArticle(article.id)"><i class="fas fa-trash"></i></button>
+            <button class="icon-button" (click)="toggleModal(); selectArticle(article)"><i class="fas fa-edit"></i></button>
           </td>
         </tr>
       </tbody>

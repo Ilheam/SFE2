@@ -1,13 +1,15 @@
 <main>
-  <button class="btn2" (click)="toggleModal()">Create Purchase Order</button>
+  <!-- Button to open the modal for creating a new purchase order -->
+  <button class="btn2" (click)="toggleCreateModal()">Créer une commande</button>
   <br><br><br>
 
+  <!-- Purchase Orders Table -->
   <div *ngIf="!selectedOrder">
     <div class="purchase-order-table-container">
       <table>
         <thead>
           <tr>
-            <th>Order ID</th>
+        <th>N° commande</th>
             <th>Fournisseur</th>
             <th>Articles</th>
             <th>Date</th>
@@ -18,14 +20,16 @@
           <tr *ngFor="let order of purchaseOrders">
             <td>{{ order.orderId }}</td>
             <td>{{ order.fournisseurName }}</td>
-            <td> {{order.articles}}
-              <!-- <ul>
-                <li *ngFor="let article of order.articles">{{ article.nom }} ({{ article.quantite }})</li>
-              </ul> -->
-            </td>
+            <td>{{ order.articles | articleListStringPipe}}</td>
             <td>{{ order.date | date: 'mediumDate' }}</td>
             <td>
-              <button (click)="generateBonDeCommande(order)">Generate Bon de Commande</button>
+              <button (click)="generateBonDeCommande(order)" class="icon-button">
+                <i class="fas fa-file-alt"></i>
+              </button>
+              <button (click)="deleteOrder(order.orderId)" class="icon-button">
+                <i class="fas fa-trash"></i>
+              </button>
+
             </td>
           </tr>
         </tbody>
@@ -33,21 +37,25 @@
     </div>
   </div>
 
+  <!-- Generated Bon de Commande -->
   <div *ngIf="selectedOrder">
     <app-bon-de-commande [order]="selectedOrder"></app-bon-de-commande>
-    <button (click)="closeBonDeCommande()">Close Bon de Commande</button>
+    <button (click)="closeBonDeCommande()">Fermer</button>
   </div>
 
-  <div id="createPurchaseOrderModal" class="modal" [class.show]="showModal">
-    <div class="rectangle">
+  <!-- Modal for Creating a New Purchase Order -->
+  <div id="createPurchaseOrderModal" class="modal" [class.show]="showCreateModal">
+    <div class="rectangle" style="overflow-y: scroll;">
       <span class="close" (click)="closeModal()">&times;</span>
       <form [formGroup]="newPurchaseOrderForm" (ngSubmit)="submitPurchaseOrder()">
-        <h2 style="text-align: center;">Create Purchase Order</h2>
-        <label for="fournisseur">Fournisseur:</label>
-        <input type="text" id="fournisseur" formControlName="fournisseur" required>
+        <h2 style="text-align: center;">Créer une commande</h2>
+        <label for="fournisseurId">Fournisseur:</label>
+        <select id="fournisseurId" formControlName="fournisseurId" required>
+          <option *ngFor="let fournisseur of fournisseurs" [value]="fournisseur.nom">{{ fournisseur.nom }}</option>
+        </select>
 
         <div class="articles-selection">
-          <h3>Select Articles:</h3>
+          <h3>Choisissez les Articles:</h3>
           <div *ngFor="let article of articles" (click)="toggleArticleSelection(article.nomArticle)"
             [class.selected]="isSelected(article.nomArticle)">
             <span>{{ article.nomArticle }}</span>
@@ -58,17 +66,21 @@
           <div *ngFor="let article of articlesFormArray.controls; let i = index" [formGroupName]="i">
             <label for="article{{i}}">Article:</label>
             <input type="text" id="article{{i}}" formControlName="nom" readonly>
-            <label for="quantite{{i}}">Quantity:</label>
+            <label for="quantite{{i}}">Quantité:</label>
             <input id="quantite{{i}}" type="number" formControlName="quantite" required>
-            <button type="button" (click)="removeArticle(i)">Remove</button>
+            <button type="button" (click)="removeArticle(i)">Supprimer</button>
           </div>
+        <br>
+        <br>
+  
         </div>
 
-        <button type="submit">Create</button>
+        <button type="submit">Créer</button>
       </form>
     </div>
   </div>
 </main>
+
 
 <style>
   .articles-selection div {
@@ -82,4 +94,33 @@
     background-color: #d1ecf1;
     border-color: #bee5eb;
   }
+
+  .modal.show {
+    display: block;
+  }
+
+  .modal .rectangle {
+    position: relative; /* Changed to relative for easier inner positioning */
+    margin: 20px auto; /* Center the form on the page */
+    height: 604px;
+    width: 587px;
+    border-radius: 50px;
+    border: 2.02px solid black;    
+    background-color: #EBEBEB;
+    padding: 20px; /* Padding inside the rectangle */
+  }
+
+  .modal .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+
+  .purchase-order-table-container {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+
 </style>

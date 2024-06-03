@@ -13,8 +13,8 @@
         <tr *ngFor="let famille of familles">
           <td>{{ famille.nom }}</td>
           <td>
-            <button style="background-color: red;" (click)="deleteFamille(famille.id)">Supprimer</button>
-            <button (click)="toggleModal(); selectFamille(famille)">Modifier</button>
+            <button class="icon-button" (click)="deleteFamille(famille.id)">  <i class="fas fa-trash"></i></button>
+            <button class="icon-button" (click)="toggleModal(); selectFamille(famille)"> <i class="fas fa-edit"></i></button>
             <button (click)="navigateToArticles(famille.id)">Voir Articles</button> <!-- Button to navigate to articles -->
           </td>
         </tr>

@@ -1,6 +1,6 @@
 <main *ngIf="order" id="bon-de-commande">
     <div class="header">
-      <img src="assets/omegalogo.jpeg" alt="Logo">
+      <img style="width: 190px  ;" src="assets/omegalogo.jpeg" alt="Logo">
       <h1>BON DE COMMANDE</h1>
     </div>
   
@@ -50,6 +50,6 @@
       <span>{{ order.date | date: 'mediumDate' }}</span>
     </div>
   </main>
-  
-  <button (click)="downloadPDF()">Download as PDF</button>
+  <br>
+  <button (click)="downloadPDF()">Télécharger PDF</button>
   

@@ -1,8 +1,8 @@
-<div class="comments-container">
+<div class="comments-container" style="overflow-y: scroll;">
   <form [formGroup]="commentForm" (ngSubmit)="submitComment()">
     <div class="form-group">
-      <label for="text">Add a Comment:</label>
-      <textarea id="text" formControlName="text" rows="3" placeholder="Write your comment here..."></textarea>
+      <label for="text">Ajouter un commentaire:</label>
+      <textarea id="text" formControlName="text" rows="3" placeholder="Ecrivez un commentaire ici..."></textarea>
     </div>
     <button type="submit" [disabled]="commentForm.invalid">{{ editMode ? 'Update' : 'Submit' }}</button>
   </form>
